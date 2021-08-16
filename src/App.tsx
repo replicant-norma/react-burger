@@ -10,6 +10,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <AppHeader />
+        <h1>Соберите бургер</h1>
         <BurgerIngredients />
         <BurgerConstructor />
       </header>
