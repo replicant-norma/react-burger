@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import './utils/data.js';
+import data from './utils/data.js';
 import AppHeader from './components/app-header/app-header';
 import BurgerConstructor from './components/burger-constructor/burger-constructor';
 import BurgerIngredients from './components/burger-ingredients/burger-ingredients';
@@ -10,10 +10,16 @@ function App() {
     <div className="App">
       <header className="App-header">
         <AppHeader />
-        <h1>Соберите бургер</h1>
-        <BurgerIngredients />
-        <BurgerConstructor />
       </header>
+        <main role="main" className="container">
+            <section className="burger-constructor">
+                <BurgerConstructor data={data} />
+            </section>
+            <section className="burger-ingredients">
+                {/* Для теста верстки передаем весь массив сразу, но это неверно */}
+                <BurgerIngredients data={data} />
+            </section>
+        </main>
     </div>
   );
 }

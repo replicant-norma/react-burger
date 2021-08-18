@@ -1,0 +1,10 @@
+.tab{
+    display:flex;
+    margin-top: 20px;
+}
+.products{
+    overflow-y: scroll;
+    height: calc(100vh - 300px);
+    scrollbar-color: #8585AD;
+    scrollbar-width: 8px;
+}

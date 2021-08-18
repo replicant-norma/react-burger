@@ -1,0 +1,19 @@
+.product{
+    width: 272px;
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+.product-img{
+
+}
+.product-price{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.product-name{
+
+}

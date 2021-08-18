@@ -1,5 +1,5 @@
 import React from 'react';
-import './app-header.css';
+import styles from './app-header.css';
 import {
     Box,
     BurgerIcon,
@@ -8,6 +8,7 @@ import {
     ProfileIcon,
     Typography
 } from '@ya.praktikum/react-developer-burger-ui-components';
+{/* Собираем хэдер */}
 
 function AppHeader(){
         return (
