@@ -5,11 +5,10 @@ import Product from "../product/product";
 {/* Компонент для отображения списка продуктов из левого экрана */}
 
 function ProductList(props){
-    const pList = props.data.map(function(el){
+    const pList = props.data.map(function(el, index){
         if (el.type == props.type){
-            console.log(props.type);
             return(
-            <Product name={el.name}
+            <Product key={index} name={el.name}
                      img={el.image}
                      price={el.price}
             />)

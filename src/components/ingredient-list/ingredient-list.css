@@ -1,4 +1,4 @@
 .ingredient-list{
     overflow-y: scroll;
-    height: calc(100vh - 500px);
+    height: calc(100vh - 430px);
 }

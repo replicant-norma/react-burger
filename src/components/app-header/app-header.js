@@ -12,7 +12,7 @@ import {
 
 function AppHeader(){
         return (
-        <header className="header">
+        <header className={styles.header}>
             <div className="item pl-5 pr-5 mr-2">
                 <div className="icon mr-2">
                 <BurgerIcon type="primary"/>

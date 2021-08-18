@@ -5,10 +5,10 @@ import Ingredient from "../ingredient/ingredient";
 {/* Собираем список ингредиентов */}
 
 function IngredientList(props){
-    const pList = props.data.map(function(el){
+    const pList = props.data.map(function(el, index){
         if (el.type == "main" || "sauce"){
             return(
-                <Ingredient position={props.position}
+                <Ingredient key={index} position={props.position}
                          name={el.name}
                          image={el.image_mobile}
                          price={el.price}
