@@ -4,12 +4,12 @@
  margin: 0 auto;
  display:flex;
 }
-.burger-constructor{
+.burger_constructor{
     margin-top: 40px;
     margin-right: 20px;
     flex-basis: calc(50% - 20px);
 }
-.burger-ingredients{
+.burger_ingredients{
     margin-top: 100px;
     flex-basis: calc(50% - 20px);
     margin-left: 20px;

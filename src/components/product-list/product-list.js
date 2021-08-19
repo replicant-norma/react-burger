@@ -1,6 +1,8 @@
 import React from 'react';
-import styles from './product-list.css';
+import styles from './product-list.module.css';
 import Product from "../product/product";
+import clsx from 'clsx';
+import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
 {/* Компонент для отображения списка продуктов из левого экрана */}
 
@@ -15,9 +17,9 @@ function ProductList(props){
         }
     });
     return(
-        <div className="position">
+        <div className={styles.position}>
             <h3 className="text text_type_main-medium mb-6">{props.listName}</h3>
-            <div className="product-list pl-4 mb-10">
+            <div className={clsx(styles.product_list, " pl-4 mb-10")}>
 
                 {pList}
 

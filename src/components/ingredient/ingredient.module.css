@@ -18,25 +18,26 @@
 .bottom{
     border-radius: 40px 40px 80px 80px;
 }
-.ingredient-position{
+.position{
     display: flex;
     align-items: center;
     margin-bottom: 16px;
     justify-content: flex-end;
 }
-.ingredient-name{
+.name{
     width: 254px;
 }
-.ingredient-image{
+.image{
     width:80px;
     height: 40px;
     display: flex;
 }
-.ingredient-dnd{
+.dnd{
 }
-.ingredient-price{
+.price{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
+.action{
+}

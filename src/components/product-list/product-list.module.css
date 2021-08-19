@@ -1,7 +1,9 @@
-.product-list{
+.product_list{
     display:flex;
     overflow-y: scroll;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+.position{
 }

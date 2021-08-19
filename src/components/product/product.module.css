@@ -5,15 +5,15 @@
     display: flex;
     flex-direction: column;
 }
-.product-img{
+.product_img{
 
 }
-.product-price{
+.product_price{
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
-.product-name{
+.product_name{
 
 }

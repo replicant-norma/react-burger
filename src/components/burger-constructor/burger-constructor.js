@@ -1,7 +1,9 @@
 import React from 'react';
-import { Tab, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import './burger-constructor.css';
+import { Box, Typography, Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import styles from './burger-constructor.module.css';
+import clsx from 'clsx';
 import ProductList from '../product-list/product-list';
+
 
 {/* Собираем левую часть конструктора */}
 
@@ -10,7 +12,7 @@ function BurgerConstructor(props){
     return (
         <>
             <h1 className="text text_type_main-large">Соберите бургер</h1>
-            <div className="tab">
+            <div className={styles.tab}>
                 <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
                     Булки
                 </Tab>
@@ -21,7 +23,7 @@ function BurgerConstructor(props){
                     Начинки
                 </Tab>
             </div>
-            <div className="products mt-4">
+            <div className={clsx(styles.products, "mt-4")}>
                 <ProductList listName="Булки" type="bun" data={props.data} />
                 <ProductList listName="Соусы" type="sauce" data={props.data} />
                 <ProductList listName="Начинки" type="main" data={props.data} />

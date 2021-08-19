@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from './ingredient-list.css';
+import styles from './ingredient-list.module.css';
 import Ingredient from "../ingredient/ingredient";
+import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
 {/* Собираем список ингредиентов */}
 
@@ -16,7 +17,7 @@ function IngredientList(props){
         }
     });
     return(
-        <div className="ingredient-list">
+        <div className={styles.ingredient_list}>
 
                 {pList}
 
