@@ -3,7 +3,7 @@ import { Box, Typography, Tab } from '@ya.praktikum/react-developer-burger-ui-co
 import styles from './burger-constructor.module.css';
 import clsx from 'clsx';
 import ProductList from '../product-list/product-list';
-
+import PropTypes from 'prop-types';
 
 {/* Собираем левую часть конструктора */}
 
@@ -34,5 +34,26 @@ function BurgerConstructor(props){
 
     )
 }
+
+const dataProp = PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    proteins: PropTypes.number,
+    fat: PropTypes.number,
+    carbohydrates: PropTypes.number,
+    calories: PropTypes.number,
+    price: PropTypes.number,
+    image: PropTypes.string,
+    image_mobile: PropTypes.string,
+    image_large: PropTypes.string,
+    __v: PropTypes.number
+});
+
+BurgerConstructor.propTypes ={
+    data: PropTypes.arrayOf(dataProp.isRequired)
+}
+
+
 
 export default BurgerConstructor;

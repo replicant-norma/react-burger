@@ -3,6 +3,8 @@ import styles from './burger-ingredients.module.css';
 import Ingredient from "../ingredient/ingredient";
 import IngredientList from "../ingredient-list/ingredient-list";
 import {Box, Typography, Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from "prop-types";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
 
 
 {/* Собираем набор ингридиентов из правой панели экрана */}
@@ -30,6 +32,25 @@ function BurgerIngredients(props){
         </div>
         </>
     )
+}
+
+const dataProp = PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    proteins: PropTypes.number,
+    fat: PropTypes.number,
+    carbohydrates: PropTypes.number,
+    calories: PropTypes.number,
+    price: PropTypes.number,
+    image: PropTypes.string,
+    image_mobile: PropTypes.string,
+    image_large: PropTypes.string,
+    __v: PropTypes.number
+});
+
+BurgerIngredients.propTypes ={
+    data: PropTypes.arrayOf(dataProp.isRequired)
 }
 
 export default BurgerIngredients;
