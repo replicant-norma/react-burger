@@ -1,4 +1,16 @@
 .ingredient_list{
     overflow-y: scroll;
     height: calc(100vh - 460px);
+    scrollbar-width: 8px;
+    scrollbar-color: #8585AD #2F2F37;
+}
+
+.ingredient_list::-webkit-scrollbar{
+    width: 8px;
+}
+.ingredient_list::-webkit-scrollbar-track{
+    background-color: #2F2F37;
+}
+.ingredient_list::-webkit-scrollbar-thumb{
+    background-color: #8585AD;
 }

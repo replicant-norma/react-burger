@@ -19,7 +19,9 @@ function BurgerIngredients(props){
         <Ingredient position="top" name="Краторная булка N-200i"
                     price="1255"
                     image="https://code.s3.yandex.net/react/code/bun-02-mobile.png" />
+        <div className={styles.scroll_wrapper}>
         <IngredientList data={props.data} position="middle" />
+        </div>
         <Ingredient position="bottom" name="Краторная булка N-200i"
                 price="1255"
                 image="https://code.s3.yandex.net/react/code/bun-02-mobile.png" />
