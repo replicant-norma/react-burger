@@ -10,13 +10,13 @@ function App() {
     <div className="App">
         <AppHeader />
         <main role="main" className={styles.container}>
-            <section className={styles.burger_constructor}>
-                <BurgerConstructor data={data} />
-            </section>
             <section className={styles.burger_ingredients}>
+                <BurgerIngredients data={data} />
+            </section>
+            <section className={styles.burger_constructor}>
                 {/* Для теста верстки передаем весь массив сразу, но это неверно
                 */}
-                <BurgerIngredients data={data} />
+                <BurgerConstructor data={data} />
             </section>
         </main>
     </div>

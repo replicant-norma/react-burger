@@ -1,20 +1,13 @@
-.tab{
-    display:flex;
-    margin-top: 20px;
+.order{
+    display: flex;
+    margin-top:40px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
 }
-.products{
-    overflow-y: scroll;
-    height: calc(100vh - 250px);
-    scrollbar-width: 8px;
-    scrollbar-color: #8585AD #2F2F37;
-
+.totalPrice{
+    margin-right: 40px;
 }
-.products::-webkit-scrollbar{
-    width: 8px;
-}
-.products::-webkit-scrollbar-track{
-    background-color: #2F2F37;
-}
-.products::-webkit-scrollbar-thumb{
-    background-color: #8585AD;
-}
+/*.scroll_wrapper{
+    margin-right: -8px;
+}*/

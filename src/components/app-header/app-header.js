@@ -20,14 +20,14 @@ function AppHeader(){
                 <BurgerIcon type="primary"/>
                 </div>
                 <a href="#" className={clsx("text_type_main-default text_color_primary",
-                    styles.item_link)}>Конструктор</a>
+                    styles.link)}>Конструктор</a>
             </div>
             <div className={clsx(styles.item, "pl-5 pr-5")}>
                 <div className={clsx(styles.icon, "mr-2")}>
                 <ListIcon type="secondary"/>
                 </div>
                 <a href="#" className={clsx("text_type_main-default text_color_inactive",
-                    styles.item_link)}>Лента заказов</a>
+                    styles.link)}>Лента заказов</a>
             </div>
                <div className={clsx(styles.logo, "ml-30")}>
                    <Logo/>
@@ -37,7 +37,7 @@ function AppHeader(){
                 <ProfileIcon type="secondary"/>
                 </div>
                 <a href="#" className={clsx("text_type_main-default text_color_inactive",
-                    styles.item_link)}>Личный кабинет</a>
+                    styles.link)}>Личный кабинет</a>
             </div>
         </header>
 

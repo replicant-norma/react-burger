@@ -8,7 +8,7 @@
     display: inline-flex;
     align-items: center;
 }
-.item_link{
+.link{
     text-decoration: none;
     //color: #f2f2f3;
 }

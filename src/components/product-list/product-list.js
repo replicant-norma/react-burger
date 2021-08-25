@@ -10,16 +10,16 @@ function ProductList(props){
     const pList = props.data.map(function(el, index){
         if (el.type == props.type){
             return(
-            <Product key={index} name={el.name}
+            <Product key={el._id} name={el.name}
                      img={el.image}
-                     price={el.price}
+                     price={el.price} count={Math.floor(Math.random()*3)}
             />)
         }
     });
     return(
         <div className={styles.position}>
             <h3 className="text text_type_main-medium mb-6">{props.listName}</h3>
-            <div className={clsx(styles.product_list, " pl-4 mb-10")}>
+            <div className={clsx(styles.list, " pl-4 mb-10")}>
 
                 {pList}
 
