@@ -36,8 +36,6 @@ function BurgerIngredients(props){
     )
 }
 
-
-
 BurgerIngredients.propTypes ={
     data: PropTypes.arrayOf(dataProp.isRequired).isRequired
 }

@@ -3,6 +3,8 @@ import styles from './ingredient-list.module.css';
 import Ingredient from "../ingredient/ingredient";
 import {Box, Typography, ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
+import PropTypes from "prop-types";
+import dataProp from "../../utils/data-prop";
 
 {/* Собираем список ингредиентов */}
 
@@ -10,11 +12,6 @@ function IngredientList(props){
     const pList = props.data.map(function(el, index){
         if (el.type == "main" || "sauce"){
             return(
-                /*<Ingredient key={index} position={props.position}
-                         name={el.name}
-                         image={el.image_mobile}
-                         price={el.price}
-                />*/
                 <>
                     <div className={styles.wrapper}>
                     <DragIcon type="primary" key={index} />
@@ -54,6 +51,10 @@ function IngredientList(props){
         </div>
         </>
     )
+}
+
+IngredientList.propTypes ={
+    data: PropTypes.arrayOf(dataProp.isRequired)
 }
 
 export default IngredientList;

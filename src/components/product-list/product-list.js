@@ -3,6 +3,8 @@ import styles from './product-list.module.css';
 import Product from "../product/product";
 import clsx from 'clsx';
 import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from "prop-types";
+import dataProp from "../../utils/data-prop";
 
 {/* Компонент для отображения списка продуктов из левого экрана */}
 
@@ -10,9 +12,7 @@ function ProductList(props){
     const pList = props.data.map(function(el, index){
         if (el.type == props.type){
             return(
-            <Product key={el._id} name={el.name}
-                     img={el.image}
-                     price={el.price} count={Math.floor(Math.random()*3)}
+            <Product key={el._id} {...el} count={Math.floor(Math.random()*3)}
             />)
         }
     });
@@ -27,5 +27,7 @@ function ProductList(props){
         </div>
     )
 }
-
+ProductList.propTypes ={
+    data: PropTypes.arrayOf(dataProp.isRequired)
+}
 export default ProductList;

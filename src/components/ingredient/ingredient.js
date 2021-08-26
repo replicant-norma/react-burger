@@ -11,6 +11,7 @@ import {
 import clsx from 'clsx';
 
 {/* Блок отображения ингридиента */}
+{/* Данный компонент не актуален, в проекте используется <ConstructorElement>*/}
 
 function Ingredient (props){
     const dragIcon = () => {
