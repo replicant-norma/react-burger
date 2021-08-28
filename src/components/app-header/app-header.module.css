@@ -6,6 +6,12 @@
     margin: 0 auto;
 }
 
+.container {
+    display: flex;
+    width: 1240px;
+    margin: 0 auto;
+}
+
 .item {
     display: inline-flex;
     align-items: center;
