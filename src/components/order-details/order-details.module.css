@@ -1,4 +1,4 @@
-.details{
+.details {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,22 +6,24 @@
 
 }
 
-.order{
+.order {
     text-align: center;
 }
 
-.label{
+.label {
     text-align: center;
 }
 
-.icon{
-    margin-top:60px;
-    width:120px;
+.icon {
+    margin-top: 60px;
+    width: 120px;
     height: 120px;
 }
-.summary{
+
+.summary {
     text-align: center;
 }
-.blue{
+
+.blue {
     color: #8585AD;
 }

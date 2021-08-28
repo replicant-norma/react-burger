@@ -1,4 +1,4 @@
-.ingredient{
+.ingredient {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -12,32 +12,40 @@
     flex-grow: 0;
     box-sizing: border-box;
 }
-.top{
+
+.top {
     border-radius: 80px 80px 40px 40px;
 }
-.bottom{
+
+.bottom {
     border-radius: 40px 40px 80px 80px;
 }
-.position{
+
+.position {
     display: flex;
     align-items: center;
     margin-bottom: 16px;
     justify-content: flex-end;
 }
-.name{
+
+.name {
     width: 254px;
 }
-.image{
-    width:80px;
+
+.image {
+    width: 80px;
     height: 40px;
     display: flex;
 }
-.dnd{
+
+.dnd {
 }
-.price{
+
+.price {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.action{
+
+.action {
 }

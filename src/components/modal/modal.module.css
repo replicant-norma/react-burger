@@ -1,4 +1,4 @@
-.modal{
+.modal {
     width: 720px;
     height: auto;
     border-radius: 40px;
@@ -8,18 +8,22 @@
     position: absolute;
     flex-direction: column;
 }
-.header{
-   height: 64px;
-   align-items: center;
+
+.header {
+    height: 64px;
+    align-items: center;
 }
-.title{
+
+.title {
     text-align: left;
 }
-.content{
+
+.content {
     margin-top: 16px;
 }
-.close{
+
+.close {
     position: absolute;
     right: 40px;
-    top:60px;
+    top: 60px;
 }

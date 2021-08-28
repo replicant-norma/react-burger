@@ -54,7 +54,7 @@ function IngredientList(props){
 }
 
 IngredientList.propTypes ={
-    data: PropTypes.arrayOf(dataProp.isRequired)
+    data: PropTypes.arrayOf(dataProp.isRequired).isRequired
 }
 
 export default IngredientList;

@@ -1,4 +1,4 @@
-const config ={
+const config = {
     url: 'https://norma.nomoreparties.space'
 }
 

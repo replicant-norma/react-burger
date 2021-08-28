@@ -1,4 +1,4 @@
-.product{
+.product {
     width: 272px;
     text-align: center;
     box-sizing: border-box;
@@ -6,15 +6,18 @@
     flex-direction: column;
     position: relative;
 }
-.img{
+
+.img {
 
 }
-.price{
+
+.price {
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
-.name{
+
+.name {
 
 }

@@ -1,13 +1,15 @@
-.order{
+.order {
     display: flex;
-    margin-top:40px;
+    margin-top: 40px;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
 }
-.totalPrice{
+
+.totalPrice {
     margin-right: 40px;
 }
+
 /*.scroll_wrapper{
     margin-right: -8px;
 }*/

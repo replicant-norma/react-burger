@@ -8,41 +8,47 @@ import clsx from 'clsx';
 import PropTypes from "prop-types";
 
 
-
-function Modal(props){
-    const[isOpen, setIsOpen] = useState(false);
+function Modal(props) {
+    const ESC_KEYCODE = 27;
     const modalRoot = document.getElementById("modals");
 
-    useEffect(()=>{
-        setIsOpen(props.isOpen);
-    }, [props.isOpen]);
+    const pressEsc = (e) => {
+        if ((e.charCode || e.keyCode) === ESC_KEYCODE) {
+            props.onClose();
+        }
+    };
 
+    useEffect(() => {
+        document.body.addEventListener('keydown', pressEsc);
+        return () => {
+            document.body.removeEventListener('keydown', pressEsc);
+        }
+    }, []);
 
-    if (!isOpen) return null;
 
     return ReactDOM.createPortal((
-        <>
+        <div id="modal" onClick={props.onClose}>
             <ModalOverlay>
-            <div className={styles.modal} onClick={e => e.stopPropagation()}>
-                <div className={clsx(styles.header,"ml-10 mr-10 mt-10")}>
-                    <div className={styles.close}>
-                        <CloseIcon type="primary" onClick={props.onClose}  />
+                <div className={styles.modal} onClick={e => e.stopPropagation()}>
+                    <div className={clsx(styles.header, "ml-10 mr-10 mt-10")}>
+                        <div className={styles.close}>
+                            <CloseIcon type="primary" onClick={props.onClose}/>
+                        </div>
+                        <div className={styles.title}>
+                            {props.title ? <h3 className={clsx("mt-3 text text_type_main-large")}>
+                                {props.title}</h3> : null}
+                        </div>
                     </div>
-                    <div className={styles.title}>
-                        {props.title ? <h3 className={clsx("mt-3 text text_type_main-large")}>
-                            {props.title}</h3> : null}
+                    <div className={styles.content}>
+                        {props.children}
                     </div>
                 </div>
-                <div className={styles.content}>
-                    {props.children}
-                </div>
-            </div>
             </ModalOverlay>
-        </>
+        </div>
     ), modalRoot)
 }
 
-Modal.propTypes ={
+Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
     title: PropTypes.string
 }
