@@ -12,17 +12,14 @@ function IngredientList(props){
     const pList = props.data.map(function(el, index){
         if (el.type == "main" || "sauce"){
             return(
-                <>
-                    <div className={styles.wrapper}>
-                    <DragIcon type="primary" key={index} />
+                    <div className={styles.wrapper} key={index}>
+                    <DragIcon type="primary" />
                     <ConstructorElement
                         text={el.name}
                         price={el.price}
                         thumbnail={el.image}
-                        key={index}
                     />
                     </div>
-                </>
                 )
         }
     });

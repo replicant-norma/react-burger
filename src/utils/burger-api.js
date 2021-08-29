@@ -7,8 +7,4 @@ const checkResponse = (res) => {
 export function getIngredients() {
     return fetch(config.url + '/api/ingredients')
         .then((res) => checkResponse(res))
-        .then((data) => data)
-        .catch((e) => {
-            console.log(e);
-        });
 }
