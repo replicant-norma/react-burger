@@ -1,4 +1,24 @@
-.App {
+.container {
+    width: 1240px;
+    padding: 0 20px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.burger_ingredients {
+    margin-top: 40px;
+    margin-right: 20px;
+    flex-basis: calc(50% - 20px);
+}
+
+.burger_constructor {
+    margin-top: 100px;
+    flex-basis: calc(50% - 20px);
+    margin-left: 20px;
+    padding: 0 16px;
+}
+
+/*.App {
   text-align: center;
 }
 
@@ -22,9 +42,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+}*/
 
-.App-link {
+/*.App-link {
   color: #61dafb;
 }
 
@@ -36,3 +56,4 @@
     transform: rotate(360deg);
   }
 }
+*/

@@ -1,0 +1,29 @@
+.modal {
+    width: 720px;
+    height: auto;
+    border-radius: 40px;
+    background: #1C1C21;
+    opacity: 1;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+}
+
+.header {
+    height: 64px;
+    align-items: center;
+}
+
+.title {
+    text-align: left;
+}
+
+.content {
+    margin-top: 16px;
+}
+
+.close {
+    position: absolute;
+    right: 40px;
+    top: 60px;
+}
