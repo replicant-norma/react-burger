@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from 'react';
+import React, {useState, useMemo, useContext} from 'react';
 import styles from './burger-constructor.module.css';
 import IngredientList from "../ingredient-list/ingredient-list";
 import {Box, Typography, Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
@@ -6,12 +6,14 @@ import PropTypes from "prop-types";
 import dataProp from '../../utils/data-prop.js';
 import OrderDetails from "../order-details/order-details";
 import Modal from "../modal/modal";
+import {BurgerConstructorContext} from "../../services/appContext";
 
 {/* Собираем набор ингридиентов из правой панели экрана */
 }
 
 function BurgerConstructor(props) {
-    const prices = props.data;
+    const {state, setState} = useContext(BurgerConstructorContext);
+    const prices = state.orderDetails;
     const total = useMemo(() => prices.reduce(function (sum, current) {
         return sum + current.price;
     }, 0), [prices]);
@@ -27,7 +29,7 @@ function BurgerConstructor(props) {
     };
     return (
         <>
-            <IngredientList data={props.data}/>
+            <IngredientList/>
             <div className={styles.order}>
                 <div className={styles.totalPrice}>
                     <span className="text text_type_digits-medium">{total}</span>
@@ -44,8 +46,8 @@ function BurgerConstructor(props) {
     )
 }
 
-BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(dataProp.isRequired).isRequired
-}
+/*BurgerConstructor.propTypes = {
+    data: PropTypes.arrayOf(dataProp.isRequired).isRequired;
+}*/
 
 export default BurgerConstructor;
