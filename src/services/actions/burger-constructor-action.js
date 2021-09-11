@@ -1,4 +1,5 @@
 import {getOrder} from "../../utils/burger-api";
+
 export const SET_MODAL_ORDER_STATE = 'SET_MODAL_ORDER_STATE';
 export const HAVE_BUN = 'HAVE_BUN';
 export const PUSH_ORDER_ITEM = 'PUSH_ORDER_ITEM';
@@ -12,7 +13,7 @@ export const SET_DRAGGED_ELEMENT = 'SET_DRAGGED_ELEMENT';
 export const SWAP_CONSTRUCTOR_INGREDIENT = 'SWAP_CONSTRUCTOR_INGREDIENT';
 
 export function orderRequest(orderDetails) {
-    return function(dispatch) {
+    return function (dispatch) {
         dispatch({
             type: GET_ORDER_REQUEST
         });

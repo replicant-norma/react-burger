@@ -35,7 +35,7 @@ export const BurgerIngredients = () => {
         const deltaSauce = Math.abs(Math.abs(tabPosition) - Math.abs(saucePosition));
         const deltaMain = Math.abs(Math.abs(tabPosition) - Math.abs(mainPosition));
 
-        if(deltaBun < deltaSauce) {
+        if (deltaBun < deltaSauce) {
             scrollTab('bun');
         } else if (deltaSauce < deltaMain) {
             scrollTab('sauce');

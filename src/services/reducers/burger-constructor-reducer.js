@@ -52,24 +52,15 @@ export const burgerConstructorReducer = (state = initialState, action) => {
                     [...state.orderDetails.filter((item) => item.type !== 'bun'), action.ingredient]
             }
         }
-        case SWAP_CONSTRUCTOR_INGREDIENT:{
-            const orderChange = state.orderDetails;
-            const draggedElement = orderChange[action.draggedElement];
-            orderChange[action.draggedElement] = orderChange[action.newPosition];
-            orderChange[action.newPosition] = draggedElement;
+        case SWAP_CONSTRUCTOR_INGREDIENT: {
+            const orderDetails = [...state.orderDetails];
+            const draggedElement = orderDetails[action.draggedElement];
+            orderDetails[action.draggedElement] = orderDetails[action.swapElement];
+            orderDetails[action.swapElement] = draggedElement;
 
-            console.log(orderChange, state.orderDetails);
-
-            //const draggedElement = orderChange[action.draggedElement];
-            //const swapElement = orderChange[action.newPosition];
-            //console.log('dragged', draggedElement);
-            //orderChange.splice(action.draggedElement, 1);
-            //orderChange.splice(action.newPosition, 0, draggedElement);
-            //orderChange.splice(action.draggedElement, 0, swapElement);
-            //console.log(orderChange);
-            return{
+            return {
                 ...state,
-                orderDetails: orderChange
+                orderDetails: orderDetails
             }
         }
         case SET_ORDER_NUMBER: {

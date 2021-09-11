@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import dataProp from "../../utils/data-prop";
 import {useDrag, useDrop} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
+import ProductList from "../product-list/product-list";
 
 function WrapperConstructorElement(props) {
     const {draggedElement} = useSelector(state => state.burgerConstructor);
@@ -22,7 +23,7 @@ function WrapperConstructorElement(props) {
         e.stopPropagation();
         dispatch({
             type: 'SWAP_CONSTRUCTOR_INGREDIENT',
-            draggedElement: draggedElement, newPosition: index
+            draggedElement: draggedElement, swapElement: index
         });
         //console.log('drop', draggedElement, index);
 
@@ -56,6 +57,11 @@ function WrapperConstructorElement(props) {
             />
         </div>
     )
+}
+
+WrapperConstructorElement.propTypes = {
+    data: PropTypes.arrayOf(dataProp.isRequired).isRequired,
+    index: PropTypes.number.isRequired
 }
 
 export default WrapperConstructorElement;

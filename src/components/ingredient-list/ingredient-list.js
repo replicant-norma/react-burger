@@ -51,14 +51,7 @@ function IngredientList(props) {
         collect: monitor => ({
             opacitySort: monitor.isOver() ? 0.3 : 1,
         }),
-        //drop(item){
-        //    onChangeDraggedElement(item)
-        // }
     });
-
-    const onChangeDraggedElement = (item) => {
-        dispatch({type: 'SET_DRAGGED_ELEMENT', index: item.draggedElement});
-    }
 
 
     const burger = useMemo(() => orderDetails.map(function (el, index) {
