@@ -60,7 +60,7 @@ function WrapperConstructorElement(props) {
 }
 
 WrapperConstructorElement.propTypes = {
-    data: PropTypes.arrayOf(dataProp.isRequired).isRequired,
+    data: dataProp.isRequired,
     index: PropTypes.number.isRequired
 }
 

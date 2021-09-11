@@ -14,7 +14,6 @@ export function getIngredientsItems() {
         });
         getIngredients().then(res => {
             if (res && res.success) {
-                console.log('я запрос');
                 dispatch({
                     type: GET_INGREDIENTS_SUCCESS,
                     data: res.data
