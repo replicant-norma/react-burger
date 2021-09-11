@@ -5,11 +5,9 @@
     scrollbar-width: 8px;
     scrollbar-color: #8585AD #2F2F37;
 }
-
-.wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.dnd{
+    min-height: calc(100vh - 400px);
+    width:100%
 }
 
 .flex {

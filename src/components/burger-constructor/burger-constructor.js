@@ -6,39 +6,41 @@ import PropTypes from "prop-types";
 import dataProp from '../../utils/data-prop.js';
 import OrderDetails from "../order-details/order-details";
 import Modal from "../modal/modal";
-import {BurgerConstructorContext} from "../../services/appContext";
+import {useDispatch, useSelector} from "react-redux";
 
 {/* Собираем набор ингридиентов из правой панели экрана */
 }
 
 function BurgerConstructor(props) {
-    const {state, setState} = useContext(BurgerConstructorContext);
-    const prices = state.orderDetails;
-    const total = useMemo(() => prices.reduce(function (sum, current) {
-        return sum + current.price;
-    }, 0), [prices]);
+    const dispatch = useDispatch();
+    const {orderDetails, isOpenModalOrder, haveBun} = useSelector((state) => state.burgerConstructor);
 
-    const [isOpenModal, setIsOpenModal] = useState(false);
+    const total = useMemo(() => orderDetails.reduce(function (sum, current) {
+        if (current.type === 'bun') return sum + current.price * 2;
+        return sum + current.price;
+    }, 0), [orderDetails]);
 
     const handleOpenClick = () => {
-        setIsOpenModal(true);
+        dispatch({type: 'SET_MODAL_ORDER_STATE', isOpenModalOrder: true});
     };
 
     const handleCloseClick = () => {
-        setIsOpenModal(false);
+        dispatch({type: 'SET_MODAL_ORDER_STATE', isOpenModalOrder: false});
+        dispatch ({type: 'SET_ORDER_NUMBER', orderNumber: null});
     };
     return (
         <>
             <IngredientList/>
-            <div className={styles.order}>
-                <div className={styles.totalPrice}>
-                    <span className="text text_type_digits-medium">{total}</span>
-                    <span className="ml-2"><CurrencyIcon type="primary"/></span>
-                </div>
-                <Button onClick={handleOpenClick}>Оформить заказ</Button>
-            </div>
-
-            {isOpenModal && (<Modal onClose={handleCloseClick}>
+            {orderDetails.length > 0 && (
+                <div className={styles.order}>
+                    <div className={styles.totalPrice}>
+                        <span className="text text_type_digits-medium">{total}</span>
+                        <span className="ml-2"><CurrencyIcon type="primary"/></span>
+                    </div>
+                    <Button type="primary" onClick={handleOpenClick}>Оформить заказ</Button>
+                </div>)
+            }
+            {isOpenModalOrder && (<Modal onClose={handleCloseClick}>
                     <OrderDetails/>
                 </Modal>
             )}
@@ -46,8 +48,10 @@ function BurgerConstructor(props) {
     )
 }
 
-/*BurgerConstructor.propTypes = {
+/*BurgerConstructor.propTypes =
+{
     data: PropTypes.arrayOf(dataProp.isRequired).isRequired;
-}*/
+}
+*/
 
 export default BurgerConstructor;

@@ -5,46 +5,48 @@ import AppHeader from '../../components/app-header/app-header';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import {getIngredients} from '../../utils/burger-api';
-import {BurgerConstructorContext} from "../../services/appContext";
+import {useDispatch, useSelector} from "react-redux";
+import {getIngredientsItems} from "../../services/actions/burger-ingredients-action";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
-
-function App() {
-    const [state, setState] = useState({
-        isLoading: false,
-        hasError: false,
-        data: [],
-        haveBun: false,
-        orderDetails: [],
-        orderNumber: null
-    });
-
+export const App = () => {
+    /*const dispatch = useDispatch();
     useEffect(() => {
         const ingredients = () => {
-            setState({...state, hasError: false, isLoading: true});
+            dispatch(actions.isLoading(true));
             getIngredients()
-                .then((data) => setState({...state, data: data.data, isLoading: false}))
+                .then((data) => {
+                    dispatch(actions.loadIngredients(data.data));
+                })
+                .then(() =>{
+                    dispatch(actions.isLoading(false));
+                    dispatch(actions.doneLoad(true));
+                })
                 .catch((e) => {
-                    setState({...state, hasError: true, isLoading: false});
-                });
+                    dispatch(actions.hasError(true))
+         });
         }
         ingredients();
-    }, []);
-
+    }, []);*/
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getIngredientsItems());
+    }, [dispatch])
     return (
-
         <div className="App">
             <AppHeader/>
             <main role="main" className={styles.container}>
+                <DndProvider backend={HTML5Backend}>
                 <section className={styles.burger_ingredients}>
-                    <BurgerIngredients data={state.data}/>
+                     <BurgerIngredients />
                 </section>
                 <section className={styles.burger_constructor}>
                     {/* Для теста верстки передаем весь массив сразу, но это неверно
                 */}
-                    <BurgerConstructorContext.Provider value={{state, setState}}>
-                        <BurgerConstructor/>
-                    </BurgerConstructorContext.Provider>
+                    <BurgerConstructor/>
                 </section>
+                </DndProvider>
             </main>
         </div>
     );
