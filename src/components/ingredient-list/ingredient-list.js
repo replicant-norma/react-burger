@@ -15,7 +15,7 @@ import {useDrag, useDrop} from "react-dnd";
 function IngredientList(props) {
 
     const dispatch = useDispatch();
-    const {orderDetails, haveBun} = useSelector(state => state.burgerConstructor);
+    const {orderDetails, haveBun, draggedElement, swapElement} = useSelector(state => state.burgerConstructor);
 
     const pList = useMemo(() => orderDetails.map(function (el, index) {
             if (el.type == 'main' || el.type == 'sauce') {
@@ -51,13 +51,25 @@ function IngredientList(props) {
         collect: monitor => ({
             opacitySort: monitor.isOver() ? 0.3 : 1,
         }),
+          drop(){
+           dropIngredient ();
+            //console.log(item);
+        }
     });
+
+    const dropIngredient = () => {
+        //console.log(draggedElement, swapElement);
+        dispatch({
+            type: 'SWAP_CONSTRUCTOR_INGREDIENT',
+            draggedElement: draggedElement, swapElement: swapElement
+        });
+    }
 
 
     const burger = useMemo(() => orderDetails.map(function (el, index) {
         if (el.type == 'bun') {
             return (
-                <div className={styles.flex} id={index} key={index}>
+                <div className={styles.flex} id={index} key={index} >
                     <ConstructorElement
                         type="top"
                         isLocked="true"

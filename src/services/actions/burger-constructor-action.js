@@ -10,6 +10,7 @@ export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 export const GET_ORDER_FAILED = 'GET_ORDER_FAILED';
 export const CHANGE_ORDER_BUN = 'CHANGE_ORDER_BUN';
 export const SET_DRAGGED_ELEMENT = 'SET_DRAGGED_ELEMENT';
+export const SET_SWAP_ELEMENT = 'SET_SWAP_ELEMENT';
 export const SWAP_CONSTRUCTOR_INGREDIENT = 'SWAP_CONSTRUCTOR_INGREDIENT';
 
 export function orderRequest(orderDetails) {

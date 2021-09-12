@@ -9,6 +9,7 @@ import {
     GET_ORDER_SUCCESS,
     CHANGE_ORDER_BUN,
     SET_DRAGGED_ELEMENT,
+    SET_SWAP_ELEMENT,
     SWAP_CONSTRUCTOR_INGREDIENT
 } from '../actions/burger-constructor-action'
 
@@ -20,7 +21,8 @@ const initialState = {
     isOpenModalOrder: false,
     isLoading: false,
     hasError: false,
-    draggedElement: null
+    draggedElement: null,
+    swapElement: null
 }
 
 export const burgerConstructorReducer = (state = initialState, action) => {
@@ -30,6 +32,9 @@ export const burgerConstructorReducer = (state = initialState, action) => {
         }
         case SET_DRAGGED_ELEMENT: {
             return {...state, draggedElement: action.index}
+        }
+        case SET_SWAP_ELEMENT: {
+            return {...state, swapElement: action.index}
         }
         case HAVE_BUN: {
             return {...state, haveBun: action.haveBun}

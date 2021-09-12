@@ -19,16 +19,20 @@ function WrapperConstructorElement(props) {
     }
 
     const dropIngredient = (e, el, index) => {
-        e.stopPropagation();
+        e.preventDefault();
+        //dispatch({
+        //    type: 'SWAP_CONSTRUCTOR_INGREDIENT',
+        //    draggedElement: draggedElement, swapElement: index
+        //});
+        //console.log('drop',index)
         dispatch({
-            type: 'SWAP_CONSTRUCTOR_INGREDIENT',
-            draggedElement: draggedElement, swapElement: index
-        });
+            type: 'SET_SWAP_ELEMENT', index: index
+        })
     }
 
     const [{isDrag}, dragRefInner] = useDrag({
         type: "inner",
-        item: props.index,
+        item: props,
         collect: monitor => ({
             isDrag: monitor.isDragging()
         }),
@@ -43,7 +47,8 @@ function WrapperConstructorElement(props) {
     return (
         <div  className={styles.wrapper} data-index={props.index} ref={dragRefInner}
              onDrag={(e) => dragIngredient(e, props, props.index)}
-             onDrop={(e) => dropIngredient(e, props, props.index)}>
+             onDragEnter={(e) => dropIngredient(e, props, props.index)}
+             >
             <DragIcon type="primary"/>
             <ConstructorElement
                 text={props.data.name}
