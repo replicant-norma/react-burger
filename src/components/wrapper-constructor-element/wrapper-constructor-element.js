@@ -43,9 +43,9 @@ function WrapperConstructorElement(props) {
         e.preventDefault();
         dispatch({type: 'DELETE_ORDER_ITEM', index: index, ingredient: type})
     }
-
+    const opacity = isDrag ? 0 : 1;
     return (
-        <div  className={styles.wrapper} data-index={props.index} ref={dragRefInner}
+        <div  className={styles.wrapper} style={{opacity:opacity}}  data-index={props.index} ref={dragRefInner}
              onDrag={(e) => dragIngredient(e, props, props.index)}
              onDragEnter={(e) => dropIngredient(e, props, props.index)}
              >
