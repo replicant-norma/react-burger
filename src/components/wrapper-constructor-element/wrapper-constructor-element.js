@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useMemo, useReducer} from 'react';
-import styles from './wrapper-constructor-element.css';
+import styles from './wrapper-constructor-element.module.css';
 import {Box, Typography, ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import clsx from 'clsx';
 import PropTypes from "prop-types";
 import dataProp from "../../utils/data-prop";
 import {useDrag, useDrop} from "react-dnd";
@@ -25,9 +24,6 @@ function WrapperConstructorElement(props) {
             type: 'SWAP_CONSTRUCTOR_INGREDIENT',
             draggedElement: draggedElement, swapElement: index
         });
-        //console.log('drop', draggedElement, index);
-
-
     }
 
     const [{isDrag}, dragRefInner] = useDrag({
@@ -45,7 +41,7 @@ function WrapperConstructorElement(props) {
     }
 
     return (
-        <div className={styles.wrapper} data-index={props.index} ref={dragRefInner}
+        <div  className={styles.wrapper} data-index={props.index} ref={dragRefInner}
              onDrag={(e) => dragIngredient(e, props, props.index)}
              onDrop={(e) => dropIngredient(e, props, props.index)}>
             <DragIcon type="primary"/>
