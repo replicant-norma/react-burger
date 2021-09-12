@@ -53,10 +53,17 @@ export const burgerConstructorReducer = (state = initialState, action) => {
             }
         }
         case SWAP_CONSTRUCTOR_INGREDIENT: {
+
             const orderDetails = [...state.orderDetails];
+            //const draggedElement = orderDetails[action.draggedElement];
+            //orderDetails[action.draggedElement] = orderDetails[action.swapElement];
+            //orderDetails[action.swapElement] = draggedElement;
+
             const draggedElement = orderDetails[action.draggedElement];
-            orderDetails[action.draggedElement] = orderDetails[action.swapElement];
-            orderDetails[action.swapElement] = draggedElement;
+            orderDetails.splice(action.draggedElement,1);
+            orderDetails.splice(action.swapElement, 0, draggedElement);
+
+
 
             return {
                 ...state,

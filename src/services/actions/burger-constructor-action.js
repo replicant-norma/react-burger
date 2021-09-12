@@ -17,17 +17,16 @@ export function orderRequest(orderDetails) {
         dispatch({
             type: GET_ORDER_REQUEST
         });
-        getOrder(orderDetails).then(res => {
-            if (res && res.success) {
+        getOrder(orderDetails)
+            .then((data) =>
                 dispatch({
                     type: GET_ORDER_SUCCESS,
-                    orderNumber: res.order.number
-                });
-            } else {
+                    orderNumber: data.order.number
+                }))
+            .catch((e) => {
                 dispatch({
                     type: GET_ORDER_FAILED
-                });
-            }
-        });
-    };
+                })
+            })
+    }
 }
