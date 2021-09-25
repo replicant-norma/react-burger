@@ -4,6 +4,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {getProfile} from "../../services/actions/auth-action";
 import {Redirect, Route} from "react-router-dom";
 import {refreshToken} from "../../utils/burger-api";
+import dataProp from "../../utils/data-prop";
+import Product from "../product/product";
+import PropTypes from "prop-types";
 
 export const ProtectedRoute = ({children, ...rest}) =>{
     const isRefreshToken = localStorage.getItem('refreshToken');
@@ -38,4 +41,8 @@ export const ProtectedRoute = ({children, ...rest}) =>{
             } />
     )
 
+}
+
+ProtectedRoute.propTypes = {
+    children: PropTypes.node.isRequired
 }

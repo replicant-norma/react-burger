@@ -20,14 +20,14 @@ function AppHeader() {
             <div className={styles.container}>
                 <div className={clsx(styles.item, "pl-5 pr-5 mr-2")}>
                     <NavLink to="/" exact={true} className={clsx("text_type_main-default",
-                        styles.link)} activeClassName={"text_color_primary"}>
+                        styles.link)} activeClassName={styles.active}>
                         <BurgerIcon type="secondary"/>
                         <span>Конструктор</span>
                     </NavLink>
                 </div>
                 <div className={clsx(styles.item, "pl-5 pr-5")}>
                     <NavLink to="/feed" className={clsx("text_type_main-default",
-                        styles.link)} activeClassName={"text_color_primary"}>
+                        styles.link)} activeClassName={styles.active}>
                         <ListIcon type="secondary"/>
                         <span>Лента заказов</span>
                     </NavLink>
@@ -37,7 +37,7 @@ function AppHeader() {
                 </div>
                 <div className={clsx(styles.item, "pl-5 pr-5")}>
                     <NavLink to="/profile" className={clsx("text_type_main-default",
-                        styles.link)} activeClassName={"text_color_primary"}>
+                        styles.link)} activeClassName={styles.active}>
                         <ProfileIcon type="secondary"/>
                         <span>Личный кабинет</span>
                     </NavLink>
