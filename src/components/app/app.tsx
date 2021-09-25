@@ -5,14 +5,19 @@ import AppHeader from '../../components/app-header/app-header';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import {getIngredients} from '../../utils/burger-api';
+import {BurgerConstructorContext} from "../../services/appContext";
 
 
 function App() {
     const [state, setState] = useState({
         isLoading: false,
         hasError: false,
-        data: []
+        data: [],
+        haveBun: false,
+        orderDetails: [],
+        orderNumber: null
     });
+
     useEffect(() => {
         const ingredients = () => {
             setState({...state, hasError: false, isLoading: true});
@@ -36,7 +41,9 @@ function App() {
                 <section className={styles.burger_constructor}>
                     {/* Для теста верстки передаем весь массив сразу, но это неверно
                 */}
-                    <BurgerConstructor data={state.data}/>
+                    <BurgerConstructorContext.Provider value={{state, setState}}>
+                        <BurgerConstructor/>
+                    </BurgerConstructorContext.Provider>
                 </section>
             </main>
         </div>

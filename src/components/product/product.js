@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Box, Typography, CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './product.module.css';
 import clsx from 'clsx';
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
-import PropTypes from "prop-types";
 import dataProp from "../../utils/data-prop";
 
 {/* Блок отображения продукта из левого экрана*/
@@ -18,7 +17,8 @@ function Product(props) {
     const handleOpenClick = () => {
         setIsOpen(true);
         setCount(count + 1);
-    };
+    }
+
     const handleCloseClick = () => {
         setIsOpen(false);
     };
