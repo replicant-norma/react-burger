@@ -10,14 +10,16 @@ import {ProtectedRoute} from "../protected-route/protected-route";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import {UnProtectedRoute} from "../unprotected-route/unprotected-route";
+import OrderDetails from "../order-details/order-details";
+import {RootState} from "../../index";
 
 export const App = () => {
-    //const {isOpenModalDetails} = useSelector((state) =>state.burgerIngredients);
+
+    const {isOpenModalOrder} = useSelector((state: RootState) => state.burgerConstructor);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getIngredientsItems());
     }, [dispatch])
-    //const [isOpenModal, setIsOpenModal] = useState(false);
 
     const history = useHistory();
     let location = useLocation<{ background: false }>();
@@ -25,8 +27,13 @@ export const App = () => {
 
     const handleCloseClick = () => {
         history.push('/');
-        //setIsOpenModal(false);
         dispatch({type: 'SET_MODAL_DETAILS_STATE', isOpenModalDetails: null})
+    };
+
+    const handleCloseClickOrder = () => {
+        history.push('/');
+        dispatch({type: 'SET_MODAL_ORDER_STATE', isOpenModalOrder: false});
+        dispatch({type: 'SET_ORDER_NUMBER', orderNumber: null});
     };
 
     return (
@@ -72,6 +79,12 @@ export const App = () => {
                         </Modal>
                     </Route>
                 )}
+                {isOpenModalOrder && background && (<ProtectedRoute path={"/"}>
+                    <Modal onClose={handleCloseClickOrder}>
+                        <OrderDetails/>
+                    </Modal>
+                </ProtectedRoute>)}
+
             </main>
         </div>
     );

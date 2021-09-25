@@ -15,8 +15,8 @@ import {
 
 export const ResetPassword = () => {
     const {password, token, newPasswordSuccess} = useSelector((state) => state.resetPassword);
-    const {resetPasswordSuccess} = useSelector((state) => state.forgotPassword);
-    const {accessToken} = useSelector((state) => state.auth);
+    //const {resetPasswordSuccess} = useSelector((state) => state.forgotPassword);
+    //const {accessToken} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
 

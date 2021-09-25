@@ -17,22 +17,16 @@ export const Product = (props) => {
     const {haveBun, orderDetails} = useSelector(state => state.burgerConstructor);
     const {isOpenModalDetails} = useSelector(state => state.burgerIngredients);
     const dispatch = useDispatch();
-    const location = useHistory();
+    const history = useHistory();
     const count = useMemo(() =>
         orderDetails.filter((item) => item._id === props.data._id).length, [orderDetails])
 
-    //const [isOpenModal, setIsOpenModal] = useState(false);
 
     const handleOpenClick = () => {
-        location.replace('/ingredients/' + props.data._id, {background: true});
-        //setIsOpenModal(true);
+        history.replace('/ingredients/' + props.data._id, {background: true});
         dispatch({type: 'SET_MODAL_DETAILS_STATE', isOpenModalDetails: props.data._id})
     }
 
-    /*const handleCloseClick = () => {
-        setIsOpenModal(false);
-        dispatch({type: 'SET_MODAL_DETAILS_STATE', isOpenModalDetails: null})
-    };*/
     const [{fail}, dragRef] = useDrag({
         type: "ingredient",
         item: props.data,
