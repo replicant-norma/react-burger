@@ -1,0 +1,36 @@
+.auth {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    margin: 80px auto;
+    width: 480px;
+}
+
+.title {
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    align-items: center;
+}
+
+.button {
+    text-align: center;
+}
+
+.login {
+    margin-top: 80px;
+    text-align: center;
+    gap: 16px;
+}
+
+.link {
+    color: #4C4CFF;
+    text-decoration: none;
+}

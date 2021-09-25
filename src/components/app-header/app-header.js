@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './app-header.module.css';
 import clsx from 'clsx';
+import {NavLink} from "react-router-dom";
 import {
     Box,
     BurgerIcon,
@@ -18,28 +19,28 @@ function AppHeader() {
         <header className={styles.header}>
             <div className={styles.container}>
                 <div className={clsx(styles.item, "pl-5 pr-5 mr-2")}>
-                    <a href="#" className={clsx("text_type_main-default text_color_primary",
-                        styles.link)}>
-                        <BurgerIcon type="primary"/>
+                    <NavLink to="/" exact={true} className={clsx("text_type_main-default",
+                        styles.link)} activeClassName={"text_color_primary"}>
+                        <BurgerIcon type="secondary"/>
                         <span>Конструктор</span>
-                    </a>
+                    </NavLink>
                 </div>
                 <div className={clsx(styles.item, "pl-5 pr-5")}>
-                    <a href="#" className={clsx("text_type_main-default text_color_inactive",
-                        styles.link)}>
+                    <NavLink to="/feed" className={clsx("text_type_main-default",
+                        styles.link)} activeClassName={"text_color_primary"}>
                         <ListIcon type="secondary"/>
                         <span>Лента заказов</span>
-                    </a>
+                    </NavLink>
                 </div>
                 <div className={clsx(styles.logo, "ml-30")}>
                     <Logo/>
                 </div>
                 <div className={clsx(styles.item, "pl-5 pr-5")}>
-                    <a href="#" className={clsx("text_type_main-default text_color_inactive",
-                        styles.link)}>
+                    <NavLink to="/profile" className={clsx("text_type_main-default",
+                        styles.link)} activeClassName={"text_color_primary"}>
                         <ProfileIcon type="secondary"/>
                         <span>Личный кабинет</span>
-                    </a>
+                    </NavLink>
                 </div>
             </div>
         </header>

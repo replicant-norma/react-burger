@@ -1,6 +1,6 @@
 .list {
     overflow-y: scroll;
-    height: calc(100vh - 460px);
+    height: calc(100vh - 470px);
     margin-left: -24px;
     scrollbar-width: 8px;
     scrollbar-color: #8585AD #2F2F37;

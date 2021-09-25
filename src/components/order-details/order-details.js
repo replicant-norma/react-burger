@@ -7,6 +7,7 @@ import {getOrder} from '../../utils/burger-api';
 import {useDispatch, useSelector} from "react-redux";
 import {getIngredientsItems} from "../../services/actions/burger-ingredients-action";
 import {orderRequest} from "../../services/actions/burger-constructor-action";
+import {Redirect} from "react-router-dom";
 
 function OrderDetails(props) {
     const {orderDetails, orderNumber} = useSelector(state => state.burgerConstructor);
