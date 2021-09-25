@@ -1,60 +1,75 @@
-import React, {useContext, useEffect, useMemo, useReducer} from 'react';
+import React, {useMemo} from 'react';
 import styles from './ingredient-list.module.css';
 import Ingredient from "../ingredient/ingredient";
+import WrapperConstructorElement from "../wrapper-constructor-element/wrapper-constructor-element";
 import {Box, Typography, ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
 import PropTypes from "prop-types";
 import dataProp from "../../utils/data-prop";
-import {BurgerConstructorContext} from "../../services/appContext";
+import {useDispatch, useSelector} from "react-redux";
+import {useDrag, useDrop} from "react-dnd";
 
 {/* Собираем список ингредиентов */
 }
 
 function IngredientList(props) {
-    const {state, setState} = useContext(BurgerConstructorContext);
 
-    function fakeOrder() {
-        const countGenerator = Math.floor(Math.random() * 12); // количество ингредиентов в бургере
-        const buns = state.data.filter((item) => item.type === 'bun'); // отобрали булки
-        const bun = buns[Math.floor(Math.random() * 2)]; // рандомно выбрали одну из булок
-        const notBuns = state.data.filter((item) => item.type !== 'bun'); // отобрали не-булки
-        let fakeIngredients = [];
-        fakeIngredients.push(bun);
-        for (let i = 0; i <= countGenerator; i++) {
-            const randomIngredient = Math.floor(Math.random() * 12);
-            fakeIngredients.push(notBuns[randomIngredient]);
-        }
-        setState({...state, orderDetails: fakeIngredients});
-        return fakeIngredients;
-    }
+    const dispatch = useDispatch();
+    const {orderDetails, haveBun, draggedElement, swapElement} = useSelector(state => state.burgerConstructor);
 
-    useEffect(() => {
-        const ingredients = async () => {
-            fakeOrder()
-        }
-        ingredients()
-    }, [state.data]);
-
-
-    const pList = state.orderDetails.map(function (el, index) {
+    const pList = useMemo(() => orderDetails.map(function (el, index) {
             if (el.type == 'main' || el.type == 'sauce') {
                 return (
-                    <div className={styles.wrapper} key={index}>
-                        <DragIcon type="primary"/>
-                        <ConstructorElement
-                            text={el.name}
-                            price={el.price}
-                            thumbnail={el.image}
-                        />
-                    </div>
+                    <WrapperConstructorElement key={index} draggable
+                                               index={index} data={el}/>
                 )
             }
         }
-    );
-    const burger = state.orderDetails.map(function (el, index) {
+    ), [orderDetails]);
+
+    const [{opacity}, dropTarget] = useDrop({
+        accept: "ingredient",
+        collect: monitor => ({
+            opacity: monitor.isOver() ? 0.3 : 1,
+        }),
+        drop(item) {
+            onDropHandler(item)
+        }
+    });
+
+    const onDropHandler = (item) => {
+        if (item.type === 'bun' && haveBun)
+            return dispatch({type: 'CHANGE_ORDER_BUN', ingredient: item});
+        if (item.type === 'bun' && !haveBun) {
+            dispatch({type: 'HAVE_BUN', haveBun: true})
+        }
+        dispatch({type: 'PUSH_ORDER_ITEM', ingredient: item});
+    }
+
+    const [, dropTargetInner] = useDrop({
+        accept: "inner",
+        collect: monitor => ({
+            opacitySort: monitor.isOver() ? 0.3 : 1,
+        }),
+          drop(){
+           dropIngredient ();
+            //console.log(item);
+        }
+    });
+
+    const dropIngredient = () => {
+        //console.log(draggedElement, swapElement);
+        dispatch({
+            type: 'SWAP_CONSTRUCTOR_INGREDIENT',
+            draggedElement: draggedElement, swapElement: swapElement
+        });
+    }
+
+
+    const burger = useMemo(() => orderDetails.map(function (el, index) {
         if (el.type == 'bun') {
             return (
-                <div className={styles.flex} onClick={fakeOrder} key={index}>
+                <div className={styles.flex} id={index} key={index} >
                     <ConstructorElement
                         type="top"
                         isLocked="true"
@@ -62,27 +77,25 @@ function IngredientList(props) {
                         price={el.price}
                         thumbnail={el.image}
                     />
-                    <div className={clsx(styles.list, styles.flex)}>
+                    <div id="constructor" className={clsx(styles.list, styles.flex)} ref={dropTargetInner}>
                         {pList}
                     </div>
                     <ConstructorElement
                         type="bottom"
                         isLocked="true"
                         text={el.name + ' низ'}
-                        price="0"
-                        //в массиве заказа булка одна, а в конструкторе показывается 2 раза с ценой
-                        //получается клиент не поймет, как формируется цена
-                        //поэтому вторая половинка булки должна быть с нулевой ценой
+                        price={el.price}
                         thumbnail={el.image}
                     />
                 </div>
             )
         }
-    })
+    }), [orderDetails])
     return (
         <>
-            {burger}
-
+            <div className={styles.dnd} style={{opacity: opacity}} ref={dropTarget}>
+                {burger}
+            </div>
         </>
     )
 }

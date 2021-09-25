@@ -3,31 +3,30 @@ import styles from './order-details.module.css';
 import {Box, Typography} from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
 import doneImgPath from '../../images/done.gif';
-import {BurgerConstructorContext} from "../../services/appContext";
 import {getOrder} from '../../utils/burger-api';
+import {useDispatch, useSelector} from "react-redux";
+import {getIngredientsItems} from "../../services/actions/burger-ingredients-action";
+import {orderRequest} from "../../services/actions/burger-constructor-action";
 
 function OrderDetails(props) {
-    const {state, setState} = useContext(BurgerConstructorContext);
-    const ingredients = () => {
+    const {orderDetails, orderNumber} = useSelector(state => state.burgerConstructor);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
         let idx = [];
-        state.orderDetails.map(function (el, index) {
+        orderDetails.map(function (el, index) {
             idx.push(el._id);
         })
-        return idx;
-    }
-    useEffect(() => {
         let requestData = {
-            "ingredients": ingredients()
+            "ingredients": idx
         }
-        getOrder(requestData)
-            .then((data) => setState({...state, orderNumber: data.order.number}))
-            .catch((e) => console.log(e))
-    }, [state.orderDetails]);
+        dispatch(orderRequest(requestData));
+    }, []);
 
     return (
         <div className={styles.details}>
             <div className={styles.order}>
-                <h1 className="text text_type_digits-large">{state.orderNumber}</h1>
+                <h1 className="text text_type_digits-large">{orderNumber}</h1>
             </div>
             <h2 className={clsx(styles.label, "mt-8 text text_type_text-small")}>индентификатор заказа</h2>
             <div className={styles.icon}>
