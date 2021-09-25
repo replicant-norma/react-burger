@@ -32,17 +32,16 @@ export const ForgotPassword = () => {
     }
 
     if (resetPasswordSuccess) {
-        //history.replace({pathname: '/forgot-password'});
         return (
             <Redirect from="/forgot-password" to={{pathname: "/reset-password"}}/>
         )
     }
 
-    if (accessToken) {
+    /*if (accessToken) {
         return (
             <Redirect to="/" />
         )
-    }
+    }*/
 
     return (
         <section className={styles.reset}>

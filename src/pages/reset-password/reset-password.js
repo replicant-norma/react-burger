@@ -29,11 +29,11 @@ export const ResetPassword = () => {
         }
     }
 
-    if (accessToken || !resetPasswordSuccess) {
+    /*if (accessToken || !resetPasswordSuccess) {
         return (
             <Redirect to="/"/>
         )
-    }
+    }*/
 
     if (newPasswordSuccess) {
         return (

@@ -9,6 +9,7 @@ import {ForgotPassword, HomePage, Login, Register, ResetPassword, Profile, Ingre
 import {ProtectedRoute} from "../protected-route/protected-route";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
+import {UnProtectedRoute} from "../unprotected-route/unprotected-route";
 
 export const App = () => {
     //const {isOpenModalDetails} = useSelector((state) =>state.burgerIngredients);
@@ -19,7 +20,7 @@ export const App = () => {
     //const [isOpenModal, setIsOpenModal] = useState(false);
 
     const history = useHistory();
-    let location = useLocation<{background: false}>();
+    let location = useLocation<{ background: false }>();
     let background = location.state && location.state.background;
 
     const handleCloseClick = () => {
@@ -29,50 +30,50 @@ export const App = () => {
     };
 
     return (
-            <div className="App">
-                <AppHeader/>
-                <main role="main" className={styles.container}>
-                    <Switch location={background || location}>
-                        <Route path="/" exact={true}>
-                            <HomePage/>
-                        </Route>
-                        <Route path="/login" exact={true}>
-                            <Login/>
-                        </Route>
-                        <Route path="/register" exact={true}>
-                            <Register/>
-                        </Route>
-                        <Route path="/forgot-password" exact={true}>
-                            <ForgotPassword/>
-                        </Route>
-                        <Route path="/reset-password" exact={true}>
-                            <ResetPassword/>
-                        </Route>
-                        <ProtectedRoute path="/profile" exact={true}>
-                            <Profile/>
-                        </ProtectedRoute>
-                        <ProtectedRoute path="/profile/orders" exact={true}>
-                            <Profile/>
-                        </ProtectedRoute>
-                        <ProtectedRoute path="/profile/orders/:id" exact={true}>
-                            <Profile/>
-                        </ProtectedRoute>
-                        <Route path={"/ingredients/:id"}>
-                            <IngredientDetails/>
-                        </Route>
-                        <Route>
-                            <NotFound/>
-                        </Route>
-                    </Switch>
-                    {background &&
-                    (<Route path={"/ingredients/:id"}>
+        <div className="App">
+            <AppHeader/>
+            <main role="main" className={styles.container}>
+                <Switch location={background || location}>
+                    <Route path="/" exact={true}>
+                        <HomePage/>
+                    </Route>
+                    <UnProtectedRoute path="/login" exact={true}>
+                        <Login/>
+                    </UnProtectedRoute>
+                    <UnProtectedRoute path="/register" exact={true}>
+                        <Register/>
+                    </UnProtectedRoute>
+                    <UnProtectedRoute path="/forgot-password" exact={true}>
+                        <ForgotPassword/>
+                    </UnProtectedRoute>
+                    <UnProtectedRoute path="/reset-password" exact={true}>
+                        <ResetPassword/>
+                    </UnProtectedRoute>
+                    <ProtectedRoute path="/profile" exact={true}>
+                        <Profile/>
+                    </ProtectedRoute>
+                    <ProtectedRoute path="/profile/orders" exact={true}>
+                        <Profile/>
+                    </ProtectedRoute>
+                    <ProtectedRoute path="/profile/orders/:id" exact={true}>
+                        <Profile/>
+                    </ProtectedRoute>
+                    <Route path={"/ingredients/:id"}>
+                        <IngredientDetails/>
+                    </Route>
+                    <Route>
+                        <NotFound/>
+                    </Route>
+                </Switch>
+                {background &&
+                (<Route path={"/ingredients/:id"}>
                         <Modal onClose={handleCloseClick} title="Детали ингредиента">
-                            <IngredientDetails />
+                            <IngredientDetails/>
                         </Modal>
-                     </Route>
-                    )}
-                </main>
-            </div>
+                    </Route>
+                )}
+            </main>
+        </div>
     );
 }
 

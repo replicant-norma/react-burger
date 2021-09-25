@@ -24,11 +24,11 @@ export const Register = () =>  {
         }
     }
 
-    if(accessToken){
+    /*if(accessToken){
         return(
             <Redirect to="/" />
         )
-    }
+    }*/
 
     return(
         <section className={styles.register}>
