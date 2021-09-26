@@ -14,7 +14,7 @@ import {register} from "../../services/actions/auth-action";
 
 
 export const Register = () =>  {
-    const {email, password, userName, accessToken} = useSelector((state) => state.auth);
+    const {email, password, userName, accessToken, backendMessage} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const inputRef = useRef(null);
     const submit = (e) => {
@@ -55,6 +55,7 @@ export const Register = () =>  {
                 />
                 <PasswordInput onChange={e => dispatch({type: 'SET_PASSWORD', payload: e.target.value})}
                     value={password} name={'password'}/>
+                <div className={styles.message}>{backendMessage}</div>
                 <div className={styles.button}>
                 <Button type="primary">Зарегистрироваться</Button>
                 </div>

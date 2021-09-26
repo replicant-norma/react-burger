@@ -28,19 +28,19 @@ export function register(email, password, name) {
         registerUser(email,password, name)
             .then((data) => {
                 if(data.success){
-                    dispatch({type: REGISTER_SUCCESS});
+                    dispatch({type: REGISTER_SUCCESS, payload: data.message});
                     const token = data.accessToken.split('Bearer ')[1];
                     setCookie('accessToken', token, {expires: 1200});
                     localStorage.setItem('refreshToken', data.refreshToken);
                     dispatch({type: 'SET_ACCESS_TOKEN', payload: token });
                     dispatch({type: 'SET_REFRESH_TOKEN', payload: data.refreshToken});
                 } else{
-                    dispatch({type: REGISTER_FAILED})
+                    dispatch({type: REGISTER_FAILED, payload: data.message})
                 }
             })
             .catch((e) => {
                 dispatch({
-                    type: REGISTER_FAILED
+                    type: REGISTER_FAILED, payload: e.message
                 })
             })
     }
@@ -55,19 +55,19 @@ export function login(email, password) {
         loginUser(email,password)
             .then((data) => {
                 if(data.success){
-                    dispatch({type: AUTH_SUCCESS});
+                    dispatch({type: AUTH_SUCCESS, payload: data.message});
                     const token = data.accessToken.split('Bearer ')[1];
                     setCookie('accessToken', token, {expires: 1200});
                     localStorage.setItem('refreshToken', data.refreshToken);
                     dispatch({type: 'SET_ACCESS_TOKEN', payload: token });
                     dispatch({type: 'SET_REFRESH_TOKEN', payload: data.refreshToken});
                 } else{
-                    dispatch({type: AUTH_FAILED})
+                    dispatch({type: AUTH_FAILED, payload: data.message})
                 }
             })
             .catch((e) => {
                 dispatch({
-                    type: AUTH_FAILED
+                    type: AUTH_FAILED, payload: e.message
                 })
             })
     }
@@ -105,16 +105,16 @@ export function updateProfile(email, password, name) {
         updateUserInfo(email,password, name)
             .then((data) => {
                 if(data.success){
-                    dispatch({type: USER_INFO_SUCCESS});
+                    dispatch({type: USER_INFO_SUCCESS, payload: 'Сохранено'});
                     dispatch({type: 'SET_EMAIL', payload: data.user.email });
                     dispatch({type: 'SET_USER_NAME', payload: data.user.name});
                 } else{
-                    dispatch({type: USER_INFO_FAILED})
+                    dispatch({type: USER_INFO_FAILED, payload: data.message})
                 }
             })
             .catch((e) => {
                 dispatch({
-                    type: USER_INFO_FAILED
+                    type: USER_INFO_FAILED, payload: e.message
                 })
             })
     }

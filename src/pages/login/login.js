@@ -14,7 +14,7 @@ import {login} from "../../services/actions/auth-action";
 
 
 export const Login = () =>  {
-    const {email, password, userName,accessToken} = useSelector((state) => state.auth);
+    const {email, password, userName,accessToken, backendMessage} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const inputRef = useRef(null);
     const {state} = useLocation();
@@ -49,6 +49,7 @@ export const Login = () =>  {
                 />
                 <PasswordInput onChange={e => dispatch({type: 'SET_PASSWORD', payload: e.target.value})}
                                value={password} name={'password'}/>
+                <div className={styles.message}>{backendMessage}</div>
                 <div className={styles.button}>
                     <Button type="primary">Войти</Button>
                 </div>

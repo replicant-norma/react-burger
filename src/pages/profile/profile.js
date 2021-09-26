@@ -12,7 +12,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getProfile, logout, updateProfile} from "../../services/actions/auth-action";
 
 export const Profile = () => {
-    const {email, password, userName, userInfoFailed} = useSelector((state) => state.auth);
+    const {email, password, userName, userInfoFailed, backendMessage} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const inputRefName = useRef();
     const inputRefEmail = useRef();
@@ -102,6 +102,7 @@ export const Profile = () => {
                         errorText={'Ошибка'}
                         size={'default'}
                     />
+                    <div className={styles.message}>{backendMessage}</div>
                     <div className={styles.action}>
                         <Button type="secondary" onClick={cancel}>Отмена</Button>
                         <Button type="primary" onClick={submit}>Сохранить</Button>

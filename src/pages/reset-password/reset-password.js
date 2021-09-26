@@ -14,9 +14,9 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export const ResetPassword = () => {
-    const {password, token, newPasswordSuccess} = useSelector((state) => state.resetPassword);
-    //const {resetPasswordSuccess} = useSelector((state) => state.forgotPassword);
-    //const {accessToken} = useSelector((state) => state.auth);
+    const {password, token, newPasswordSuccess,backendMessage} = useSelector((state) => state.resetPassword);
+    const {resetPasswordSuccess} = useSelector((state) => state.forgotPassword);
+    const {accessToken} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
 
@@ -29,11 +29,11 @@ export const ResetPassword = () => {
         }
     }
 
-    /*if (accessToken || !resetPasswordSuccess) {
+    if (accessToken || !resetPasswordSuccess) {
         return (
             <Redirect to="/"/>
         )
-    }*/
+    }
 
     if (newPasswordSuccess) {
         return (
@@ -60,6 +60,7 @@ export const ResetPassword = () => {
                     name={'token'}
                     size={'default'}
                 />
+                <div className={styles.message}>{backendMessage}</div>
                 <div className={styles.button}>
                     <Button type="primary">Сохранить</Button>
                 </div>

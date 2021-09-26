@@ -14,7 +14,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export const ForgotPassword = () => {
-    const {email, errorInput, errorInputText, resetPasswordSuccess} = useSelector((state) => state.forgotPassword);
+    const {email, errorInput, errorInputText, resetPasswordSuccess, backendMessage} = useSelector((state) => state.forgotPassword);
     const {accessToken} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const inputRef = useRef(null);
@@ -59,6 +59,7 @@ export const ForgotPassword = () => {
                     errorText={errorInputText}
                     size={'default'}
                 />
+                <div className={styles.message}>{backendMessage}</div>
                 <div className={styles.button}>
                     <Button type="primary">Восстановить</Button>
                 </div>

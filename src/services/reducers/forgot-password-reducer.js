@@ -15,7 +15,7 @@ const initialState = {
     resetPasswordRequest: false,
     resetPasswordSuccess: false,
     resetPasswordFailed: false,
-    data: [],
+    backendMessage: '',
 }
 
 export const forgotPasswordReducer  = (state = initialState, action) => {
@@ -31,15 +31,15 @@ export const forgotPasswordReducer  = (state = initialState, action) => {
         }
         case RESET_PASSWORD_REQUEST:{
             return {...state, resetPasswordRequest: true,
-                resetPasswordSuccess: false, resetPasswordFailed: false}
+                resetPasswordSuccess: false, resetPasswordFailed: false, backendMessage: ''}
         }
         case RESET_PASSWORD_SUCCESS:{
             return {...state, resetPasswordSuccess: true,
-                resetPasswordFailed: false, resetPasswordRequest: false}
+                resetPasswordFailed: false, resetPasswordRequest: false, backendMessage: action.payload}
         }
         case RESET_PASSWORD_FAILED:{
             return {...state, resetPasswordFailed: true,
-                resetPasswordSuccess: false, resetPasswordRequest: false}
+                resetPasswordSuccess: false, resetPasswordRequest: false, backendMessage: action.payload}
         }
         case RESET_REQUEST_STATUS:{
             return {...state, resetPasswordSuccess: false,
