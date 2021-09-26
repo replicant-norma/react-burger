@@ -10,7 +10,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
 import {validationEmail} from "../../utils/utils";
-import {register} from "../../services/actions/auth-action";
+import {register, SET_EMAIL, SET_USER_NAME} from "../../services/actions/auth-action";
 
 
 export const Register = () =>  {
@@ -37,7 +37,7 @@ export const Register = () =>  {
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
-                    onChange={e => dispatch({type: 'SET_USER_NAME', payload: e.target.value})}
+                    onChange={e => dispatch({type: SET_USER_NAME, payload: e.target.value})}
                     value={userName}
                     name={'name'}
                     size={'default'}
@@ -45,7 +45,7 @@ export const Register = () =>  {
                 <Input
                     type={'text'}
                     placeholder={'E-mail'}
-                    onChange={e => dispatch({type: 'SET_EMAIL', payload: e.target.value})}
+                    onChange={e => dispatch({type: SET_EMAIL, payload: e.target.value})}
                     value={email}
                     name={'email'}
                     error={false}

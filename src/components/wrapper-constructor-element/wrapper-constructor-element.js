@@ -6,6 +6,11 @@ import dataProp from "../../utils/data-prop";
 import {useDrag, useDrop} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
 import ProductList from "../product-list/product-list";
+import {
+    DELETE_ORDER_ITEM,
+    SET_DRAGGED_ELEMENT,
+    SET_SWAP_ELEMENT
+} from "../../services/actions/burger-constructor-action";
 
 function WrapperConstructorElement(props) {
     const {draggedElement} = useSelector(state => state.burgerConstructor);
@@ -13,7 +18,7 @@ function WrapperConstructorElement(props) {
     const dragIngredient = (e, el, index) => {
         e.preventDefault();
         //console.log('drag', index);
-        dispatch({type: 'SET_DRAGGED_ELEMENT', index: index});
+        dispatch({type: SET_DRAGGED_ELEMENT, index: index});
         //console.log(draggedElement);
 
     }
@@ -26,7 +31,7 @@ function WrapperConstructorElement(props) {
         //});
         //console.log('drop',index)
         dispatch({
-            type: 'SET_SWAP_ELEMENT', index: index
+            type: SET_SWAP_ELEMENT, index: index
         })
     }
 
@@ -41,7 +46,7 @@ function WrapperConstructorElement(props) {
 
     const deleteItemIngredient = (e, index, type) => {
         e.preventDefault();
-        dispatch({type: 'DELETE_ORDER_ITEM', index: index, ingredient: type})
+        dispatch({type: DELETE_ORDER_ITEM, index: index, ingredient: type})
     }
     const opacity = isDrag ? 0 : 1;
     return (

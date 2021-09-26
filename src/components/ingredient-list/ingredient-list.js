@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useRef} from 'react';
 import styles from './ingredient-list.module.css';
 import Ingredient from "../ingredient/ingredient";
 import WrapperConstructorElement from "../wrapper-constructor-element/wrapper-constructor-element";
@@ -8,6 +8,12 @@ import PropTypes from "prop-types";
 import dataProp from "../../utils/data-prop";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrag, useDrop} from "react-dnd";
+import {
+    CHANGE_ORDER_BUN,
+    HAVE_BUN,
+    PUSH_ORDER_ITEM,
+    SWAP_CONSTRUCTOR_INGREDIENT
+} from "../../services/actions/burger-constructor-action";
 
 {/* Собираем список ингредиентов */
 }
@@ -21,7 +27,7 @@ function IngredientList(props) {
             if (el.type == 'main' || el.type == 'sauce') {
                 return (
                     <WrapperConstructorElement key={index} draggable
-                                               index={index} data={el}/>
+                                               index={index} data={el} />
                 )
             }
         }
@@ -39,11 +45,11 @@ function IngredientList(props) {
 
     const onDropHandler = (item) => {
         if (item.type === 'bun' && haveBun)
-            return dispatch({type: 'CHANGE_ORDER_BUN', ingredient: item});
+            return dispatch({type: CHANGE_ORDER_BUN, ingredient: item});
         if (item.type === 'bun' && !haveBun) {
-            dispatch({type: 'HAVE_BUN', haveBun: true})
+            dispatch({type: HAVE_BUN, haveBun: true})
         }
-        dispatch({type: 'PUSH_ORDER_ITEM', ingredient: item});
+        dispatch({type: PUSH_ORDER_ITEM, ingredient: item});
     }
 
     const [, dropTargetInner] = useDrop({
@@ -60,7 +66,7 @@ function IngredientList(props) {
     const dropIngredient = () => {
         //console.log(draggedElement, swapElement);
         dispatch({
-            type: 'SWAP_CONSTRUCTOR_INGREDIENT',
+            type: SWAP_CONSTRUCTOR_INGREDIENT,
             draggedElement: draggedElement, swapElement: swapElement
         });
     }

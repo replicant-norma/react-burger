@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './app-header.module.css';
 import clsx from 'clsx';
-import {NavLink} from "react-router-dom";
+import {NavLink, Link} from "react-router-dom";
 import {
     Box,
     BurgerIcon,
@@ -33,7 +33,7 @@ function AppHeader() {
                     </NavLink>
                 </div>
                 <div className={clsx(styles.logo, "ml-30")}>
-                    <Logo/>
+                    <Link to={"/"}><Logo/></Link>
                 </div>
                 <div className={clsx(styles.item, "pl-5 pr-5")}>
                     <NavLink to="/profile" className={clsx("text_type_main-default",

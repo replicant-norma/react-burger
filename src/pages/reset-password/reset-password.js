@@ -4,7 +4,7 @@ import styles from './reset-password.module.css';
 import {validationPassword} from '../../utils/utils';
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
-import {resetPasswordRequest} from "../../services/actions/reset-password-action";
+import {resetPasswordRequest, SET_TOKEN} from "../../services/actions/reset-password-action";
 import {
     Box,
     Logo,
@@ -12,6 +12,7 @@ import {
     Input,
     PasswordInput, Button
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import {SET_PASSWORD} from "../../services/actions/auth-action";
 
 export const ResetPassword = () => {
     const {password, token, newPasswordSuccess,backendMessage} = useSelector((state) => state.resetPassword);
@@ -46,7 +47,7 @@ export const ResetPassword = () => {
             <h2 className="text text_type_main-medium">Восстановление пароля</h2>
             <form className={styles.form} onSubmit={submit}>
                 <PasswordInput
-                    onChange={e => dispatch({type: 'SET_PASSWORD', payload: e.target.value})}
+                    onChange={e => dispatch({type: SET_PASSWORD, payload: e.target.value})}
                     value={password}
                     name={'password'}
                     size={'default'}
@@ -54,7 +55,7 @@ export const ResetPassword = () => {
                 <Input
                     type={'text'}
                     placeholder={'Введите код из письма'}
-                    onChange={e => dispatch({type: 'SET_TOKEN', payload: e.target.value})}
+                    onChange={e => dispatch({type: SET_TOKEN, payload: e.target.value})}
                     icon={''}
                     value={token}
                     name={'token'}

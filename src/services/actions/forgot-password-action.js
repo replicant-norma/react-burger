@@ -15,14 +15,14 @@ export function forgotPasswordRequest(email) {
         });
         forgotPassword(email)
             .then((data) => data.success ? dispatch({
-                    type: 'RESET_PASSWORD_SUCCESS', payload: data.message
+                    type: RESET_PASSWORD_SUCCESS, payload: data.message
                 }) : dispatch({
-                    type: 'RESET_PASSWORD_FAILED', payload: data.message
+                    type: RESET_PASSWORD_FAILED, payload: data.message
                 })
             )
             .catch((e, data) => {
                 dispatch({
-                    type: 'RESET_PASSWORD_FAILED', payload: data.message
+                    type: RESET_PASSWORD_FAILED, payload: data.message
                 })
             })
     }

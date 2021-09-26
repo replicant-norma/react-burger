@@ -3,7 +3,10 @@ import styles from './burger-constructor.module.css';
 import IngredientList from "../ingredient-list/ingredient-list";
 import {Box, Typography, Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
-import {Redirect, useHistory} from "react-router-dom";
+import {Redirect, useHistory, useLocation} from "react-router-dom";
+import {SET_MODAL_ORDER_STATE, SET_ORDER_NUMBER} from "../../services/actions/burger-constructor-action";
+import OrderDetails from "../order-details/order-details";
+import Modal from "../modal/modal";
 
 {/* Собираем набор ингридиентов из правой панели экрана */
 }
@@ -11,7 +14,9 @@ import {Redirect, useHistory} from "react-router-dom";
 function BurgerConstructor(props) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const {orderDetails} = useSelector((state) => state.burgerConstructor);
+    const location = useLocation();
+    const {orderDetails, isOpenModalOrder, haveBun} = useSelector((state) => state.burgerConstructor);
+    const {accessToken} = useSelector((state) => state.auth);
     const total = useMemo(() => orderDetails.reduce(function (sum, current) {
         if (current.type === 'bun') return sum + current.price * 2;
         return sum + current.price;
@@ -19,8 +24,17 @@ function BurgerConstructor(props) {
 
     const handleOpenClick = (e) => {
         e.preventDefault();
-        history.replace('/', {background: true});
-        dispatch({type: 'SET_MODAL_ORDER_STATE', isOpenModalOrder: true});
+        if (accessToken && haveBun) {
+            dispatch({type: SET_MODAL_ORDER_STATE, isOpenModalOrder: true})
+        }
+        if (!accessToken){
+            history.push("/login");
+        }
+    };
+
+    const handleCloseClickOrder = () => {
+        dispatch({type: SET_MODAL_ORDER_STATE, isOpenModalOrder: false});
+        dispatch({type: SET_ORDER_NUMBER, orderNumber: null});
     };
 
     return (
@@ -35,6 +49,10 @@ function BurgerConstructor(props) {
                     <Button type="primary" onClick={handleOpenClick}>Оформить заказ</Button>
                 </div>)
             }
+            {isOpenModalOrder && (<Modal onClose={handleCloseClickOrder}>
+                    <OrderDetails/>
+                </Modal>
+            )}
 
         </>
     )

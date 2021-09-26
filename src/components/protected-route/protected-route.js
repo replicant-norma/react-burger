@@ -1,42 +1,21 @@
 import React, {useEffect} from "react";
 import {getCookie} from "../../utils/utils";
 import {useDispatch, useSelector} from "react-redux";
-import {getProfile} from "../../services/actions/auth-action";
+import {getProfile, SET_ACCESS_TOKEN, SET_REFRESH_TOKEN} from "../../services/actions/auth-action";
 import {Redirect, Route} from "react-router-dom";
 import {refreshToken} from "../../utils/burger-api";
 import PropTypes from "prop-types";
 
-export const ProtectedRoute = ({children, ...rest}) =>{
-    const isRefreshToken = localStorage.getItem('refreshToken');
+export const ProtectedRoute = ({children, ...rest}) => {
     const {accessToken} = useSelector((state) => state.auth)
-    const dispatch = useDispatch();
-
-    const init = () =>{
-        if (getCookie('accessToken')){
-            dispatch({type:'SET_ACCESS_TOKEN', payload: getCookie('accessToken')})
-            dispatch(getProfile())
-        } else{
-            if(isRefreshToken) {
-                refreshToken();
-                dispatch(getProfile());
-                dispatch({type:'SET_ACCESS_TOKEN', payload: getCookie('accessToken')})
-                dispatch({type:'SET_REFRESH_TOKEN', payload: localStorage.getItem('refreshToken')})
-            }
-
-        }
-    }
-
-    useEffect(()=>{
-        init();
-    }, [])
 
     return (
         <Route {...rest}
-            render={({location}) =>
-             accessToken ? (children) :(
-                 <Redirect to={{pathname: '/login', state: { from: location }}}/>
-             )
-            } />
+               render={({location}) =>
+                   accessToken ? (children) : (
+                       <Redirect to={{pathname: '/login', state: {from: location}}}/>
+                   )
+               }/>
     )
 
 }

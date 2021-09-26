@@ -6,6 +6,7 @@ import ProductList from '../product-list/product-list';
 import {useSelector, useDispatch} from "react-redux";
 import PropTypes from 'prop-types';
 import dataProp from '../../utils/data-prop.js';
+import {SET_CURRENT_TAB} from "../../services/actions/burger-ingredients-action";
 
 {/* Собираем левую часть конструктора */
 }
@@ -17,13 +18,13 @@ export const BurgerIngredients = () => {
     const sauce = useMemo(() => data.filter((item) => item.type === 'sauce'), [data]);
 
     const setTab = (tab) => {
-        dispatch({type: 'SET_CURRENT_TAB', currentTab: tab})
+        dispatch({type: SET_CURRENT_TAB, currentTab: tab})
         const element = document.getElementById(tab);
         if (element) element.scrollIntoView({behavior: "smooth"});
     };
 
     const scrollTab = (tab) => {
-        dispatch({type: 'SET_CURRENT_TAB', currentTab: tab})
+        dispatch({type: SET_CURRENT_TAB, currentTab: tab})
     };
     const handleScroll = () => {
         const bunPosition = document.getElementById('bun').getBoundingClientRect().top;

@@ -8,6 +8,7 @@ import dataProp from "../../utils/data-prop";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrag} from "react-dnd";
 import {Route, useHistory, useLocation, Link} from "react-router-dom";
+import {SET_MODAL_DETAILS_STATE} from "../../services/actions/burger-ingredients-action";
 
 
 {/* Блок отображения продукта из левого экрана*/
@@ -18,13 +19,14 @@ export const Product = (props) => {
     const {isOpenModalDetails} = useSelector(state => state.burgerIngredients);
     const dispatch = useDispatch();
     const history = useHistory();
+    const location = useLocation();
     const count = useMemo(() =>
         orderDetails.filter((item) => item._id === props.data._id).length, [orderDetails])
 
 
     const handleOpenClick = () => {
-        history.replace('/ingredients/' + props.data._id, {background: true});
-        dispatch({type: 'SET_MODAL_DETAILS_STATE', isOpenModalDetails: props.data._id})
+        history.push('/ingredients/' + props.data._id, {background: true});
+        dispatch({type: SET_MODAL_DETAILS_STATE, isOpenModalDetails: props.data._id})
     }
 
     const [{fail}, dragRef] = useDrag({

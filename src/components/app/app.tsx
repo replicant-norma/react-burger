@@ -12,29 +12,52 @@ import Modal from "../modal/modal";
 import {UnProtectedRoute} from "../unprotected-route/unprotected-route";
 import OrderDetails from "../order-details/order-details";
 import {RootState} from "../../index";
+import {SET_MODAL_DETAILS_STATE} from "../../services/actions/burger-ingredients-action";
+import {SET_MODAL_ORDER_STATE, SET_ORDER_NUMBER} from "../../services/actions/burger-constructor-action";
+import {getCookie} from "../../utils/utils";
+import {getProfile, SET_ACCESS_TOKEN, SET_REFRESH_TOKEN} from "../../services/actions/auth-action";
+import {refreshToken} from "../../utils/burger-api";
 
 export const App = () => {
-
     const {isOpenModalOrder} = useSelector((state: RootState) => state.burgerConstructor);
+    const isRefreshToken = localStorage.getItem('refreshToken');
     const dispatch = useDispatch();
+    const init = () => {
+        if (getCookie('accessToken')) {
+            dispatch({type: SET_ACCESS_TOKEN, payload: getCookie('accessToken')})
+            dispatch(getProfile())
+        } else {
+            if (isRefreshToken) {
+                refreshToken();
+                dispatch(getProfile());
+                dispatch({type: SET_ACCESS_TOKEN, payload: getCookie('accessToken')})
+                dispatch({type: SET_REFRESH_TOKEN, payload: localStorage.getItem('refreshToken')})
+            }
+
+        }
+    }
+
+    useEffect(() => {
+        init();
+    }, [])
+
+
     useEffect(() => {
         dispatch(getIngredientsItems());
     }, [dispatch])
-
     const history = useHistory();
-    let location = useLocation<{ background: false }>();
+    let location = useLocation<{ background?: undefined }>();
     let background = location.state && location.state.background;
+
+    if (history.action !== 'PUSH') {
+        background = undefined;
+    }
 
     const handleCloseClick = () => {
         history.push('/');
-        dispatch({type: 'SET_MODAL_DETAILS_STATE', isOpenModalDetails: null})
+        dispatch({type: SET_MODAL_DETAILS_STATE, isOpenModalDetails: null})
     };
 
-    const handleCloseClickOrder = () => {
-        history.push('/');
-        dispatch({type: 'SET_MODAL_ORDER_STATE', isOpenModalOrder: false});
-        dispatch({type: 'SET_ORDER_NUMBER', orderNumber: null});
-    };
 
     return (
         <div className="App">
@@ -79,11 +102,6 @@ export const App = () => {
                         </Modal>
                     </Route>
                 )}
-                {isOpenModalOrder && background && (<ProtectedRoute path={"/"}>
-                    <Modal onClose={handleCloseClickOrder}>
-                        <OrderDetails/>
-                    </Modal>
-                </ProtectedRoute>)}
 
             </main>
         </div>

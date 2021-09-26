@@ -9,7 +9,14 @@ import {
     Button
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
-import {getProfile, logout, updateProfile} from "../../services/actions/auth-action";
+import {
+    getProfile,
+    logout,
+    SET_EMAIL,
+    SET_PASSWORD,
+    SET_USER_NAME,
+    updateProfile
+} from "../../services/actions/auth-action";
 
 export const Profile = () => {
     const {email, password, userName, userInfoFailed, backendMessage} = useSelector((state) => state.auth);
@@ -30,7 +37,7 @@ export const Profile = () => {
     const cancel = (e) => {
         e.preventDefault();
         dispatch(getProfile());
-        dispatch({type: 'SET_PASSWORD', payload: ''});
+        dispatch({type: SET_PASSWORD, payload: ''});
     }
 
     const signOut = (e) => {
@@ -57,7 +64,7 @@ export const Profile = () => {
                     </NavLink>
                 </li>
                 <li className={clsx("text text_type_main-medium", styles.item)}>
-                    <Link className={clsx("text_color_inactive", styles.link)}
+                    <Link to={"/login"} className={clsx("text_color_inactive", styles.link)}
                            onClick={signOut}>Выход</Link>
                 </li>
             </ul>
@@ -66,7 +73,7 @@ export const Profile = () => {
                     <Input
                         type={'text'}
                         placeholder={'Имя'}
-                        onChange={e => dispatch({type: 'SET_USER_NAME', payload: e.target.value})}
+                        onChange={e => dispatch({type: SET_USER_NAME, payload: e.target.value})}
                         icon={'EditIcon'}
                         value={userName}
                         name={'name'}
@@ -79,7 +86,7 @@ export const Profile = () => {
                     <Input
                         type={'text'}
                         placeholder={'Логин'}
-                        onChange={e => dispatch({type: 'SET_EMAIL', payload: e.target.value})}
+                        onChange={e => dispatch({type: SET_EMAIL, payload: e.target.value})}
                         icon={'EditIcon'}
                         value={email}
                         name={'email'}
@@ -92,7 +99,7 @@ export const Profile = () => {
                     <Input
                         type={'password'}
                         placeholder={'Пароль'}
-                        onChange={e => dispatch({type: 'SET_PASSWORD', payload: e.target.value})}
+                        onChange={e => dispatch({type: SET_PASSWORD, payload: e.target.value})}
                         icon={'EditIcon'}
                         value={password}
                         name={'password'}

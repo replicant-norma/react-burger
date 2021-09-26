@@ -10,7 +10,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
 import {validationEmail} from "../../utils/utils";
-import {login} from "../../services/actions/auth-action";
+import {login, SET_EMAIL, SET_PASSWORD} from "../../services/actions/auth-action";
 
 
 export const Login = () =>  {
@@ -39,7 +39,7 @@ export const Login = () =>  {
                 <Input
                     type={'text'}
                     placeholder={'E-mail'}
-                    onChange={e => dispatch({type: 'SET_EMAIL', payload: e.target.value})}
+                    onChange={e => dispatch({type: SET_EMAIL, payload: e.target.value})}
                     value={email}
                     name={'email'}
                     error={false}
@@ -47,7 +47,7 @@ export const Login = () =>  {
                     errorText={'Ошибка'}
                     size={'default'}
                 />
-                <PasswordInput onChange={e => dispatch({type: 'SET_PASSWORD', payload: e.target.value})}
+                <PasswordInput onChange={e => dispatch({type: SET_PASSWORD, payload: e.target.value})}
                                value={password} name={'password'}/>
                 <div className={styles.message}>{backendMessage}</div>
                 <div className={styles.button}>

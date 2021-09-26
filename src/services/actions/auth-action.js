@@ -1,6 +1,5 @@
 import {registerUser, loginUser, getUserInfo, updateUserInfo} from "../../utils/burger-api";
 import {setCookie} from "../../utils/utils";
-import {useLocation} from "react-router-dom";
 
 export const SET_EMAIL = 'SET_EMAIL';
 export const SET_PASSWORD = 'SET_PASSWORD';
@@ -32,8 +31,8 @@ export function register(email, password, name) {
                     const token = data.accessToken.split('Bearer ')[1];
                     setCookie('accessToken', token, {expires: 1200});
                     localStorage.setItem('refreshToken', data.refreshToken);
-                    dispatch({type: 'SET_ACCESS_TOKEN', payload: token });
-                    dispatch({type: 'SET_REFRESH_TOKEN', payload: data.refreshToken});
+                    dispatch({type: SET_ACCESS_TOKEN, payload: token });
+                    dispatch({type: SET_REFRESH_TOKEN, payload: data.refreshToken});
                 } else{
                     dispatch({type: REGISTER_FAILED, payload: data.message})
                 }
@@ -59,8 +58,8 @@ export function login(email, password) {
                     const token = data.accessToken.split('Bearer ')[1];
                     setCookie('accessToken', token, {expires: 1200});
                     localStorage.setItem('refreshToken', data.refreshToken);
-                    dispatch({type: 'SET_ACCESS_TOKEN', payload: token });
-                    dispatch({type: 'SET_REFRESH_TOKEN', payload: data.refreshToken});
+                    dispatch({type: SET_ACCESS_TOKEN, payload: token });
+                    dispatch({type: SET_REFRESH_TOKEN, payload: data.refreshToken});
                 } else{
                     dispatch({type: AUTH_FAILED, payload: data.message})
                 }
@@ -82,8 +81,8 @@ export function getProfile() {
             .then((data) => {
                 if(data.success){
                     dispatch({type: USER_INFO_SUCCESS});
-                    dispatch({type: 'SET_EMAIL', payload: data.user.email });
-                    dispatch({type: 'SET_USER_NAME', payload: data.user.name});
+                    dispatch({type: SET_EMAIL, payload: data.user.email });
+                    dispatch({type: SET_USER_NAME, payload: data.user.name});
                 } else{
                     dispatch({type: USER_INFO_FAILED})
                 }
@@ -106,8 +105,8 @@ export function updateProfile(email, password, name) {
             .then((data) => {
                 if(data.success){
                     dispatch({type: USER_INFO_SUCCESS, payload: 'Сохранено'});
-                    dispatch({type: 'SET_EMAIL', payload: data.user.email });
-                    dispatch({type: 'SET_USER_NAME', payload: data.user.name});
+                    dispatch({type: SET_EMAIL, payload: data.user.email });
+                    dispatch({type: SET_USER_NAME, payload: data.user.name});
                 } else{
                     dispatch({type: USER_INFO_FAILED, payload: data.message})
                 }
