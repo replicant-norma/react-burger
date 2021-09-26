@@ -32,7 +32,6 @@ export const resetPasswordReducer  = (state = initialState, action) => {
                 newPasswordRequest: false, newPasswordFailed: false, backendMessage: action.payload }
         }
         case NEW_PASSWORD_FAILED:{
-            console.log(action.payload);
             return {...state, newPasswordFailed: true,
                 newPasswordSuccess: false, newPasswordRequest: false, backendMessage: action.payload}
         }
