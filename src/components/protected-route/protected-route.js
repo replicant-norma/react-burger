@@ -20,7 +20,7 @@ export const ProtectedRoute = ({children, ...rest}) =>{
                 refreshToken();
                 dispatch(getProfile());
                 dispatch({type:'SET_ACCESS_TOKEN', payload: getCookie('accessToken')})
-                dispatch({type:'SET_REFRESH_TOKEN', payload: localStorage.getItem('accessToken')})
+                dispatch({type:'SET_REFRESH_TOKEN', payload: localStorage.getItem('refreshToken')})
             }
 
         }
