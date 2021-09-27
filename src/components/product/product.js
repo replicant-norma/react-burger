@@ -23,7 +23,7 @@ export const Product = (props) => {
 
 
     const handleOpenClick = () => {
-        history.push('/ingredients/' + props.data._id, {background: true});
+        history.push('/ingredients/' + props.data._id, {background: location});
         dispatch({type: SET_MODAL_DETAILS_STATE, isOpenModalDetails: props.data._id})
     }
 

@@ -15,6 +15,7 @@ import {SET_MODAL_DETAILS_STATE} from "../../services/actions/burger-ingredients
 import {getCookie} from "../../utils/utils";
 import {getProfile, SET_ACCESS_TOKEN, SET_REFRESH_TOKEN} from "../../services/actions/auth-action";
 import {refreshToken} from "../../utils/burger-api";
+import {Location} from "history";
 
 export const App = () => {
 
@@ -43,11 +44,11 @@ export const App = () => {
         dispatch(getIngredientsItems());
     }, [dispatch])
     const history = useHistory();
-    let location = useLocation<{ background?: undefined }>();
+    let location = useLocation<{ background?: Location<{} | null | undefined> }>();
     let background = location.state && location.state.background;
 
     if (history.action !== 'PUSH') {
-        background = undefined;
+        background = undefined
     }
 
     const handleCloseClick = () => {
@@ -93,11 +94,10 @@ export const App = () => {
                     </Route>
                 </Switch>
                 {background &&
-                (<Route path={"/ingredients/:id"}>
+                (<Route path={"/ingredients/:id"} render={() =>
                         <Modal onClose={handleCloseClick} title="Детали ингредиента">
                             <IngredientDetails/>
-                        </Modal>
-                    </Route>
+                        </Modal>} />
                 )}
 
             </main>
