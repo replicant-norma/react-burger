@@ -9,13 +9,13 @@ export const NEW_PASSWORD_FAILED = 'NEW_PASSWORD_FAILED';
 export function resetPasswordRequest(password, token) {
     return function (dispatch) {
         dispatch({
-            type: 'NEW_PASSWORD_REQUEST'
+            type: NEW_PASSWORD_REQUEST
         });
         resetPassword(password, token)
             .then((data) => data.success ? dispatch({
-                    type: 'NEW_PASSWORD_SUCCESS', payload: data.message
+                    type: NEW_PASSWORD_SUCCESS, payload: data.message
                 }) : dispatch({
-                    type: 'NEW_PASSWORD_FAILED', payload: data.message
+                    type: NEW_PASSWORD_FAILED, payload: data.message
                 })
             )
             .catch((e) => {
