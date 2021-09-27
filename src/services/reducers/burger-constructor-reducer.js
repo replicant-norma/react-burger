@@ -10,7 +10,7 @@ import {
     CHANGE_ORDER_BUN,
     SET_DRAGGED_ELEMENT,
     SET_SWAP_ELEMENT,
-    SWAP_CONSTRUCTOR_INGREDIENT
+    SWAP_CONSTRUCTOR_INGREDIENT, RESET_ORDER_DETAILS
 } from '../actions/burger-constructor-action'
 
 const initialState = {
@@ -44,6 +44,11 @@ export const burgerConstructorReducer = (state = initialState, action) => {
                 ...state, orderDetails: [...state.orderDetails, action.ingredient]
             }
         }
+        case RESET_ORDER_DETAILS: {
+            return {
+                ...state, orderDetails: []
+            }
+        }
         case DELETE_ORDER_ITEM: {
             return {
                 ...state,
@@ -65,9 +70,8 @@ export const burgerConstructorReducer = (state = initialState, action) => {
             //orderDetails[action.swapElement] = draggedElement;
 
             const draggedElement = orderDetails[action.draggedElement];
-            orderDetails.splice(action.draggedElement,1);
+            orderDetails.splice(action.draggedElement, 1);
             orderDetails.splice(action.swapElement, 0, draggedElement);
-
 
 
             return {

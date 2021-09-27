@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from "react";
 import styles from './profile.module.css';
 import clsx from 'clsx';
-import {NavLink,Link, Redirect} from "react-router-dom";
+import {NavLink, Link, Redirect} from "react-router-dom";
 import {
     Box,
     Typography,
@@ -43,7 +43,7 @@ export const Profile = () => {
     const signOut = (e) => {
         e.preventDefault();
         dispatch(logout());
-        return (<Redirect to="/" />)
+        return (<Redirect to="/"/>)
     }
 
     return (
@@ -51,21 +51,21 @@ export const Profile = () => {
             <ul className={styles.nav}>
                 <li className={clsx("text text_type_main-medium", styles.item)}>
                     <NavLink to="/profile" exact={true}
-                     className={styles.link}
-                     activeClassName={styles.active}>
+                             className={styles.link}
+                             activeClassName={styles.active}>
                         Профиль
                     </NavLink>
                 </li>
                 <li className={clsx("text text_type_main-medium", styles.item)}>
                     <NavLink to="/profile/orders" exact={true}
-                     className={styles.link}
-                     activeClassName={styles.active}>
+                             className={styles.link}
+                             activeClassName={styles.active}>
                         История заказов
                     </NavLink>
                 </li>
                 <li className={clsx("text text_type_main-medium", styles.item)}>
                     <Link to={"/login"} className={clsx("text_color_inactive", styles.link)}
-                           onClick={signOut}>Выход</Link>
+                          onClick={signOut}>Выход</Link>
                 </li>
             </ul>
             <div className={styles.content}>

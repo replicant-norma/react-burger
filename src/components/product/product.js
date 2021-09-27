@@ -2,8 +2,6 @@ import React, {useContext, useEffect, useState, useMemo} from 'react';
 import {Box, Typography, CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './product.module.css';
 import clsx from 'clsx';
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
 import dataProp from "../../utils/data-prop";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrag} from "react-dnd";

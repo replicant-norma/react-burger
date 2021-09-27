@@ -4,7 +4,11 @@ import IngredientList from "../ingredient-list/ingredient-list";
 import {Box, Typography, Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect, useHistory, useLocation} from "react-router-dom";
-import {SET_MODAL_ORDER_STATE, SET_ORDER_NUMBER} from "../../services/actions/burger-constructor-action";
+import {
+    RESET_ORDER_DETAILS,
+    SET_MODAL_ORDER_STATE,
+    SET_ORDER_NUMBER
+} from "../../services/actions/burger-constructor-action";
 import OrderDetails from "../order-details/order-details";
 import Modal from "../modal/modal";
 
@@ -27,7 +31,7 @@ function BurgerConstructor(props) {
         if (accessToken && haveBun) {
             dispatch({type: SET_MODAL_ORDER_STATE, isOpenModalOrder: true})
         }
-        if (!accessToken){
+        if (!accessToken && haveBun) {
             history.push("/login");
         }
     };
@@ -35,6 +39,7 @@ function BurgerConstructor(props) {
     const handleCloseClickOrder = () => {
         dispatch({type: SET_MODAL_ORDER_STATE, isOpenModalOrder: false});
         dispatch({type: SET_ORDER_NUMBER, orderNumber: null});
+        dispatch({type: RESET_ORDER_DETAILS});
     };
 
     return (
@@ -46,7 +51,8 @@ function BurgerConstructor(props) {
                         <span className="text text_type_digits-medium">{total}</span>
                         <span className="ml-2"><CurrencyIcon type="primary"/></span>
                     </div>
-                    <Button type="primary" onClick={handleOpenClick}>Оформить заказ</Button>
+                    {haveBun &&
+                    <Button type="primary" onClick={handleOpenClick}>Оформить заказ</Button>}
                 </div>)
             }
             {isOpenModalOrder && (<Modal onClose={handleCloseClickOrder}>

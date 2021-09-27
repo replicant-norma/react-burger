@@ -12,6 +12,7 @@ export const CHANGE_ORDER_BUN = 'CHANGE_ORDER_BUN';
 export const SET_DRAGGED_ELEMENT = 'SET_DRAGGED_ELEMENT';
 export const SET_SWAP_ELEMENT = 'SET_SWAP_ELEMENT';
 export const SWAP_CONSTRUCTOR_INGREDIENT = 'SWAP_CONSTRUCTOR_INGREDIENT';
+export const RESET_ORDER_DETAILS = 'RESET_ORDER_DETAILS';
 
 export function orderRequest(orderDetails) {
     return function (dispatch) {

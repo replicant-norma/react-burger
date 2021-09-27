@@ -10,16 +10,14 @@ import {ProtectedRoute} from "../protected-route/protected-route";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import {UnProtectedRoute} from "../unprotected-route/unprotected-route";
-import OrderDetails from "../order-details/order-details";
 import {RootState} from "../../index";
 import {SET_MODAL_DETAILS_STATE} from "../../services/actions/burger-ingredients-action";
-import {SET_MODAL_ORDER_STATE, SET_ORDER_NUMBER} from "../../services/actions/burger-constructor-action";
 import {getCookie} from "../../utils/utils";
 import {getProfile, SET_ACCESS_TOKEN, SET_REFRESH_TOKEN} from "../../services/actions/auth-action";
 import {refreshToken} from "../../utils/burger-api";
 
 export const App = () => {
-    const {isOpenModalOrder} = useSelector((state: RootState) => state.burgerConstructor);
+
     const isRefreshToken = localStorage.getItem('refreshToken');
     const dispatch = useDispatch();
     const init = () => {
@@ -40,7 +38,6 @@ export const App = () => {
     useEffect(() => {
         init();
     }, [])
-
 
     useEffect(() => {
         dispatch(getIngredientsItems());
