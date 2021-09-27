@@ -3,9 +3,7 @@ import styles from './order-details.module.css';
 import {Box, Typography} from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
 import doneImgPath from '../../images/done.gif';
-import {getOrder} from '../../utils/burger-api';
 import {useDispatch, useSelector} from "react-redux";
-import {getIngredientsItems} from "../../services/actions/burger-ingredients-action";
 import {orderRequest} from "../../services/actions/burger-constructor-action";
 
 function OrderDetails(props) {

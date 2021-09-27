@@ -1,10 +1,16 @@
 import { combineReducers } from 'redux';
 import {burgerIngredientsReducer} from './burger-ingredients-reducer';
 import {burgerConstructorReducer} from "./burger-constructor-reducer";
+import {forgotPasswordReducer} from "./forgot-password-reducer";
+import {resetPasswordReducer} from "./reset-password-reducer";
+import {authReducer} from "./auth-reducer";
 
 export const rootReducer = combineReducers({
     burgerIngredients: burgerIngredientsReducer,
     burgerConstructor: burgerConstructorReducer,
+    forgotPassword: forgotPasswordReducer,
+    resetPassword: resetPasswordReducer,
+    auth: authReducer,
 });
 
 

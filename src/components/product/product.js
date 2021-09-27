@@ -2,41 +2,31 @@ import React, {useContext, useEffect, useState, useMemo} from 'react';
 import {Box, Typography, CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './product.module.css';
 import clsx from 'clsx';
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
 import dataProp from "../../utils/data-prop";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrag} from "react-dnd";
+import {Route, useHistory, useLocation, Link} from "react-router-dom";
+import {SET_MODAL_DETAILS_STATE} from "../../services/actions/burger-ingredients-action";
 
 
 {/* Блок отображения продукта из левого экрана*/
 }
 
-function Product(props) {
+export const Product = (props) => {
     const {haveBun, orderDetails} = useSelector(state => state.burgerConstructor);
     const {isOpenModalDetails} = useSelector(state => state.burgerIngredients);
     const dispatch = useDispatch();
-
+    const history = useHistory();
+    const location = useLocation();
     const count = useMemo(() =>
         orderDetails.filter((item) => item._id === props.data._id).length, [orderDetails])
 
-    const [isOpenModal, setIsOpenModal] = useState(false);
 
     const handleOpenClick = () => {
-        setIsOpenModal(true);
-        dispatch({type: 'SET_MODAL_DETAILS_STATE', isOpenModalDetails: props.data._id})
-        //if (props.data.type ===  'bun' && haveBun) return null;
-        //if (props.data.type === 'bun' && !haveBun) {
-        //    dispatch({type: 'HAVE_BUN', haveBun: true})
-        //}
-        //dispatch({type:'PUSH_ORDER_ITEM', ingredient: props.data})
-        //setCount(count+1);
+        history.push('/ingredients/' + props.data._id, {background: location});
+        dispatch({type: SET_MODAL_DETAILS_STATE, isOpenModalDetails: props.data._id})
     }
 
-    const handleCloseClick = () => {
-        setIsOpenModal(false);
-        dispatch({type: 'SET_MODAL_DETAILS_STATE', isOpenModalDetails: null})
-    };
     const [{fail}, dragRef] = useDrag({
         type: "ingredient",
         item: props.data,
@@ -59,10 +49,6 @@ function Product(props) {
                     <h3 className="text text_type_main-default">{props.data.name}</h3>
                 </div>
             </div>
-            {isOpenModal && (<Modal onClose={handleCloseClick} title="Детали ингредиента">
-                    <IngredientDetails data={isOpenModalDetails}/>
-                </Modal>
-            )}
         </>
     )
 }

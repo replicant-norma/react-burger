@@ -7,6 +7,7 @@ import {Provider} from "react-redux";
 import {rootReducer} from './services/reducers';
 import {compose, createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
+import {BrowserRouter as Router} from "react-router-dom";
 
 
 /*declare global {
@@ -25,6 +26,9 @@ const composeEnhancers = (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_C
 const enhancer = composeEnhancers(applyMiddleware(thunk));
 const store = createStore(rootReducer, enhancer);
 
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
 /*const store = configureStore({
         reducer: rootReducer,
         middleware: [thunk],
@@ -36,7 +40,9 @@ const store = createStore(rootReducer, enhancer);
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
+            <Router>
             <App/>
+            </Router>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
