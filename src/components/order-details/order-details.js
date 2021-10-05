@@ -5,9 +5,11 @@ import clsx from 'clsx';
 import doneImgPath from '../../images/done.gif';
 import {useDispatch, useSelector} from "react-redux";
 import {orderRequest} from "../../services/actions/burger-constructor-action";
+import {WS_SEND_MESSAGE, WS_CONNECTION_START} from "../../services/actions/ws-action";
 
 function OrderDetails(props) {
     const {orderDetails, orderNumber} = useSelector(state => state.burgerConstructor);
+    const {wsConnected} = useSelector((state)=> state.wsReducer);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -19,7 +21,9 @@ function OrderDetails(props) {
             "ingredients": idx
         }
         dispatch(orderRequest(requestData));
-    }, []);
+        //if (!wsConnected) dispatch({type: WS_CONNECTION_START});
+        //if (wsConnected) dispatch({type: WS_SEND_MESSAGE, payload: requestData});
+    }, [dispatch]);
 
     return (
         <div className={styles.details}>

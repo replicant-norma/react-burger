@@ -8,6 +8,8 @@ import {rootReducer} from './services/reducers';
 import {compose, createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {BrowserRouter as Router} from "react-router-dom";
+import socketMiddleware from "./services/middleware/socketMiddleware";
+import {getCookie} from "./utils/utils";
 
 
 /*declare global {
@@ -16,6 +18,11 @@ import {BrowserRouter as Router} from "react-router-dom";
     }
 }*/
 
+const accessToken = getCookie('accessToken');
+const WS_URL = 'wss://norma.nomoreparties.space/api/orders/all';
+const WS_AUTH_URL = 'wss://norma.nomoreparties.space/api/orders?token='+accessToken;
+
+
 const composeEnhancers = (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 ///compose;
@@ -23,7 +30,7 @@ const composeEnhancers = (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_C
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
         : compose;
 */
-const enhancer = composeEnhancers(applyMiddleware(thunk));
+const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware(WS_AUTH_URL)));
 const store = createStore(rootReducer, enhancer);
 
 export type RootState = ReturnType<typeof store.getState>

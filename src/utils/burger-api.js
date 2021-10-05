@@ -11,7 +11,7 @@ export function getIngredients() {
 }
 
 export function getOrder(orderDetails) {
-    return fetch(config.url + '/api/orders', {
+    return fetch(config.url + '/api/orders?token='+getCookie('accessToken'), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'

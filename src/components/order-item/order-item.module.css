@@ -1,0 +1,64 @@
+.order{
+    display:flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 16px;
+    //width: 584px;
+    //height: 214px;
+    background: #1C1C21;
+    border-radius: 40px;
+    box-sizing: border-box;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.name{
+    text-align: left;
+}
+
+.item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+}
+.price{
+    display: flex;
+    align-items: center;
+}
+
+.pics{
+    display: flex;
+}
+
+.icon{
+    display: flex;
+    width: 64px;
+    height: 64px;
+    margin-right: -16px;
+    border-radius: 100%;
+    border: 2px solid transparent;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(45deg, #1C1C21, #1C1C21),
+    linear-gradient(45deg, #801AB2, #4C4CFF);
+    -webkit-background-image: -webkit-linear-gradient(45deg, #1C1C21, #1C1C21),
+    -webkit-linear-gradient(45deg, #801AB2, #4C4CFF);
+    -moz-background-image: -moz-linear-gradient(45deg, #1C1C21, #1C1C21),
+    -moz-linear-gradient(45deg, #801AB2, #4C4CFF);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+
+.img{
+    width: 100%;
+}
+
+.more{
+    position: absolute;
+}
