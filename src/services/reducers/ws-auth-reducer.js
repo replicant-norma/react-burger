@@ -1,41 +1,41 @@
 import {
-    WS_CONNECTION_START,
-    WS_CONNECTION_SUCCESS,
-    WS_CONNECTION_ERROR,
-    WS_CONNECTION_CLOSED,
-    WS_GET_MESSAGE
-} from '../actions/ws-action';
+    WS_AUTH_CONNECTION_START,
+    WS_AUTH_CONNECTION_SUCCESS,
+    WS_AUTH_CONNECTION_ERROR,
+    WS_AUTH_CONNECTION_CLOSED,
+    WS_AUTH_GET_MESSAGE
+} from '../actions/ws-auth-action';
 
 const wsState = {
     wsConnected: false,
     ordersAll: null,
     error: ''
 };
-export const wsReducer = (state = wsState, action) => {
+export const wsAuthReducer = (state = wsState, action) => {
     switch (action.type) {
-        case WS_CONNECTION_START: {
+        case WS_AUTH_CONNECTION_START: {
             return {...state}
         }
-        case WS_CONNECTION_SUCCESS:
+        case WS_AUTH_CONNECTION_SUCCESS:
             return {
                 ...state,
                 error: null,
                 wsConnected: true
             };
 
-        case WS_CONNECTION_ERROR:
+        case WS_AUTH_CONNECTION_ERROR:
             return {
                 ...state,
                 error: action.payload,
                 wsConnected: false
             };
-        case WS_CONNECTION_CLOSED:
+        case WS_AUTH_CONNECTION_CLOSED:
             return {
                 ...state,
                 error: null,
                 wsConnected: false
             };
-        case WS_GET_MESSAGE:
+        case WS_AUTH_GET_MESSAGE:
             return {
                 ...state,
                 error: null,

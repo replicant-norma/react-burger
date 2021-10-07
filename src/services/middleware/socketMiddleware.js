@@ -1,14 +1,14 @@
-import {
-    WS_CONNECTION_START,
-    WS_CONNECTION_SUCCESS,
-    WS_CONNECTION_ERROR,
-    WS_GET_MESSAGE,
-    WS_CONNECTION_CLOSED,
-    WS_SEND_MESSAGE
-} from "../actions/ws-action";
-
-export const socketMiddleware = (wsUrl) => {
+export const socketMiddleware = (wsUrl, actions) => {
     return store => {
+        const {
+            WS_CONNECTION_START,
+            WS_CONNECTION_SUCCESS,
+            WS_CONNECTION_CLOSED,
+            WS_CONNECTION_ERROR,
+            WS_GET_MESSAGE,
+            WS_SEND_MESSAGE
+        } = actions;
+
         let socket = null;
         return next => action => {
             const {dispatch, getState} = store;
@@ -38,7 +38,6 @@ export const socketMiddleware = (wsUrl) => {
 
                 if (type === WS_SEND_MESSAGE) {
                     const message = payload;
-
                     socket.send(JSON.stringify(message));
                 }
             }

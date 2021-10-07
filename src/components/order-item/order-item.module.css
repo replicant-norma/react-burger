@@ -8,6 +8,7 @@
     background: #1C1C21;
     border-radius: 40px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 .header{
     display: flex;

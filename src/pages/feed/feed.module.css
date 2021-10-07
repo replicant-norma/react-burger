@@ -78,3 +78,8 @@
 .done .orderList{
     color: #00CCCC;
 }
+
+.load{
+    width: 100%;
+    text-align: center;
+}

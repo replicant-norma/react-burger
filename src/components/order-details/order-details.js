@@ -9,7 +9,6 @@ import {WS_SEND_MESSAGE, WS_CONNECTION_START} from "../../services/actions/ws-ac
 
 function OrderDetails(props) {
     const {orderDetails, orderNumber} = useSelector(state => state.burgerConstructor);
-    const {wsConnected} = useSelector((state)=> state.wsReducer);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -21,8 +20,6 @@ function OrderDetails(props) {
             "ingredients": idx
         }
         dispatch(orderRequest(requestData));
-        //if (!wsConnected) dispatch({type: WS_CONNECTION_START});
-        //if (wsConnected) dispatch({type: WS_SEND_MESSAGE, payload: requestData});
     }, [dispatch]);
 
     return (

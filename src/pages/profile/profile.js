@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from "react";
 import styles from './profile.module.css';
 import clsx from 'clsx';
-import {NavLink, Link, Redirect} from "react-router-dom";
+import {NavLink, Link, Redirect, useHistory, useLocation} from "react-router-dom";
 import {
     Box,
     Typography,
@@ -21,13 +21,16 @@ import {
 export const Profile = () => {
     const {email, password, userName, userInfoFailed, backendMessage} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
+    const location = useLocation();
     const inputRefName = useRef();
     const inputRefEmail = useRef();
     const inputRefPassword = useRef();
 
     useEffect(() => {
         dispatch(getProfile());
+        location.state = '/profile';
     }, []);
+
 
     const submit = (e) => {
         e.preventDefault();
@@ -57,7 +60,7 @@ export const Profile = () => {
                     </NavLink>
                 </li>
                 <li className={clsx("text text_type_main-medium", styles.item)}>
-                    <NavLink to="/profile/orders" exact={true}
+                    <NavLink to="/profile/orders"  exact={true}
                              className={styles.link}
                              activeClassName={styles.active}>
                         История заказов

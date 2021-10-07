@@ -1,14 +1,15 @@
 import React, {useEffect} from "react";
-import {getCookie} from "../../utils/utils";
-import {useDispatch, useSelector} from "react-redux";
-import {getProfile, SET_ACCESS_TOKEN, SET_REFRESH_TOKEN} from "../../services/actions/auth-action";
-import {Redirect, Route} from "react-router-dom";
-import {refreshToken} from "../../utils/burger-api";
+import {useSelector} from "react-redux";
+import {Redirect, Route, useHistory, useLocation} from "react-router-dom";
 import PropTypes from "prop-types";
 
 export const ProtectedRoute = ({children, ...rest}) => {
-    const {accessToken} = useSelector((state) => state.auth)
-
+    const {accessToken} = useSelector((state) => state.auth);
+    const history = useHistory();
+    const location = useLocation();
+    useEffect(()=> {
+        history.push(location.pathname);
+    },[]);
     return (
         <Route {...rest}
                render={({location}) =>
