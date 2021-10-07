@@ -45,14 +45,16 @@ export function dateFormat(date) {
     const dt = new Date(date);
     const diff = differenceInDays(new Date(), dt);
     const minutes = dt.getMinutes() < 10 ? '0' + dt.getMinutes().toString() : dt.getMinutes();
-
-    if (diff > 0) {
+    console.log(diff);
+    if (diff > 1) {
         return formatDistance(
             dt,
             new Date(new Date()),
             {locale: ru} // Pass the locale as an option
         ) + ' назад, ' + dt.getHours() + ":" + dt.getMinutes();
-    } else {
+    } else if(diff === 0 && new Date().getDate() !== dt.getDate()) {
+        return 'Вчера, ' + dt.getHours() + ":" + minutes;
+    } else{
         return 'Сегодня, ' + dt.getHours() + ":" + minutes;
     }
 }
