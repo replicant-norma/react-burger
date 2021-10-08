@@ -17,7 +17,7 @@ import {SET_MODAL_DETAILS_STATE} from "../../services/actions/burger-ingredients
 import {ordersAllRequest, SET_MODAL_ORDER_FULL_STATE} from "../../services/actions/burger-constructor-action";
 import {getCookie} from "../../utils/utils";
 import {getProfile, SET_ACCESS_TOKEN, SET_REFRESH_TOKEN} from "../../services/actions/auth-action";
-import {getOrdersAll, refreshToken} from "../../utils/burger-api";
+import {refreshToken} from "../../utils/burger-api";
 import {Location} from "history";
 import OrderFullDetails from "../order-full-details/order-full-details";
 

@@ -4,7 +4,6 @@ import {
     SET_USER_NAME,
     SET_ACCESS_TOKEN,
     SET_REFRESH_TOKEN,
-    SET_IS_AUTH,
     REGISTER_REQUEST,
     REGISTER_SUCCESS,
     REGISTER_FAILED,
@@ -54,9 +53,7 @@ export const authReducer = (state = initialState, action) => {
         case SET_REFRESH_TOKEN: {
             return {...state, password: '', refreshToken: action.payload}
         }
-        case SET_IS_AUTH: {
-            return {...state, password: '', isAuth: action.payload}
-        }
+
         case REGISTER_REQUEST: {
             return {
                 ...state, registerRequest: true, registerSuccess: false,

@@ -11,7 +11,6 @@ import {
     CHANGE_ORDER_BUN,
     HAVE_BUN,
     PUSH_ORDER_ITEM,
-    SWAP_CONSTRUCTOR_INGREDIENT
 } from "../../services/actions/burger-constructor-action";
 
 {/* Собираем список ингредиентов */
