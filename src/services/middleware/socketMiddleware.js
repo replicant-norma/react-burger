@@ -1,4 +1,6 @@
-export const socketMiddleware = (wsUrl, actions) => {
+import {getCookie} from "../../utils/utils";
+
+export const socketMiddleware = (wsUrl, actions, auth) => {
     return store => {
         const {
             WS_CONNECTION_START,
@@ -8,13 +10,18 @@ export const socketMiddleware = (wsUrl, actions) => {
             WS_GET_MESSAGE,
             WS_SEND_MESSAGE
         } = actions;
-
+        let token = null;
+        if (auth){
+            token = getCookie('accessToken');
+            wsUrl += `?token=${token}`;
+        }
         let socket = null;
         return next => action => {
             const {dispatch, getState} = store;
             const {type, payload} = action;
 
             if (type === WS_CONNECTION_START) {
+                console.log(wsUrl);
                 socket = new WebSocket(wsUrl);
             }
             if (socket) {

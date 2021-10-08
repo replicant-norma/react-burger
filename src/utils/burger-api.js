@@ -16,7 +16,7 @@ export function getOrder(orderDetails) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
-             Authorization: 'Bearer ' + getCookie('accessToken')
+            Authorization: 'Bearer ' + getCookie('accessToken')
         },
         body: JSON.stringify(orderDetails)
     })

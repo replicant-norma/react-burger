@@ -103,13 +103,13 @@ export const burgerConstructorReducer = (state = initialState, action) => {
             return {...state, hasError: true, isLoading: false}
         }
         case GET_ORDERS_ALL_REQUEST: {
-                return {...state, isLoading: true}
-            }
+            return {...state, isLoading: true}
+        }
         case GET_ORDERS_ALL_SUCCESS: {
-                return {...state, isLoading: false, ordersAll: action.ordersAll}
-            }
+            return {...state, isLoading: false, ordersAll: action.ordersAll}
+        }
         case GET_ORDERS_ALL_FAILED: {
-                return {...state, hasError: true, isLoading: false}
+            return {...state, hasError: true, isLoading: false}
 
         }
         default: {

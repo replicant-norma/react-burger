@@ -11,7 +11,8 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../services/actions/auth-action";
 import {OrderList} from "../../components/order-list/order-list";
-import {WS_AUTH_CONNECTION_START} from "../../services/actions/ws-auth-action";
+import {WS_AUTH_CONNECTION_START, WS_AUTH_CONNECTION_CLOSED} from "../../services/actions/ws-auth-action";
+
 
 export const Orders = () => {
     const {wsConnected, ordersAll} = useSelector((state) => state.wsAuthReducer);
@@ -21,7 +22,10 @@ export const Orders = () => {
     useEffect(() => {
         if (!wsConnected) dispatch({type: WS_AUTH_CONNECTION_START});
         location.state = '/profile/orders';
-    }, [wsConnected, dispatch])
+        return () => {
+            dispatch({type: WS_AUTH_CONNECTION_CLOSED})
+        }
+    }, [])
 
     const signOut = (e) => {
         e.preventDefault();

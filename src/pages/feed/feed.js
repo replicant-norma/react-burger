@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import styles from './feed.module.css';
 import {OrderList} from "../../components/order-list/order-list";
 import {useDispatch, useSelector} from "react-redux";
-import {WS_CONNECTION_START} from "../../services/actions/ws-action";
+import {WS_CONNECTION_CLOSED, WS_CONNECTION_START} from "../../services/actions/ws-action";
 import {ordersAllRequest} from "../../services/actions/burger-constructor-action";
 import {getCookie} from "../../utils/utils";
 
@@ -13,7 +13,10 @@ export const Feed = () => {
 
     useEffect(() => {
         if (!wsConnected) dispatch({type: WS_CONNECTION_START});
-    }, [wsConnected, dispatch]);
+        return () => {
+            dispatch({type: WS_CONNECTION_CLOSED})
+        }
+    }, []);
 
     if (!ordersAll) {
         return (<div className={styles.load}>Загрузка данных...</div>);

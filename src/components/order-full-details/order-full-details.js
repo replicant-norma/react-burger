@@ -2,20 +2,37 @@ import React, {useEffect} from 'react';
 import styles from './order-full-details.module.css';
 import clsx from 'clsx';
 import {Box, Typography, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {dateFormat} from "../../utils/utils";
+import {WS_AUTH_CONNECTION_CLOSED, WS_AUTH_CONNECTION_START} from "../../services/actions/ws-auth-action";
+import {WS_CONNECTION_CLOSED, WS_CONNECTION_START} from "../../services/actions/ws-action";
 
 export const OrderFullDetails = () => {
     const dispatch = useDispatch();
+    const location = useLocation();
     const {data, doneLoad} = useSelector((state) => state.burgerIngredients);
-    const {ordersAll} = useSelector((state) => state.burgerConstructor);
+    const orders = useSelector((state) => state.wsReducer.ordersAll);
+    const ordersAuth = useSelector((state) => state.wsAuthReducer.ordersAll);
+    const ordersAll = location.pathname.indexOf('/profile/orders') >= 0 ? ordersAuth : orders;
+
     const {id} = useParams();
     const status = {
         done: "Выполнен",
         pending: "Готовится",
         created: "Создан"
     }
+
+    useEffect(() => {
+        location.pathname.indexOf('/profile/orders') >= 0
+            ? dispatch({type: WS_AUTH_CONNECTION_START})
+            : dispatch({type: WS_CONNECTION_START})
+        return () => {
+            location.pathname.indexOf('/profile/orders') >= 0
+                ? dispatch({type: WS_AUTH_CONNECTION_CLOSED})
+                : dispatch({type: WS_CONNECTION_CLOSED})
+        }
+    }, [])
 
     if (!ordersAll) {
         return (<div>Загрузка данных</div>);

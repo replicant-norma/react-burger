@@ -34,7 +34,6 @@ import {
     }
 }*/
 
-const accessToken = getCookie('accessToken');
 const WS_URL = 'wss://norma.nomoreparties.space/orders/all';
 const WS_AUTH_URL = 'wss://norma.nomoreparties.space/orders';
 
@@ -53,15 +52,15 @@ const enhancer = composeEnhancers(applyMiddleware(thunk,
         WS_GET_MESSAGE,
         WS_CONNECTION_CLOSED,
         WS_SEND_MESSAGE
-    }),
-    socketMiddleware(`${WS_AUTH_URL}?token=${accessToken}`, {
+    }, false),
+    socketMiddleware(`${WS_AUTH_URL}`, {
         WS_CONNECTION_START: WS_AUTH_CONNECTION_START,
         WS_CONNECTION_SUCCESS: WS_AUTH_CONNECTION_SUCCESS,
         WS_CONNECTION_ERROR: WS_AUTH_CONNECTION_ERROR,
         WS_GET_MESSAGE: WS_AUTH_GET_MESSAGE,
         WS_CONNECTION_CLOSED: WS_AUTH_CONNECTION_CLOSED,
         WS_SEND_MESSAGE: WS_AUTH_SEND_MESSAGE
-    })));
+    }, true)));
 const store = createStore(rootReducer, enhancer);
 
 export type RootState = ReturnType<typeof store.getState>
