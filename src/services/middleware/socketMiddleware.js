@@ -21,7 +21,6 @@ export const socketMiddleware = (wsUrl, actions, auth) => {
             const {type, payload} = action;
 
             if (type === WS_CONNECTION_START) {
-                console.log(wsUrl);
                 socket = new WebSocket(wsUrl);
             }
             if (socket) {
