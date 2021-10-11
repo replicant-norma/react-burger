@@ -9,30 +9,31 @@ import {
     PasswordInput, Button
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
-import {validationEmail} from "../../utils/utils";
+import {getCookie, validationEmail} from "../../utils/utils";
 import {login, SET_EMAIL, SET_PASSWORD} from "../../services/actions/auth-action";
 
 
-export const Login = () =>  {
-    const {email, password, userName,accessToken, backendMessage} = useSelector((state) => state.auth);
+export const Login = () => {
+    const {email, password, userName, backendMessage} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
+    const accessToken = getCookie('accessToken');
     const inputRef = useRef(null);
     const {state} = useLocation();
 
     const submit = (e) => {
         e.preventDefault();
         if (validationEmail(email)) {
-            dispatch(login(email,password));
+            dispatch(login(email, password));
         }
     }
 
-    if(accessToken){
-        return(
-            <Redirect to={state?.from || '/' } />
+    if (accessToken) {
+        return (
+            <Redirect to={state?.from || '/'}/>
         )
     }
 
-    return(
+    return (
         <section className={styles.auth}>
             <h2 className="text text_type_main-medium">Войти</h2>
             <form className={styles.form} onSubmit={submit}>

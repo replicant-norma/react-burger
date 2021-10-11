@@ -14,13 +14,12 @@ import {
     Logo,
     Typography,
     Input,
-    PasswordInput, Button
+    Button
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {SET_EMAIL} from "../../services/actions/auth-action";
 
 export const ForgotPassword = () => {
     const {email, errorInput, errorInputText, resetPasswordSuccess, backendMessage} = useSelector((state) => state.forgotPassword);
-    const {accessToken} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const inputRef = useRef(null);
     const history = useHistory();

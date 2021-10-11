@@ -1,4 +1,4 @@
-import {registerUser, loginUser, getUserInfo, updateUserInfo} from "../../utils/burger-api";
+import {registerUser, loginUser, getUserInfo, updateUserInfo, logoutUser} from "../../utils/burger-api";
 import {setCookie} from "../../utils/utils";
 
 export const SET_EMAIL = 'SET_EMAIL';
@@ -24,16 +24,16 @@ export function register(email, password, name) {
         dispatch({
             type: REGISTER_REQUEST
         });
-        registerUser(email,password, name)
+        registerUser(email, password, name)
             .then((data) => {
-                if(data.success){
+                if (data.success) {
                     dispatch({type: REGISTER_SUCCESS, payload: data.message});
                     const token = data.accessToken.split('Bearer ')[1];
                     setCookie('accessToken', token, {expires: 1200});
                     localStorage.setItem('refreshToken', data.refreshToken);
-                    dispatch({type: SET_ACCESS_TOKEN, payload: token });
+                    dispatch({type: SET_ACCESS_TOKEN, payload: token});
                     dispatch({type: SET_REFRESH_TOKEN, payload: data.refreshToken});
-                } else{
+                } else {
                     dispatch({type: REGISTER_FAILED, payload: data.message})
                 }
             })
@@ -51,16 +51,16 @@ export function login(email, password) {
         dispatch({
             type: AUTH_REQUEST
         });
-        loginUser(email,password)
+        loginUser(email, password)
             .then((data) => {
-                if(data.success){
+                if (data.success) {
                     dispatch({type: AUTH_SUCCESS, payload: data.message});
                     const token = data.accessToken.split('Bearer ')[1];
                     setCookie('accessToken', token, {expires: 1200});
                     localStorage.setItem('refreshToken', data.refreshToken);
-                    dispatch({type: SET_ACCESS_TOKEN, payload: token });
-                    dispatch({type: SET_REFRESH_TOKEN, payload: data.refreshToken});
-                } else{
+                    //dispatch({type: SET_ACCESS_TOKEN, payload: token});
+                    //dispatch({type: SET_REFRESH_TOKEN, payload: data.refreshToken});
+                } else {
                     dispatch({type: AUTH_FAILED, payload: data.message})
                 }
             })
@@ -79,11 +79,11 @@ export function getProfile() {
         });
         getUserInfo()
             .then((data) => {
-                if(data.success){
+                if (data.success) {
                     dispatch({type: USER_INFO_SUCCESS});
-                    dispatch({type: SET_EMAIL, payload: data.user.email });
+                    dispatch({type: SET_EMAIL, payload: data.user.email});
                     dispatch({type: SET_USER_NAME, payload: data.user.name});
-                } else{
+                } else {
                     dispatch({type: USER_INFO_FAILED})
                 }
             })
@@ -101,13 +101,13 @@ export function updateProfile(email, password, name) {
         dispatch({
             type: USER_INFO_REQUEST
         });
-        updateUserInfo(email,password, name)
+        updateUserInfo(email, password, name)
             .then((data) => {
-                if(data.success){
+                if (data.success) {
                     dispatch({type: USER_INFO_SUCCESS, payload: 'Сохранено'});
-                    dispatch({type: SET_EMAIL, payload: data.user.email });
+                    dispatch({type: SET_EMAIL, payload: data.user.email});
                     dispatch({type: SET_USER_NAME, payload: data.user.name});
-                } else{
+                } else {
                     dispatch({type: USER_INFO_FAILED, payload: data.message})
                 }
             })
@@ -119,10 +119,24 @@ export function updateProfile(email, password, name) {
     }
 }
 
-export function logout(){
-    return function (dispatch){
-        setCookie('accessToken', null, {expires: -1});
-        localStorage.removeItem('refreshToken');
-        dispatch({type: LOGOUT});
+export function logout() {
+    return function (dispatch) {
+        dispatch({
+            type: AUTH_REQUEST
+        });
+        logoutUser()
+            .then((data) => {
+                if (data.success) {
+                    dispatch({type: AUTH_SUCCESS, payload: data.message});
+                    dispatch({type: LOGOUT});
+                } else {
+                    dispatch({type: AUTH_FAILED, payload: data.message})
+                }
+            })
+            .catch((e) => {
+                dispatch({
+                    type: AUTH_FAILED, payload: e.message
+                })
+            })
     }
 }

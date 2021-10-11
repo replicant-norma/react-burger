@@ -82,6 +82,20 @@ export function loginUser(email, password) {
         .then((res) => checkResponse(res))
 }
 
+export function logoutUser() {
+    const refreshToken = localStorage.getItem('refreshToken');
+    const data = {token: refreshToken}
+    return fetch(config.url + '/api/auth/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            Authorization: 'Bearer ' + getCookie('accessToken')
+        },
+        body: JSON.stringify(data)
+    })
+        .then((res) => checkResponse(res))
+}
+
 export function getUserInfo() {
     //refreshToken();
     return fetch(config.url + '/api/auth/user', {
@@ -121,6 +135,7 @@ export function refreshToken() {
     })
         .then((res) => checkResponse(res))
         .then((data) => {
+            setCookie('accessToken', null, {expires: -1});
             setCookie('accessToken', data.accessToken.split('Bearer ')[1], {expires: 1200});
             localStorage.setItem('refreshToken', data.refreshToken);
         })

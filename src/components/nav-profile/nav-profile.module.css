@@ -1,0 +1,21 @@
+.nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.item {
+    height: 64px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.link {
+    text-decoration: none;
+    color: #8585ad;
+}
+
+.active {
+    color: #fff;
+}

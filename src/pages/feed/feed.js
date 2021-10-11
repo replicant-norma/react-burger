@@ -3,8 +3,6 @@ import styles from './feed.module.css';
 import {OrderList} from "../../components/order-list/order-list";
 import {useDispatch, useSelector} from "react-redux";
 import {WS_CONNECTION_CLOSED, WS_CONNECTION_START} from "../../services/actions/ws-action";
-import {ordersAllRequest} from "../../services/actions/burger-constructor-action";
-import {getCookie} from "../../utils/utils";
 
 export const Feed = () => {
 
@@ -57,7 +55,7 @@ export const Feed = () => {
                         <p className="text text_type_digits-large">{ordersAll.total}</p>
                     </div>
                     <div className={styles.totalDone}>
-                        <h4 className="text text_type_main-medium">Выполнено за все сегодня:</h4>
+                        <h4 className="text text_type_main-medium">Выполнено за сегодня:</h4>
                         <p className="text text_type_digits-large">{ordersAll.totalToday}</p>
                     </div>
                 </section>

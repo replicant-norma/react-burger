@@ -113,7 +113,7 @@ export const authReducer = (state = initialState, action) => {
         }
         case LOGOUT: {
             return {
-                ...state, email: null, password: '', userName: null, accessToken: null,
+                ...state, email: '', password: '', userName: null, accessToken: null,
                 refreshToken: null, tryOrderRequest: false
             }
         }

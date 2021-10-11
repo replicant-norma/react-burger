@@ -1,5 +1,5 @@
-import React, {useState, useRef} from "react";
-import {Link, Redirect} from 'react-router-dom';
+import React, {useRef} from "react";
+import {Link} from 'react-router-dom';
 import styles from './register.module.css';
 import {
     Box,
@@ -14,7 +14,7 @@ import {register, SET_EMAIL, SET_USER_NAME} from "../../services/actions/auth-ac
 
 
 export const Register = () =>  {
-    const {email, password, userName, accessToken, backendMessage} = useSelector((state) => state.auth);
+    const {email, password, userName, backendMessage} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const inputRef = useRef(null);
     const submit = (e) => {
@@ -23,12 +23,6 @@ export const Register = () =>  {
             dispatch(register(email,password,userName));
         }
     }
-
-    /*if(accessToken){
-        return(
-            <Redirect to="/" />
-        )
-    }*/
 
     return(
         <section className={styles.register}>
