@@ -58,8 +58,8 @@ export function login(email, password) {
                     const token = data.accessToken.split('Bearer ')[1];
                     setCookie('accessToken', token, {expires: 1200});
                     localStorage.setItem('refreshToken', data.refreshToken);
-                    //dispatch({type: SET_ACCESS_TOKEN, payload: token});
-                    //dispatch({type: SET_REFRESH_TOKEN, payload: data.refreshToken});
+                    dispatch({type: SET_ACCESS_TOKEN, payload: token});
+                    dispatch({type: SET_REFRESH_TOKEN, payload: data.refreshToken});
                 } else {
                     dispatch({type: AUTH_FAILED, payload: data.message})
                 }

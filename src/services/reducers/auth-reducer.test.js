@@ -168,7 +168,7 @@ describe('authReducer', () => {
     it('Test LOGOUT', () => {
         expect(authReducer(initialState, {type: LOGOUT}))
             .toEqual({
-                ...initialState, email: null, password: '', userName: null, accessToken: null,
+                ...initialState, email: '', password: '', userName: null, accessToken: null,
                 refreshToken: null, tryOrderRequest: false
             })
     })
