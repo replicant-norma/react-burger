@@ -14,7 +14,7 @@ export const Feed = () => {
         return () => {
             dispatch({type: WS_CONNECTION_CLOSED})
         }
-    }, []);
+    }, [dispatch]);
 
     if (!ordersAll) {
         return (<div className={styles.load}>Загрузка данных...</div>);
@@ -25,7 +25,7 @@ export const Feed = () => {
             <h2 className="text text_type_main-large">Лента заказов</h2>
             <div className={styles.wrapper}>
                 <section className={styles.orders}>
-                    <OrderList orders={ordersAll.orders}/>
+                    <OrderList orders={ordersAll.orders || []}/>
                 </section>
                 <section className={styles.stats}>
                     <div className={styles.status}>

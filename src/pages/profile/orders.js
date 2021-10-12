@@ -25,7 +25,7 @@ export const Orders = () => {
         return () => {
             dispatch({type: WS_AUTH_CONNECTION_CLOSED})
         }
-    }, [])
+    }, [dispatch])
 
     if (!ordersAll) {
         return (
@@ -33,11 +33,11 @@ export const Orders = () => {
         )
     }
 
-    return (ordersAll &&
+    return (
         <div className={styles.profile}>
             <NavProfile/>
             <div className={styles.content}>
-                <OrderList orders={ordersAll.orders}/>
+                <OrderList orders={ordersAll.orders || []}/>
             </div>
         </div>
     );

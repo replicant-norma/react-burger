@@ -10,18 +10,13 @@ export const socketMiddleware = (wsUrl, actions, auth) => {
             WS_GET_MESSAGE,
             WS_SEND_MESSAGE
         } = actions;
-        let token = null;
-        if (auth){
-            token = getCookie('accessToken');
-            wsUrl += `?token=${token}`;
-        }
         let socket = null;
         return next => action => {
             const {dispatch, getState} = store;
             const {type, payload} = action;
 
             if (type === WS_CONNECTION_START) {
-                socket = new WebSocket(wsUrl);
+                socket = new WebSocket(`${wsUrl}${auth ? '?token=' + getCookie('accessToken') : ''}`);
             }
             if (socket) {
                 socket.onopen = event => {

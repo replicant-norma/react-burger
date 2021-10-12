@@ -42,7 +42,7 @@ export const App = () => {
 
     useEffect(() => {
         init();
-    }, [])
+    }, [init])
 
     useEffect(() => {
         dispatch(getIngredientsItems());

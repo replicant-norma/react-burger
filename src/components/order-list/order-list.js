@@ -7,24 +7,13 @@ import {
 import {OrderItem} from "../order-item/order-item";
 
 export const OrderList = (props) => {
-
-    if (!props.orders) {
-        return (
-            <div className={styles.noOrders}>Заказов пока нет</div>
-        )
-    }
-
-    const list = props.orders.map(function (el, index) {
-        return (
-            <OrderItem key={el._id} order={el}/>
-        )
-
-    })
     return (
         <div className={styles.content}>
-            {list}
+            {props.orders.map((el, index) => {
+                return <OrderItem key={el._id} order={el}/>
+            })
+            }
         </div>
-
     );
 
 }
