@@ -1,3 +1,7 @@
+import {differenceInDays, formatDistance} from 'date-fns';
+import {ru} from 'date-fns/locale';
+
+
 export const validationEmail = (email) => {
     const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     return reg.test(String(email).toLowerCase());
@@ -35,4 +39,21 @@ export function getCookie(name) {
         new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
     );
     return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+export function dateFormat(date) {
+    const dt = new Date(date);
+    const diff = differenceInDays(new Date(), dt);
+    const minutes = dt.getMinutes() < 10 ? '0' + dt.getMinutes().toString() : dt.getMinutes();
+    if (diff > 1) {
+        return formatDistance(
+            dt,
+            new Date(new Date()),
+            {locale: ru} // Pass the locale as an option
+        ) + ' назад, ' + dt.getHours() + ":" + dt.getMinutes();
+    } else if (diff === 0 && new Date().getDate() !== dt.getDate()) {
+        return 'Вчера, ' + dt.getHours() + ":" + minutes;
+    } else {
+        return 'Сегодня, ' + dt.getHours() + ":" + minutes;
+    }
 }

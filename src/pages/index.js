@@ -6,7 +6,8 @@ import {ResetPassword} from './reset-password/reset-password'
 import {Profile} from './profile/profile'
 import {Ingredients} from './ingredients'
 import {NotFound} from './not-found/not-found'
+import {Feed} from './feed/feed'
+import {Orders} from "./profile/orders";
 
 
-
-export {HomePage, Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound}
+export {HomePage, Login, Register, ForgotPassword, ResetPassword, Profile, Ingredients, NotFound, Feed, Orders}

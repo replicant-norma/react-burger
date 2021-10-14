@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import dataProp from "../../utils/data-prop";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrag} from "react-dnd";
-import {Route, useHistory, useLocation, Link} from "react-router-dom";
+import {useHistory, useLocation, Link} from "react-router-dom";
 import {SET_MODAL_DETAILS_STATE} from "../../services/actions/burger-ingredients-action";
 
 
@@ -37,7 +37,7 @@ export const Product = (props) => {
     return (
         <>
             <div className={clsx(styles.product)} ref={dragRef} onClick={handleOpenClick}>
-                {count > 0 ? <Counter count={count} size="default"/> : null}
+                {count > 0 ? <Counter count={props.data.type === 'bun' ? 2 * count : count} size="default"/> : null}
                 <div className={styles.img}>
                     <img src={props.data.image} alt={props.data.name}/>
                 </div>

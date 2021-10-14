@@ -10,7 +10,13 @@ import {
     CHANGE_ORDER_BUN,
     SET_DRAGGED_ELEMENT,
     SET_SWAP_ELEMENT,
-    SWAP_CONSTRUCTOR_INGREDIENT, RESET_ORDER_DETAILS
+    SWAP_CONSTRUCTOR_INGREDIENT,
+    RESET_ORDER_DETAILS,
+    SET_MODAL_ORDER_FULL_STATE,
+    GET_ORDERS_ALL_REQUEST,
+    GET_ORDERS_ALL_FAILED,
+    GET_ORDERS_ALL_SUCCESS
+
 } from '../actions/burger-constructor-action'
 
 const initialState = {
@@ -19,16 +25,21 @@ const initialState = {
     orderNumber: null,
     ingredient: null,
     isOpenModalOrder: false,
+    isOpenModalOrderFull: false,
     isLoading: false,
     hasError: false,
     draggedElement: null,
-    swapElement: null
+    swapElement: null,
+    ordersAll: null,
 }
 
 export const burgerConstructorReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_MODAL_ORDER_STATE: {
             return {...state, isOpenModalOrder: action.isOpenModalOrder}
+        }
+        case SET_MODAL_ORDER_FULL_STATE: {
+            return {...state, isOpenModalOrderFull: action.isOpenModalOrderFull}
         }
         case SET_DRAGGED_ELEMENT: {
             return {...state, draggedElement: action.index}
@@ -90,6 +101,16 @@ export const burgerConstructorReducer = (state = initialState, action) => {
         }
         case GET_ORDER_FAILED: {
             return {...state, hasError: true, isLoading: false}
+        }
+        case GET_ORDERS_ALL_REQUEST: {
+            return {...state, isLoading: true}
+        }
+        case GET_ORDERS_ALL_SUCCESS: {
+            return {...state, isLoading: false, ordersAll: action.ordersAll}
+        }
+        case GET_ORDERS_ALL_FAILED: {
+            return {...state, hasError: true, isLoading: false}
+
         }
         default: {
             return state

@@ -11,6 +11,7 @@ import {
 } from "../../services/actions/burger-constructor-action";
 import OrderDetails from "../order-details/order-details";
 import Modal from "../modal/modal";
+import {getCookie} from "../../utils/utils";
 
 {/* Собираем набор ингридиентов из правой панели экрана */
 }
@@ -20,7 +21,7 @@ function BurgerConstructor(props) {
     const history = useHistory();
     const location = useLocation();
     const {orderDetails, isOpenModalOrder, haveBun} = useSelector((state) => state.burgerConstructor);
-    const {accessToken} = useSelector((state) => state.auth);
+    const accessToken = getCookie('accessToken');
     const total = useMemo(() => orderDetails.reduce(function (sum, current) {
         if (current.type === 'bun') return sum + current.price * 2;
         return sum + current.price;

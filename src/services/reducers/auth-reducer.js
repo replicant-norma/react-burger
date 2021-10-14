@@ -58,49 +58,69 @@ export const authReducer = (state = initialState, action) => {
             return {...state, password: '', isAuth: action.payload}
         }
         case REGISTER_REQUEST: {
-            return {...state, registerRequest: true, registerSuccess: false,
-                registerFailed: false, backendMessage: ''}
+            return {
+                ...state, registerRequest: true, registerSuccess: false,
+                registerFailed: false, backendMessage: ''
+            }
         }
         case REGISTER_SUCCESS: {
-            return {...state, registerRequest: false, registerSuccess: true,
-                registerFailed: false, backendMessage: action.payload}
+            return {
+                ...state, registerRequest: false, registerSuccess: true,
+                registerFailed: false, backendMessage: action.payload
+            }
         }
         case REGISTER_FAILED: {
-            return {...state, registerRequest: false, registerSuccess: false,
-                registerFailed: true, backendMessage: action.payload}
+            return {
+                ...state, registerRequest: false, registerSuccess: false,
+                registerFailed: true, backendMessage: action.payload
+            }
         }
         case AUTH_REQUEST: {
-            return {...state, authRequest: true, authSuccess: false,
-                authFailed: false, backendMessage: ''}
+            return {
+                ...state, authRequest: true, authSuccess: false,
+                authFailed: false, backendMessage: ''
+            }
         }
         case AUTH_SUCCESS: {
-            return {...state, authRequest: false, authSuccess: true,
-                authFailed: false, backendMessage: action.payload}
+            return {
+                ...state, authRequest: false, authSuccess: true,
+                authFailed: false, backendMessage: action.payload
+            }
         }
         case AUTH_FAILED: {
-            return {...state, authRequest: false, authSuccess: false,
-                authFailed: true, backendMessage: action.payload}
+            return {
+                ...state, authRequest: false, authSuccess: false,
+                authFailed: true, backendMessage: action.payload
+            }
         }
         case USER_INFO_REQUEST: {
-            return {...state, userInfoRequest: true, userInfoSuccess: false,
-                userInfoFailed: false, backendMessage: ''}
+            return {
+                ...state, userInfoRequest: true, userInfoSuccess: false,
+                userInfoFailed: false, backendMessage: ''
+            }
         }
         case USER_INFO_SUCCESS: {
-            return {...state, userInfoRequest: false, userInfoSuccess: true,
-                userInfoFailed: false, backendMessage: action.payload}
+            return {
+                ...state, userInfoRequest: false, userInfoSuccess: true,
+                userInfoFailed: false, backendMessage: action.payload
+            }
         }
         case USER_INFO_FAILED: {
-            return {...state, userInfoRequest: false, userInfoSuccess: false,
-                userInfoFailed: true, backendMessage: action.payload}
+            return {
+                ...state, userInfoRequest: false, userInfoSuccess: false,
+                userInfoFailed: true, backendMessage: action.payload
+            }
         }
-        case TRY_ORDER_REQUEST:{
+        case TRY_ORDER_REQUEST: {
             return {...state, tryOrderRequest: action.payload}
         }
-        case LOGOUT:{
-            return {...state, email:'', password: '', userName: '', accessToken: '',
-                refreshToken: '', tryOrderRequest: false}
+        case LOGOUT: {
+            return {
+                ...state, email: null, password: '', userName: null, accessToken: null,
+                refreshToken: null, tryOrderRequest: false
+            }
         }
-        default:{
+        default: {
             return state
         }
     }
