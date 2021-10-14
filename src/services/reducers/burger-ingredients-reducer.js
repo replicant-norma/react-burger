@@ -17,7 +17,7 @@ const initialState = {
 
 
 export const burgerIngredientsReducer = (state = initialState, action) => {
-    switch (action.type){
+    switch (action.type) {
         case GET_INGREDIENTS_REQUEST: {
             return {...state, isLoading: true}
         }
@@ -27,13 +27,13 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
         case GET_INGREDIENTS_FAILED: {
             return {...state, hasError: true, isLoading: false}
         }
-        case SET_CURRENT_TAB:{
+        case SET_CURRENT_TAB: {
             return {...state, currentTab: action.currentTab}
         }
         case SET_MODAL_DETAILS_STATE: {
             return {...state, isOpenModalDetails: action.isOpenModalDetails}
         }
-        default:{
+        default: {
             return state
         }
     }

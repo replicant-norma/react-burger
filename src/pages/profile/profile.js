@@ -1,7 +1,6 @@
 import React, {useEffect, useRef} from "react";
 import styles from './profile.module.css';
-import clsx from 'clsx';
-import {NavLink, Link, Redirect, useHistory, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {
     Box,
     Typography,
@@ -11,15 +10,15 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {
     getProfile,
-    logout,
     SET_EMAIL,
     SET_PASSWORD,
     SET_USER_NAME,
     updateProfile
 } from "../../services/actions/auth-action";
+import {NavProfile} from "../../components/nav-profile/nav-profile";
 
 export const Profile = () => {
-    const {email, password, userName, userInfoFailed, backendMessage} = useSelector((state) => state.auth);
+    const {email, password, userName, backendMessage, userInfoSuccess} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const location = useLocation();
     const inputRefName = useRef();
@@ -43,34 +42,10 @@ export const Profile = () => {
         dispatch({type: SET_PASSWORD, payload: ''});
     }
 
-    const signOut = (e) => {
-        e.preventDefault();
-        dispatch(logout());
-        return (<Redirect to="/"/>)
-    }
 
-    return (
+    return (userInfoSuccess &&
         <div className={styles.profile}>
-            <ul className={styles.nav}>
-                <li className={clsx("text text_type_main-medium", styles.item)}>
-                    <NavLink to="/profile" exact={true}
-                             className={styles.link}
-                             activeClassName={styles.active}>
-                        Профиль
-                    </NavLink>
-                </li>
-                <li className={clsx("text text_type_main-medium", styles.item)}>
-                    <NavLink to="/profile/orders"  exact={true}
-                             className={styles.link}
-                             activeClassName={styles.active}>
-                        История заказов
-                    </NavLink>
-                </li>
-                <li className={clsx("text text_type_main-medium", styles.item)}>
-                    <Link to={"/login"} className={clsx("text_color_inactive", styles.link)}
-                          onClick={signOut}>Выход</Link>
-                </li>
-            </ul>
+            <NavProfile/>
             <div className={styles.content}>
                 <form name="user_info" className={styles.content}>
                     <Input

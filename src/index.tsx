@@ -9,7 +9,6 @@ import {compose, createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {BrowserRouter as Router} from "react-router-dom";
 import socketMiddleware from "./services/middleware/socketMiddleware";
-import {getCookie} from "./utils/utils";
 import {
     WS_CONNECTION_START,
     WS_CONNECTION_SUCCESS,

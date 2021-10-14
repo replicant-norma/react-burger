@@ -1,7 +1,7 @@
 import React, {useRef, useEffect} from "react";
 import {Link} from 'react-router-dom';
 import styles from './reset-password.module.css';
-import {validationPassword} from '../../utils/utils';
+import {getCookie, validationPassword} from '../../utils/utils';
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {resetPasswordRequest, SET_TOKEN} from "../../services/actions/reset-password-action";
@@ -17,7 +17,7 @@ import {SET_PASSWORD} from "../../services/actions/auth-action";
 export const ResetPassword = () => {
     const {password, token, newPasswordSuccess,backendMessage} = useSelector((state) => state.resetPassword);
     const {resetPasswordSuccess} = useSelector((state) => state.forgotPassword);
-    const {accessToken} = useSelector((state) => state.auth);
+    const accessToken = getCookie('accessToken');
     const dispatch = useDispatch();
 
 
