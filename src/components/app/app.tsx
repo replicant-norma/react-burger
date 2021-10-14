@@ -1,7 +1,7 @@
 import React from "react";
 import {useEffect} from "react";
 import styles from './app.module.css';
-import AppHeader from '../../components/app-header/app-header';
+import AppHeader from '../app-header/app-header';
 import {useDispatch, useSelector} from "react-redux";
 import {getIngredientsItems} from "../../services/actions/burger-ingredients-action";
 import {Route, Switch, useLocation, useHistory} from "react-router-dom";
