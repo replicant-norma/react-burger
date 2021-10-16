@@ -34,12 +34,12 @@ export interface ISetName {
 
 export interface ISetAccessToken {
     readonly type: typeof SET_ACCESS_TOKEN;
-    readonly payload: string;
+    readonly payload: string | undefined;
 }
 
 export interface ISetRefreshToken {
     readonly type: typeof SET_REFRESH_TOKEN;
-    readonly payload: string;
+    readonly payload: string | null;
 }
 
 export interface IRegisterRequest {
@@ -48,12 +48,12 @@ export interface IRegisterRequest {
 
 export interface IRegisterSuccess {
     readonly type: typeof REGISTER_SUCCESS;
-    readonly payload: string | null;
+    readonly payload: string;
 }
 
 export interface IRegisterFailed {
     readonly type: typeof REGISTER_FAILED;
-    readonly payload: string | null;
+    readonly payload: string;
 }
 
 export interface IAuthRequest {
@@ -62,12 +62,12 @@ export interface IAuthRequest {
 
 export interface IAuthSuccess {
     readonly type: typeof AUTH_SUCCESS;
-    readonly payload: string | null;
+    readonly payload: string;
 }
 
 export interface IAuthFailed {
     readonly type: typeof AUTH_FAILED;
-    readonly payload: string | null;
+    readonly payload: string;
 }
 
 export interface IUserInfoRequest {
@@ -76,12 +76,12 @@ export interface IUserInfoRequest {
 
 export interface IUserInfoSuccess {
     readonly type: typeof USER_INFO_SUCCESS;
-    readonly payload: string | null;
+    readonly payload: string;
 }
 
 export interface IUserInfoFailed {
     readonly type: typeof USER_INFO_FAILED;
-    readonly payload: string | null;
+    readonly payload: string;
 }
 
 export interface ITryOrderRequest {

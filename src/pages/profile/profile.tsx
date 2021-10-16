@@ -1,11 +1,10 @@
-import React, {FC,useEffect, useRef} from "react";
+import React, {FC, useEffect, useRef} from "react";
 import styles from './profile.module.css';
 import {useLocation} from "react-router-dom";
 import {
     Input,
     Button
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {useDispatch, useSelector} from "react-redux";
 import {
     getProfile,
     SET_EMAIL,
@@ -15,14 +14,21 @@ import {
 } from "../../services/actions/auth-action";
 import {NavProfile} from "../../components/nav-profile/nav-profile";
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
-interface IProfile{
+interface IProfile {
 
 }
 
-export const Profile : FC<IProfile> = ():any => {
-    const {email, password, userName, backendMessage, userInfoSuccess} = useSelector((state:RootState) => state.auth);
-    const dispatch = useDispatch();
+export const Profile: FC<IProfile> = (): any => {
+    const {
+        email,
+        password,
+        userName,
+        backendMessage,
+        userInfoSuccess
+    } = useAppSelector((state: RootState) => state.auth);
+    const dispatch = useAppDispatch();
     const location = useLocation();
     const inputRefName = useRef();
     const inputRefEmail = useRef();
@@ -34,12 +40,12 @@ export const Profile : FC<IProfile> = ():any => {
     }, []);
 
 
-    const submit = (e:any) => {
+    const submit = (e: any) => {
         e.preventDefault();
         dispatch(updateProfile(email, password, userName))
     }
 
-    const cancel = (e:any) => {
+    const cancel = (e: any) => {
         e.preventDefault();
         dispatch(getProfile());
         dispatch({type: SET_PASSWORD, payload: ''});

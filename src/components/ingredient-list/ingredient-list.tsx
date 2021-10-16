@@ -1,9 +1,8 @@
 import React, {useMemo, FC} from 'react';
 import styles from './ingredient-list.module.css';
 import WrapperConstructorElement from "../wrapper-constructor-element/wrapper-constructor-element";
-import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-components';
 import clsx from 'clsx';
-import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import {
     CHANGE_ORDER_BUN,
@@ -12,11 +11,12 @@ import {
 } from "../../services/actions/burger-constructor-action";
 import IDataIngredients from "../../types";
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 
 export const IngredientList: FC =() => {
-    const dispatch = useDispatch();
-    const {orderDetails, haveBun} = useSelector((state: RootState) => state.burgerConstructor);
+    const dispatch = useAppDispatch();
+    const {orderDetails, haveBun} = useAppSelector((state: RootState) => state.burgerConstructor);
     const pList = useMemo(() => orderDetails.map(function (el:IDataIngredients, index: number) {
             if (el.type == 'main' || el.type == 'sauce') {
                 return (

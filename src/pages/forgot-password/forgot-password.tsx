@@ -2,23 +2,23 @@ import React, {SyntheticEvent, useRef} from "react";
 import {Link} from 'react-router-dom';
 import styles from './forgot-password.module.css';
 import {validationEmail} from '../../utils/utils';
-import {useDispatch, useSelector} from "react-redux";
 import {
     forgotPasswordRequest,
     SET_ERROR_INPUT,
     SET_ERROR_INPUT_TEXT
 } from "../../services/actions/forgot-password-action";
-import {Redirect, useHistory} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import {
     Input,
     Button
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {SET_EMAIL} from "../../services/actions/auth-action";
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 export const ForgotPassword = () => {
-    const {email, errorInput, errorInputText, resetPasswordSuccess, backendMessage} = useSelector((state: RootState) => state.forgotPassword);
-    const dispatch = useDispatch();
+    const {email, errorInput, errorInputText, resetPasswordSuccess, backendMessage} = useAppSelector((state: RootState) => state.forgotPassword);
+    const dispatch = useAppDispatch();
     const inputRef = useRef(null);
 
     const submit = (e:SyntheticEvent<HTMLElement,Event>) => {
@@ -39,12 +39,6 @@ export const ForgotPassword = () => {
             <Redirect from="/forgot-password" to={{pathname: "/reset-password"}}/>
         )
     }
-
-    /*if (accessToken) {
-        return (
-            <Redirect to="/" />
-        )
-    }*/
 
     return (
         <section className={styles.reset}>

@@ -3,19 +3,19 @@ import styles from './order-full-details.module.css';
 import clsx from 'clsx';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {useLocation, useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
 import {dateFormat} from "../../utils/utils";
 import {WS_AUTH_CONNECTION_CLOSED, WS_AUTH_CONNECTION_START} from "../../services/actions/ws-auth-action";
 import {WS_CONNECTION_CLOSED, WS_CONNECTION_START} from "../../services/actions/ws-action";
 import IDataIngredients, {IOrder, IIngredientsOrder} from "../../types";
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 export const OrderFullDetails: FC = ():any => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const location = useLocation();
-    const {data, doneLoad} = useSelector((state:RootState) => state.burgerIngredients);
-    const orders = useSelector((state:RootState) => state.wsReducer.ordersAll);
-    const ordersAuth = useSelector((state:RootState) => state.wsAuthReducer.ordersAll);
+    const {data, doneLoad} = useAppSelector((state:RootState) => state.burgerIngredients);
+    const orders = useAppSelector((state:RootState) => state.wsReducer.ordersAll);
+    const ordersAuth = useAppSelector((state:RootState) => state.wsAuthReducer.ordersAll);
     const ordersAll = location.pathname.indexOf('/profile/orders') >= 0 ? ordersAuth : orders;
 
     const {id} = useParams<{ id?: string }>();

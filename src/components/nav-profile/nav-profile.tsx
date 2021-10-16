@@ -1,14 +1,14 @@
 import styles from "../../pages/profile/profile.module.css";
 import clsx from "clsx";
-import {Link, NavLink, useHistory, useLocation} from "react-router-dom";
+import {Link, NavLink, useHistory} from "react-router-dom";
 import React, {FC, SyntheticEvent} from "react";
-import {useDispatch} from "react-redux";
 import {logout} from "../../services/actions/auth-action";
 import {setCookie} from "../../utils/utils";
+import {useAppDispatch} from "../../services/types/hooks";
 
 
 export const NavProfile :FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const history = useHistory();
 
     const signOut = (e: SyntheticEvent<HTMLElement>) => {

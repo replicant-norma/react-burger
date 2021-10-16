@@ -2,7 +2,6 @@ import React from "react";
 import {useEffect} from "react";
 import styles from './app.module.css';
 import AppHeader from '../app-header/app-header';
-import {useDispatch, useSelector} from "react-redux";
 import {getIngredientsItems} from "../../services/actions/burger-ingredients-action";
 import {Route, Switch, useLocation, useHistory} from "react-router-dom";
 import {
@@ -20,11 +19,11 @@ import {getProfile, SET_ACCESS_TOKEN, SET_REFRESH_TOKEN} from "../../services/ac
 import {refreshToken} from "../../utils/burger-api";
 import {Location} from "history";
 import OrderFullDetails from "../order-full-details/order-full-details";
+import {useAppDispatch} from "../../services/types/hooks";
 
 export const App = () => {
-
     const isRefreshToken = localStorage.getItem('refreshToken');
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch()
     const init = () => {
         if (getCookie('accessToken')) {
             dispatch({type: SET_ACCESS_TOKEN, payload: getCookie('accessToken')})
@@ -58,7 +57,7 @@ export const App = () => {
 
     const handleCloseClick = () => {
         history.push('/');
-        dispatch({type: SET_MODAL_DETAILS_STATE, isOpenModalDetails: null})
+        dispatch({type: SET_MODAL_DETAILS_STATE, isOpenModalDetails: false})
     };
 
     const handleCloseClickOrderFull = () => {

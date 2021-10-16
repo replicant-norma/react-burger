@@ -25,8 +25,6 @@ export interface IWsAuthConnectionError {
 
 export interface IWsAuthConnectionClosed {
     readonly type: typeof WS_AUTH_CONNECTION_CLOSED;
-    readonly error: string;
-    readonly wsConnected: boolean;
 }
 
 export interface IWsAuthGetMessage {

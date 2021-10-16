@@ -1,14 +1,14 @@
-import React, {FC, ReactElement} from 'react';
+import React, {FC} from 'react';
 import styles from './ingredient-details.module.css';
 import clsx from 'clsx';
-import {useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import IDataIngredients from "../../types";
 import {RootState} from "../../services/store";
+import {useAppSelector} from "../../services/types/hooks";
 
 export const IngredientDetails: FC = ():any => {
     const {id} = useParams<{ id?: string }>();
-    const {data, doneLoad} = useSelector((state: RootState) => state.burgerIngredients);
+    const {data, doneLoad} = useAppSelector((state: RootState) => state.burgerIngredients);
     const details: IDataIngredients|any = data.find((item: IDataIngredients) => item._id === id);
 
     return (doneLoad && (

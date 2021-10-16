@@ -17,6 +17,7 @@ import {
     RESET_ORDER_DETAILS,
     DELETE_ORDER_ITEM
 } from '../actions/burger-constructor-action';
+import IDataIngredients from "../../types";
 
 
 export interface ISetModalOrderState {
@@ -36,12 +37,12 @@ export interface IHaveBun {
 
 export interface IPushOrderItem {
     readonly type: typeof PUSH_ORDER_ITEM;
-    readonly ingredient: string;
+    readonly ingredient: IDataIngredients;
 }
 
 export interface ISetOrderNumber {
     readonly type: typeof SET_ORDER_NUMBER;
-    readonly orderNumber: number;
+    readonly orderNumber: number|null;
 }
 
 export interface IGetOrderRequest {
@@ -72,7 +73,7 @@ export interface IGetOrdersAllFailed {
 
 export interface IChangeOrderBun {
     readonly type: typeof CHANGE_ORDER_BUN;
-    readonly ingredient: string;
+    readonly ingredient: IDataIngredients;
 }
 
 export interface ISetDraggedElement {

@@ -1,16 +1,16 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect} from "react";
 import styles from './orders.module.css';
-import {useLocation, useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useLocation} from "react-router-dom";
 import {OrderList} from "../../components/order-list/order-list";
 import {WS_AUTH_CONNECTION_START, WS_AUTH_CONNECTION_CLOSED} from "../../services/actions/ws-auth-action";
 import {NavProfile} from "../../components/nav-profile/nav-profile";
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 
 export const Orders = () => {
-    const {wsConnected, ordersAll} = useSelector((state:RootState) => state.wsAuthReducer);
-    const dispatch = useDispatch();
+    const {wsConnected, ordersAll} = useAppSelector((state:RootState) => state.wsAuthReducer);
+    const dispatch = useAppDispatch();
     const location = useLocation();
 
     useEffect(() => {

@@ -1,5 +1,6 @@
 import {registerUser, loginUser, getUserInfo, updateUserInfo, logoutUser} from "../../utils/burger-api";
 import {setCookie} from "../../utils/utils";
+import {AppDispatch} from "../store";
 
 export const SET_EMAIL = 'SET_EMAIL' as const;
 export const SET_PASSWORD = 'SET_PASSWORD' as const;
@@ -20,7 +21,7 @@ export const TRY_ORDER_REQUEST = 'TRY_ORDER_REQUEST' as const;
 export const LOGOUT = 'LOGOUT' as const;
 
 export function register(email: string, password: string, name: string) {
-    return function (dispatch: any) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: REGISTER_REQUEST
         });
@@ -47,7 +48,7 @@ export function register(email: string, password: string, name: string) {
 
 
 export function login(email: string, password: string) {
-    return function (dispatch: any) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: AUTH_REQUEST
         });
@@ -73,23 +74,23 @@ export function login(email: string, password: string) {
 }
 
 export function getProfile() {
-    return function (dispatch: any) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: USER_INFO_REQUEST
         });
         getUserInfo()
             .then((data) => {
                 if (data.success) {
-                    dispatch({type: USER_INFO_SUCCESS});
+                    dispatch({type: USER_INFO_SUCCESS, payload: data.message});
                     dispatch({type: SET_EMAIL, payload: data.user.email});
                     dispatch({type: SET_USER_NAME, payload: data.user.name});
                 } else {
-                    dispatch({type: USER_INFO_FAILED})
+                    dispatch({type: USER_INFO_FAILED, payload: data.message})
                 }
             })
             .catch((e) => {
                 dispatch({
-                    type: USER_INFO_FAILED
+                    type: USER_INFO_FAILED, payload: e.message
                 })
             })
     }
@@ -97,7 +98,7 @@ export function getProfile() {
 
 
 export function updateProfile(email: string, password: string, name: string) {
-    return function (dispatch: any) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: USER_INFO_REQUEST
         });
@@ -120,7 +121,7 @@ export function updateProfile(email: string, password: string, name: string) {
 }
 
 export function logout() {
-    return function (dispatch: any) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: AUTH_REQUEST
         });

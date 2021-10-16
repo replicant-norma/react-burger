@@ -1,9 +1,8 @@
 import config from "../config/config";
 import {getCookie, setCookie} from "./utils";
-import {IIngredientsOrder} from "../types";
 
-const checkResponse = (res:any) => {
-    return res.ok ? res.json() : res.json().then((err:any) => Promise.reject(err));
+const checkResponse = (res: any) => {
+    return res.ok ? res.json() : res.json().then((err: any) => Promise.reject(err));
 };
 
 export function getIngredients() {
@@ -35,7 +34,7 @@ export function getOrdersAll() {
         .then((res) => checkResponse(res))
 }
 
-export function forgotPassword(email:string) {
+export function forgotPassword(email: string) {
     const data = {email: email}
     return fetch(config.url + '/api/password-reset', {
         method: 'POST',
@@ -47,7 +46,7 @@ export function forgotPassword(email:string) {
         .then((res) => checkResponse(res))
 }
 
-export function resetPassword(password:string, token:string) {
+export function resetPassword(password: string, token: string) {
     const data = {password: password, token: token}
     return fetch(config.url + '/api/password-reset/reset', {
         method: 'POST',
@@ -59,7 +58,7 @@ export function resetPassword(password:string, token:string) {
         .then((res) => checkResponse(res))
 }
 
-export function registerUser(email:string, password:string, name:string) {
+export function registerUser(email: string, password: string, name: string) {
     const data = {email: email, password: password, name: name}
     return fetch(config.url + '/api/auth/register', {
         method: 'POST',
@@ -71,7 +70,7 @@ export function registerUser(email:string, password:string, name:string) {
         .then((res) => checkResponse(res))
 }
 
-export function loginUser(email:string, password:string) {
+export function loginUser(email: string, password: string) {
     const data = {email: email, password: password}
     return fetch(config.url + '/api/auth/login', {
         method: 'POST',
@@ -109,7 +108,7 @@ export function getUserInfo() {
         .then((res) => checkResponse(res))
 }
 
-export function updateUserInfo(email:string, password:string, name:string) {
+export function updateUserInfo(email: string, password: string, name: string) {
     //refreshToken();
     const data = {email: email, password: password, name: name}
     return fetch(config.url + '/api/auth/user', {

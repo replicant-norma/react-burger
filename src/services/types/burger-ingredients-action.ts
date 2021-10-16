@@ -10,20 +10,15 @@ import IDataIngredients from "../../types";
 
 export interface IGetIngredientsRequest {
     readonly type: typeof GET_INGREDIENTS_REQUEST;
-    readonly isLoading: boolean;
 }
 
 export interface IGetIngredientsSuccess {
     readonly type: typeof GET_INGREDIENTS_SUCCESS;
-    readonly isLoading: boolean;
-    readonly doneLoad: boolean;
     readonly data: Array<IDataIngredients>
 }
 
 export interface IGetIngredientsFailed {
     readonly type: typeof GET_INGREDIENTS_FAILED;
-    readonly isLoading: boolean;
-    readonly hasError: boolean;
 }
 
 export interface ISetCurrentTab {

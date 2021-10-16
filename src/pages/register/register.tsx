@@ -5,15 +5,15 @@ import {
     Input,
     PasswordInput, Button
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {useDispatch, useSelector} from "react-redux";
 import {validationEmail} from "../../utils/utils";
 import {register, SET_EMAIL, SET_USER_NAME} from "../../services/actions/auth-action";
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 
 export const Register = () => {
-    const {email, password, userName, backendMessage} = useSelector((state: RootState) => state.auth);
-    const dispatch = useDispatch();
+    const {email, password, userName, backendMessage} = useAppSelector((state: RootState) => state.auth);
+    const dispatch = useAppDispatch();
     const inputRef = useRef(null);
     const submit = (e: any) => {
         e.preventDefault();

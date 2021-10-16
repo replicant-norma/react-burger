@@ -2,20 +2,20 @@ import React, {FC, useMemo} from 'react';
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './product.module.css';
 import clsx from 'clsx';
-import {useDispatch, useSelector} from "react-redux";
 import {useDrag} from "react-dnd";
-import {useHistory, useLocation, Link} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {SET_MODAL_DETAILS_STATE} from "../../services/actions/burger-ingredients-action";
 import IDataIngredients from "../../types";
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
-interface IProduct{
+interface IProduct {
     data: IDataIngredients
 }
 
 export const Product: FC<IProduct> = ({data}) => {
-    const {haveBun, orderDetails} = useSelector((state:RootState) => state.burgerConstructor);
-    const dispatch = useDispatch();
+    const {haveBun, orderDetails} = useAppSelector((state: RootState) => state.burgerConstructor);
+    const dispatch = useAppDispatch();
     const history = useHistory();
     const location = useLocation();
     const count = useMemo(() =>
@@ -24,7 +24,7 @@ export const Product: FC<IProduct> = ({data}) => {
 
     const handleOpenClick = () => {
         history.push('/ingredients/' + data._id, {background: location});
-        dispatch({type: SET_MODAL_DETAILS_STATE, isOpenModalDetails: data._id})
+        dispatch({type: SET_MODAL_DETAILS_STATE, isOpenModalDetails: true})
     }
 
     const [{fail}, dragRef] = useDrag({

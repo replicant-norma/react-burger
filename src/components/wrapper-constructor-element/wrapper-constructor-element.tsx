@@ -2,22 +2,22 @@ import React, {FC, SyntheticEvent, useRef} from 'react';
 import styles from './wrapper-constructor-element.module.css';
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDrag, useDrop} from "react-dnd";
-import {useDispatch} from "react-redux";
 import {
     DELETE_ORDER_ITEM,
     SET_DRAGGED_ELEMENT,
     SET_SWAP_ELEMENT, SWAP_CONSTRUCTOR_INGREDIENT
 } from "../../services/actions/burger-constructor-action";
 import IDataIngredients from "../../types";
+import {useAppDispatch} from "../../services/types/hooks";
 
-interface IWrappedConstrutorElement {
+interface IWrappedConstructorElement {
     index:number;
     data: IDataIngredients
 }
 
-export const WrapperConstructorElement: FC<IWrappedConstrutorElement> = ({data, index}) => {
+export const WrapperConstructorElement: FC<IWrappedConstructorElement> = ({data, index}) => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const ref = useRef(null);
 
     const dragIngredient = (e: SyntheticEvent<HTMLElement, Event>, el: IDataIngredients, index: number) => {

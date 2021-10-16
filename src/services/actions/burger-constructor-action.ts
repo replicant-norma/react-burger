@@ -1,5 +1,5 @@
 import {getOrder, getOrdersAll} from "../../utils/burger-api";
-import {IIngredientsOrder} from "../../types";
+import {AppDispatch} from "../store";
 export const SET_MODAL_ORDER_STATE = 'SET_MODAL_ORDER_STATE' as const;
 export const SET_MODAL_ORDER_FULL_STATE = 'SET_MODAL_ORDER_FULL_STATE' as const;
 export const HAVE_BUN = 'HAVE_BUN' as const;
@@ -19,7 +19,7 @@ export const SWAP_CONSTRUCTOR_INGREDIENT = 'SWAP_CONSTRUCTOR_INGREDIENT' as cons
 export const RESET_ORDER_DETAILS = 'RESET_ORDER_DETAILS' as const;
 
 export function orderRequest(orderDetails:{}) {
-    return function (dispatch: any) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: GET_ORDER_REQUEST
         });
@@ -38,7 +38,7 @@ export function orderRequest(orderDetails:{}) {
 }
 
 export function ordersAllRequest() {
-    return function (dispatch: any) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: GET_ORDERS_ALL_REQUEST
         });

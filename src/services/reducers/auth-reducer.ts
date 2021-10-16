@@ -18,12 +18,12 @@ import {
 } from "../actions/auth-action";
 import {TAuthActions} from "../types/auth-action";
 
-type TAuthState ={
+type TAuthState = {
     email: string;
     password: string;
     userName: string;
-    accessToken: string|null;
-    refreshToken: string|null;
+    accessToken: string | undefined;
+    refreshToken: string | null;
     registerRequest: boolean;
     registerSuccess: boolean;
     registerFailed: boolean;
@@ -34,7 +34,7 @@ type TAuthState ={
     userInfoSuccess: boolean;
     userInfoFailed: boolean;
     tryOrderRequest: boolean;
-    backendMessage: string|null;
+    backendMessage: string;
 }
 
 
@@ -57,7 +57,7 @@ const initialState: TAuthState = {
     backendMessage: '',
 }
 
-export const authReducer = (state = initialState, action:TAuthActions):TAuthState => {
+export const authReducer = (state = initialState, action: TAuthActions): TAuthState => {
     switch (action.type) {
         case SET_EMAIL: {
             return {...state, email: action.payload}
@@ -134,7 +134,7 @@ export const authReducer = (state = initialState, action:TAuthActions):TAuthStat
         }
         case LOGOUT: {
             return {
-                ...state, email: '', password: '', userName: '', accessToken: null,
+                ...state, email: '', password: '', userName: '', accessToken: undefined,
                 refreshToken: null, tryOrderRequest: false
             }
         }

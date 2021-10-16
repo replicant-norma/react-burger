@@ -1,18 +1,18 @@
-import React, {useMemo, useEffect, useRef} from 'react';
+import React, {useMemo} from 'react';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 import clsx from 'clsx';
 import ProductList from '../product-list/product-list';
-import {useSelector, useDispatch} from "react-redux";
 import {SET_CURRENT_TAB} from "../../services/actions/burger-ingredients-action";
 import IDataIngredients from '../../types';
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 {/* Собираем левую часть конструктора */
 }
 export const BurgerIngredients = () => {
-    const dispatch = useDispatch();
-    const {data, doneLoad, currentTab} = useSelector((state: RootState) => state.burgerIngredients);
+    const dispatch = useAppDispatch();
+    const {data, doneLoad, currentTab} = useAppSelector((state: RootState) => state.burgerIngredients);
     const bun = useMemo(() => data.filter((item: IDataIngredients) => item.type === 'bun'), [data]);
     const main = useMemo(() => data.filter((item: IDataIngredients) => item.type === 'main'), [data]);
     const sauce = useMemo(() => data.filter((item: IDataIngredients) => item.type === 'sauce'), [data]);

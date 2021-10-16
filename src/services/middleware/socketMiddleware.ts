@@ -1,8 +1,15 @@
 import {getCookie} from "../../utils/utils";
 
-
-export const socketMiddleware = (wsUrl:string, actions: any, auth:boolean) => {
-    return (store: { dispatch: any; getState: any; })  => {
+export const socketMiddleware = (wsUrl: string, actions:
+    {
+        WS_CONNECTION_START: "WS_CONNECTION_START"| "WS_AUTH_CONNECTION_START";
+        WS_CONNECTION_SUCCESS: "WS_CONNECTION_SUCCESS" | "WS_AUTH_CONNECTION_SUCCESS";
+        WS_CONNECTION_CLOSED: "WS_CONNECTION_CLOSED" | "WS_AUTH_CONNECTION_CLOSED";
+        WS_CONNECTION_ERROR: "WS_CONNECTION_ERROR" | "WS_AUTH_CONNECTION_ERROR";
+        WS_GET_MESSAGE: "WS_GET_MESSAGE" | "WS_AUTH_GET_MESSAGE";
+        WS_SEND_MESSAGE: "WS_SEND_MESSAGE" | "WS_AUTH_SEND_MESSAGE";
+    } , auth: boolean) => {
+    return (store: { dispatch: any; }) => {
         const {
             WS_CONNECTION_START,
             WS_CONNECTION_SUCCESS,
@@ -10,10 +17,15 @@ export const socketMiddleware = (wsUrl:string, actions: any, auth:boolean) => {
             WS_CONNECTION_ERROR,
             WS_GET_MESSAGE,
             WS_SEND_MESSAGE
-        }: any = actions;
-        let socket: WebSocket|null = null;
-        return (next: (arg0: { type: any; payload: any; }) => void) => (action: { type: any; payload: any; }) => {
-            const {dispatch, getState} = store;
+        }: {WS_CONNECTION_START: "WS_CONNECTION_START"| "WS_AUTH_CONNECTION_START";
+            WS_CONNECTION_SUCCESS: "WS_CONNECTION_SUCCESS" | "WS_AUTH_CONNECTION_SUCCESS";
+            WS_CONNECTION_CLOSED: "WS_CONNECTION_CLOSED" | "WS_AUTH_CONNECTION_CLOSED";
+            WS_CONNECTION_ERROR: "WS_CONNECTION_ERROR" | "WS_AUTH_CONNECTION_ERROR";
+            WS_GET_MESSAGE: "WS_GET_MESSAGE" | "WS_AUTH_GET_MESSAGE";
+            WS_SEND_MESSAGE: "WS_SEND_MESSAGE" | "WS_AUTH_SEND_MESSAGE"} = actions;
+        let socket: WebSocket | null = null;
+        return (next: (arg0: any) => void) => (action: { type: any; payload: any; }) => {
+            const {dispatch} = store;
             const {type, payload} = action;
 
             if (type === WS_CONNECTION_START) {

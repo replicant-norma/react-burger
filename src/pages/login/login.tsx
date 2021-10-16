@@ -1,19 +1,19 @@
 import React, {useRef} from "react";
-import {Link, Redirect, useHistory, useLocation} from 'react-router-dom';
+import {Link, Redirect, useLocation} from 'react-router-dom';
 import styles from './login.module.css';
 import {
     Input,
     PasswordInput, Button
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {useDispatch, useSelector} from "react-redux";
 import {getCookie, validationEmail} from "../../utils/utils";
 import {login, SET_EMAIL, SET_PASSWORD} from "../../services/actions/auth-action";
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 
 export const Login = () => {
-    const {email, password, userName, backendMessage} = useSelector((state:RootState) => state.auth);
-    const dispatch = useDispatch();
+    const {email, password, backendMessage} = useAppSelector((state:RootState) => state.auth);
+    const dispatch = useAppDispatch();
     const accessToken = getCookie('accessToken');
     const inputRef = useRef(null);
     const {state} = useLocation();

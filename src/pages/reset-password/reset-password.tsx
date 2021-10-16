@@ -2,7 +2,6 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import styles from './reset-password.module.css';
 import {getCookie, validationPassword} from '../../utils/utils';
-import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {resetPasswordRequest, SET_TOKEN} from "../../services/actions/reset-password-action";
 import {
@@ -11,6 +10,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {SET_PASSWORD} from "../../services/actions/auth-action";
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 export const ResetPassword = () => {
     const {
@@ -18,13 +18,13 @@ export const ResetPassword = () => {
         token,
         newPasswordSuccess,
         backendMessage
-    } = useSelector((state: RootState) => state.resetPassword);
-    const {resetPasswordSuccess} = useSelector((state: RootState) => state.forgotPassword);
+    } = useAppSelector((state: RootState) => state.resetPassword);
+    const {resetPasswordSuccess} = useAppSelector((state: RootState) => state.forgotPassword);
     const accessToken = getCookie('accessToken');
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
 
-    const submit = (e:any) => {
+    const submit = (e: any) => {
         e.preventDefault();
         if (validationPassword(password)) {
             dispatch(resetPasswordRequest(password, token));

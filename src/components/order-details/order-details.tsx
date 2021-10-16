@@ -2,14 +2,14 @@ import React, {useEffect, FC} from 'react';
 import styles from './order-details.module.css';
 import clsx from 'clsx';
 import doneImgPath from '../../images/done.gif';
-import {useDispatch, useSelector} from "react-redux";
 import {orderRequest} from "../../services/actions/burger-constructor-action";
 import IDataIngredients from "../../types";
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 export const OrderDetails : FC = () => {
-    const {orderDetails, orderNumber} = useSelector((state: RootState) => state.burgerConstructor);
-    const dispatch = useDispatch();
+    const {orderDetails, orderNumber} = useAppSelector((state: RootState) => state.burgerConstructor);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         let idx: Array<string> = [];

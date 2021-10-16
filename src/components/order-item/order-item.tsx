@@ -4,20 +4,20 @@ import clsx from 'clsx';
 import {
     CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {useDispatch, useSelector} from "react-redux";
 import {SET_MODAL_ORDER_FULL_STATE} from "../../services/actions/burger-constructor-action";
 import {useHistory, useLocation} from "react-router-dom";
 import {dateFormat} from "../../utils/utils";
 import IDataIngredients, {IOrder} from "../../types";
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 interface IOrderItem{
     order: IOrder;
 }
 
 export const OrderItem : FC<IOrderItem> = ({order}) => {
-    const {data} = useSelector((state:RootState) => state.burgerIngredients);
-    const dispatch = useDispatch();
+    const {data} = useAppSelector((state:RootState) => state.burgerIngredients);
+    const dispatch = useAppDispatch();
     const history = useHistory();
     const location = useLocation();
     let totalPrice = 0;

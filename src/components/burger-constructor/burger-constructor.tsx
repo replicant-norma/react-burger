@@ -2,8 +2,7 @@ import React, {useMemo, FC, SyntheticEvent} from 'react';
 import styles from './burger-constructor.module.css';
 import IngredientList from "../ingredient-list/ingredient-list";
 import {Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import {useDispatch, useSelector} from "react-redux";
-import {useHistory, useLocation} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {
     RESET_ORDER_DETAILS,
     SET_MODAL_ORDER_STATE,
@@ -14,15 +13,15 @@ import Modal from "../modal/modal";
 import {getCookie} from "../../utils/utils";
 import IDataIngredients from '../../types';
 import {RootState} from "../../services/store";
+import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 {/* Собираем набор ингридиентов из правой панели экрана */
 }
 
 export const BurgerConstructor : FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const history = useHistory();
-    const location = useLocation();
-    const {orderDetails, isOpenModalOrder, haveBun} = useSelector((state:RootState) => state.burgerConstructor);
+    const {orderDetails, isOpenModalOrder, haveBun} = useAppSelector((state:RootState) => state.burgerConstructor);
     const accessToken = getCookie('accessToken');
     const total = useMemo( ():number => orderDetails.reduce(function (sum:number, current: IDataIngredients) {
         if (current.type === 'bun') return sum + current.price * 2;
