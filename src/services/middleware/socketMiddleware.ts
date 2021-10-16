@@ -1,14 +1,32 @@
 import {getCookie} from "../../utils/utils";
+import {
+    WS_CONNECTION_START,
+    WS_CONNECTION_SUCCESS,
+    WS_CONNECTION_CLOSED,
+    WS_CONNECTION_ERROR,
+    WS_GET_MESSAGE,
+    WS_SEND_MESSAGE
+} from '../actions/ws-action';
 
-export const socketMiddleware = (wsUrl: string, actions:
-    {
-        WS_CONNECTION_START: "WS_CONNECTION_START"| "WS_AUTH_CONNECTION_START";
-        WS_CONNECTION_SUCCESS: "WS_CONNECTION_SUCCESS" | "WS_AUTH_CONNECTION_SUCCESS";
-        WS_CONNECTION_CLOSED: "WS_CONNECTION_CLOSED" | "WS_AUTH_CONNECTION_CLOSED";
-        WS_CONNECTION_ERROR: "WS_CONNECTION_ERROR" | "WS_AUTH_CONNECTION_ERROR";
-        WS_GET_MESSAGE: "WS_GET_MESSAGE" | "WS_AUTH_GET_MESSAGE";
-        WS_SEND_MESSAGE: "WS_SEND_MESSAGE" | "WS_AUTH_SEND_MESSAGE";
-    } , auth: boolean) => {
+import {
+    WS_AUTH_CONNECTION_START,
+    WS_AUTH_CONNECTION_SUCCESS,
+    WS_AUTH_CONNECTION_CLOSED,
+    WS_AUTH_CONNECTION_ERROR,
+    WS_AUTH_GET_MESSAGE,
+    WS_AUTH_SEND_MESSAGE
+} from '../actions/ws-auth-action';
+
+type TSocketActions = {
+    WS_CONNECTION_START: typeof WS_CONNECTION_START | typeof WS_AUTH_CONNECTION_START;
+    WS_CONNECTION_SUCCESS: typeof WS_CONNECTION_SUCCESS | typeof WS_AUTH_CONNECTION_SUCCESS;
+    WS_CONNECTION_CLOSED: typeof WS_CONNECTION_CLOSED | typeof WS_AUTH_CONNECTION_CLOSED;
+    WS_CONNECTION_ERROR: typeof WS_CONNECTION_ERROR | typeof WS_AUTH_CONNECTION_ERROR;
+    WS_GET_MESSAGE: typeof WS_GET_MESSAGE | typeof WS_AUTH_GET_MESSAGE;
+    WS_SEND_MESSAGE: typeof WS_SEND_MESSAGE | typeof WS_AUTH_SEND_MESSAGE;
+}
+
+export const socketMiddleware = (wsUrl: string, actions: TSocketActions, auth: boolean) => {
     return (store: { dispatch: any; }) => {
         const {
             WS_CONNECTION_START,
@@ -17,12 +35,7 @@ export const socketMiddleware = (wsUrl: string, actions:
             WS_CONNECTION_ERROR,
             WS_GET_MESSAGE,
             WS_SEND_MESSAGE
-        }: {WS_CONNECTION_START: "WS_CONNECTION_START"| "WS_AUTH_CONNECTION_START";
-            WS_CONNECTION_SUCCESS: "WS_CONNECTION_SUCCESS" | "WS_AUTH_CONNECTION_SUCCESS";
-            WS_CONNECTION_CLOSED: "WS_CONNECTION_CLOSED" | "WS_AUTH_CONNECTION_CLOSED";
-            WS_CONNECTION_ERROR: "WS_CONNECTION_ERROR" | "WS_AUTH_CONNECTION_ERROR";
-            WS_GET_MESSAGE: "WS_GET_MESSAGE" | "WS_AUTH_GET_MESSAGE";
-            WS_SEND_MESSAGE: "WS_SEND_MESSAGE" | "WS_AUTH_SEND_MESSAGE"} = actions;
+        } = actions;
         let socket: WebSocket | null = null;
         return (next: (arg0: any) => void) => (action: { type: any; payload: any; }) => {
             const {dispatch} = store;

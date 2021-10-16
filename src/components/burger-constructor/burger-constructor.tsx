@@ -12,7 +12,6 @@ import {OrderDetails} from "../order-details/order-details";
 import Modal from "../modal/modal";
 import {getCookie} from "../../utils/utils";
 import IDataIngredients from '../../types';
-import {RootState} from "../../services/store";
 import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 {/* Собираем набор ингридиентов из правой панели экрана */
@@ -21,7 +20,7 @@ import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 export const BurgerConstructor : FC = () => {
     const dispatch = useAppDispatch();
     const history = useHistory();
-    const {orderDetails, isOpenModalOrder, haveBun} = useAppSelector((state:RootState) => state.burgerConstructor);
+    const {orderDetails, isOpenModalOrder, haveBun} = useAppSelector((state) => state.burgerConstructor);
     const accessToken = getCookie('accessToken');
     const total = useMemo( ():number => orderDetails.reduce(function (sum:number, current: IDataIngredients) {
         if (current.type === 'bun') return sum + current.price * 2;

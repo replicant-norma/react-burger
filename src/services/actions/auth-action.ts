@@ -1,6 +1,6 @@
 import {registerUser, loginUser, getUserInfo, updateUserInfo, logoutUser} from "../../utils/burger-api";
 import {setCookie} from "../../utils/utils";
-import {AppDispatch} from "../store";
+import {AppDispatch, AppThunk} from "../store";
 
 export const SET_EMAIL = 'SET_EMAIL' as const;
 export const SET_PASSWORD = 'SET_PASSWORD' as const;
@@ -20,7 +20,7 @@ export const USER_INFO_FAILED = 'USER_INFO_FAILED' as const;
 export const TRY_ORDER_REQUEST = 'TRY_ORDER_REQUEST' as const;
 export const LOGOUT = 'LOGOUT' as const;
 
-export function register(email: string, password: string, name: string) {
+export const register: AppThunk = (email: string, password: string, name: string) => {
     return function (dispatch: AppDispatch) {
         dispatch({
             type: REGISTER_REQUEST
@@ -47,7 +47,7 @@ export function register(email: string, password: string, name: string) {
 }
 
 
-export function login(email: string, password: string) {
+export const login: AppThunk = (email: string, password: string) => {
     return function (dispatch: AppDispatch) {
         dispatch({
             type: AUTH_REQUEST
@@ -73,7 +73,7 @@ export function login(email: string, password: string) {
     }
 }
 
-export function getProfile() {
+export const getProfile: AppThunk = () => {
     return function (dispatch: AppDispatch) {
         dispatch({
             type: USER_INFO_REQUEST
@@ -97,7 +97,7 @@ export function getProfile() {
 }
 
 
-export function updateProfile(email: string, password: string, name: string) {
+export const updateProfile: AppThunk = (email: string, password: string, name: string) => {
     return function (dispatch: AppDispatch) {
         dispatch({
             type: USER_INFO_REQUEST
@@ -120,7 +120,7 @@ export function updateProfile(email: string, password: string, name: string) {
     }
 }
 
-export function logout() {
+export const logout: AppThunk = () => {
     return function (dispatch: AppDispatch) {
         dispatch({
             type: AUTH_REQUEST

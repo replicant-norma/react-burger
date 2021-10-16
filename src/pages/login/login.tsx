@@ -7,12 +7,11 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {getCookie, validationEmail} from "../../utils/utils";
 import {login, SET_EMAIL, SET_PASSWORD} from "../../services/actions/auth-action";
-import {RootState} from "../../services/store";
 import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 
 export const Login = () => {
-    const {email, password, backendMessage} = useAppSelector((state:RootState) => state.auth);
+    const {email, password, backendMessage} = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
     const accessToken = getCookie('accessToken');
     const inputRef = useRef(null);

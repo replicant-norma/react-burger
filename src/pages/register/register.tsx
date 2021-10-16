@@ -7,12 +7,11 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {validationEmail} from "../../utils/utils";
 import {register, SET_EMAIL, SET_USER_NAME} from "../../services/actions/auth-action";
-import {RootState} from "../../services/store";
 import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 
 export const Register = () => {
-    const {email, password, userName, backendMessage} = useAppSelector((state: RootState) => state.auth);
+    const {email, password, userName, backendMessage} = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
     const inputRef = useRef(null);
     const submit = (e: any) => {

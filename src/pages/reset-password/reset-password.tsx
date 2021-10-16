@@ -9,17 +9,11 @@ import {
     PasswordInput, Button
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {SET_PASSWORD} from "../../services/actions/auth-action";
-import {RootState} from "../../services/store";
 import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 export const ResetPassword = () => {
-    const {
-        password,
-        token,
-        newPasswordSuccess,
-        backendMessage
-    } = useAppSelector((state: RootState) => state.resetPassword);
-    const {resetPasswordSuccess} = useAppSelector((state: RootState) => state.forgotPassword);
+    const {password, token, newPasswordSuccess, backendMessage} = useAppSelector((state) => state.resetPassword);
+    const {resetPasswordSuccess} = useAppSelector((state) => state.forgotPassword);
     const accessToken = getCookie('accessToken');
     const dispatch = useAppDispatch();
 

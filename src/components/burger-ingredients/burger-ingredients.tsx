@@ -5,14 +5,13 @@ import clsx from 'clsx';
 import ProductList from '../product-list/product-list';
 import {SET_CURRENT_TAB} from "../../services/actions/burger-ingredients-action";
 import IDataIngredients from '../../types';
-import {RootState} from "../../services/store";
 import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 {/* Собираем левую часть конструктора */
 }
 export const BurgerIngredients = () => {
     const dispatch = useAppDispatch();
-    const {data, doneLoad, currentTab} = useAppSelector((state: RootState) => state.burgerIngredients);
+    const {data, doneLoad, currentTab} = useAppSelector((state) => state.burgerIngredients);
     const bun = useMemo(() => data.filter((item: IDataIngredients) => item.type === 'bun'), [data]);
     const main = useMemo(() => data.filter((item: IDataIngredients) => item.type === 'main'), [data]);
     const sauce = useMemo(() => data.filter((item: IDataIngredients) => item.type === 'sauce'), [data]);

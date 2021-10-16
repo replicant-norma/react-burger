@@ -8,7 +8,6 @@ import {SET_MODAL_ORDER_FULL_STATE} from "../../services/actions/burger-construc
 import {useHistory, useLocation} from "react-router-dom";
 import {dateFormat} from "../../utils/utils";
 import IDataIngredients, {IOrder} from "../../types";
-import {RootState} from "../../services/store";
 import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 interface IOrderItem{
@@ -16,7 +15,7 @@ interface IOrderItem{
 }
 
 export const OrderItem : FC<IOrderItem> = ({order}) => {
-    const {data} = useAppSelector((state:RootState) => state.burgerIngredients);
+    const {data} = useAppSelector((state) => state.burgerIngredients);
     const dispatch = useAppDispatch();
     const history = useHistory();
     const location = useLocation();

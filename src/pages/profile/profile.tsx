@@ -13,7 +13,6 @@ import {
     updateProfile
 } from "../../services/actions/auth-action";
 import {NavProfile} from "../../components/nav-profile/nav-profile";
-import {RootState} from "../../services/store";
 import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 interface IProfile {
@@ -21,13 +20,7 @@ interface IProfile {
 }
 
 export const Profile: FC<IProfile> = (): any => {
-    const {
-        email,
-        password,
-        userName,
-        backendMessage,
-        userInfoSuccess
-    } = useAppSelector((state: RootState) => state.auth);
+    const {email, password, userName, backendMessage, userInfoSuccess} = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
     const location = useLocation();
     const inputRefName = useRef();

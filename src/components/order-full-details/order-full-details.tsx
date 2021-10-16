@@ -7,15 +7,14 @@ import {dateFormat} from "../../utils/utils";
 import {WS_AUTH_CONNECTION_CLOSED, WS_AUTH_CONNECTION_START} from "../../services/actions/ws-auth-action";
 import {WS_CONNECTION_CLOSED, WS_CONNECTION_START} from "../../services/actions/ws-action";
 import IDataIngredients, {IOrder, IIngredientsOrder} from "../../types";
-import {RootState} from "../../services/store";
 import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
-export const OrderFullDetails: FC = ():any => {
+export const OrderFullDetails: FC = (): any => {
     const dispatch = useAppDispatch();
     const location = useLocation();
-    const {data, doneLoad} = useAppSelector((state:RootState) => state.burgerIngredients);
-    const orders = useAppSelector((state:RootState) => state.wsReducer.ordersAll);
-    const ordersAuth = useAppSelector((state:RootState) => state.wsAuthReducer.ordersAll);
+    const {data, doneLoad} = useAppSelector((state) => state.burgerIngredients);
+    const orders = useAppSelector((state) => state.wsReducer.ordersAll);
+    const ordersAuth = useAppSelector((state) => state.wsAuthReducer.ordersAll);
     const ordersAll = location.pathname.indexOf('/profile/orders') >= 0 ? ordersAuth : orders;
 
     const {id} = useParams<{ id?: string }>();
@@ -40,7 +39,7 @@ export const OrderFullDetails: FC = ():any => {
         return (<div>Загрузка данных</div>);
     }
 
-    const order: IOrder|any = ordersAll.orders.find((item: IOrder) => item._id === id);
+    const order: IOrder | any = ordersAll.orders.find((item: IOrder) => item._id === id);
     let ingredients: Array<IIngredientsOrder> = Object.values(order.ingredients.reduce(function (acc: Array<string>, item: string) {
         const ingredient = data.find((element: IDataIngredients) => element._id === item);
         if (acc.hasOwnProperty(item)) {

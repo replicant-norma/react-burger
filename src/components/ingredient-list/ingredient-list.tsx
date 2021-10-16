@@ -10,13 +10,12 @@ import {
     PUSH_ORDER_ITEM,
 } from "../../services/actions/burger-constructor-action";
 import IDataIngredients from "../../types";
-import {RootState} from "../../services/store";
 import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 
 export const IngredientList: FC =() => {
     const dispatch = useAppDispatch();
-    const {orderDetails, haveBun} = useAppSelector((state: RootState) => state.burgerConstructor);
+    const {orderDetails, haveBun} = useAppSelector((state) => state.burgerConstructor);
     const pList = useMemo(() => orderDetails.map(function (el:IDataIngredients, index: number) {
             if (el.type == 'main' || el.type == 'sauce') {
                 return (

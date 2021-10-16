@@ -2,13 +2,12 @@ import React, {useEffect} from "react";
 import styles from './feed.module.css';
 import {OrderList} from "../../components/order-list/order-list";
 import {WS_CONNECTION_CLOSED, WS_CONNECTION_START} from "../../services/actions/ws-action";
-import {RootState} from "../../services/store";
 import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 export const Feed = () => {
 
     const dispatch = useAppDispatch();
-    const {ordersAll, wsConnected} = useAppSelector((state:RootState) => state.wsReducer);
+    const {ordersAll, wsConnected} = useAppSelector((state) => state.wsReducer);
 
     useEffect(() => {
         if (!wsConnected) dispatch({type: WS_CONNECTION_START});

@@ -6,7 +6,6 @@ import {useDrag} from "react-dnd";
 import {useHistory, useLocation} from "react-router-dom";
 import {SET_MODAL_DETAILS_STATE} from "../../services/actions/burger-ingredients-action";
 import IDataIngredients from "../../types";
-import {RootState} from "../../services/store";
 import {useAppDispatch, useAppSelector} from "../../services/types/hooks";
 
 interface IProduct {
@@ -14,7 +13,7 @@ interface IProduct {
 }
 
 export const Product: FC<IProduct> = ({data}) => {
-    const {haveBun, orderDetails} = useAppSelector((state: RootState) => state.burgerConstructor);
+    const {haveBun, orderDetails} = useAppSelector((state) => state.burgerConstructor);
     const dispatch = useAppDispatch();
     const history = useHistory();
     const location = useLocation();
